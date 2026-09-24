@@ -1,0 +1,9 @@
+{
+  "name": "통합사회2 개념 맞히기",
+  "short_name": "통합사회2",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F3F4F2",
+  "theme_color": "#1F5E56",
+  "icons": [{ "src": "icon-180.png", "sizes": "180x180", "type": "image/png" }]
+}

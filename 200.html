@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="통합사회2">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1213" media="(prefers-color-scheme: dark)">
+<meta name="description" content="천재교육 통합사회2 Ⅰ·Ⅱ·Ⅳ단원 개념 문제와 오답 노트">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>통합사회2 개념 맞히기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#F3F4F2; --card:#FFFFFF; --ink:#15191B; --ink-2:#4A535A; --ink-3:#7E878E;
+  --rule:#D8DCD9; --rule-2:#E9ECE9;
+  --acc:#1F5E56; --acc-soft:#E2EFEC; --acc-line:#9BC4BC; --on-acc:#FFFFFF;
+  --ok:#2F7A4E; --ok-soft:#E3F1E8;
+  --bad:#BE3F35; --bad-soft:#FAE9E7;
+  --warn:#8C6212; --warn-soft:#F6EFDD;
+  --u1:#B5532A; --u2:#3C6BB0; --u4:#5D7B2C;
+  --shadow:0 1px 0 rgba(21,25,27,.05), 0 8px 22px -14px rgba(21,25,27,.38);
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1213; --card:#171C1E; --ink:#E7ECEA; --ink-2:#AAB4B2; --ink-3:#79837F;
+    --rule:#2A3234; --rule-2:#212729;
+    --acc:#5FBCAC; --acc-soft:#12292A; --acc-line:#2F5F5A; --on-acc:#08100F;
+    --ok:#63C48C; --ok-soft:#13261B;
+    --bad:#EF7A6E; --bad-soft:#2C1A19;
+    --warn:#DCAE55; --warn-soft:#28200F;
+    --u1:#C96B33; --u2:#5E8CD4; --u4:#769E42;
+    --shadow:0 1px 0 rgba(0,0,0,.45), 0 12px 28px -16px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1213; --card:#171C1E; --ink:#E7ECEA; --ink-2:#AAB4B2; --ink-3:#79837F;
+  --rule:#2A3234; --rule-2:#212729;
+  --acc:#5FBCAC; --acc-soft:#12292A; --acc-line:#2F5F5A; --on-acc:#08100F;
+  --ok:#63C48C; --ok-soft:#13261B;
+  --bad:#EF7A6E; --bad-soft:#2C1A19;
+  --warn:#DCAE55; --warn-soft:#28200F;
+  --u1:#C96B33; --u2:#5E8CD4; --u4:#769E42;
+  --shadow:0 1px 0 rgba(0,0,0,.45), 0 12px 28px -16px rgba(0,0,0,.85);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  font-size:16px; line-height:1.55;
+  -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent;
+}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+#app{max-width:540px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+
+/* ---------- 상단 ---------- */
+.topbar{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule-2)}
+.topbar .row{display:flex;align-items:center;gap:10px;padding:10px 14px 8px}
+.iconbtn{
+  appearance:none;border:1px solid var(--rule);background:var(--card);color:var(--ink-2);
+  width:34px;height:34px;border-radius:9px;font-size:15px;line-height:1;cursor:pointer;
+  display:grid;place-items:center;flex:none;font-family:inherit;
+}
+.iconbtn:active{transform:scale(.95)}
+.steps{display:flex;gap:5px;flex:1;align-items:center}
+.stepdot{height:4px;flex:1;border-radius:99px;background:var(--rule)}
+.stepdot.on,.stepdot.done{background:var(--acc)}
+.counter{font-size:12px;color:var(--ink-3);flex:none}
+.combo{font-size:11px;font-weight:600;color:var(--on-acc);background:var(--acc);padding:3px 8px;border-radius:99px;flex:none}
+
+/* ---------- 홈 ---------- */
+.home{padding:26px 18px 44px;display:flex;flex-direction:column;gap:22px;flex:1}
+.brand h1{
+  margin:0;font-family:"Hahmlet",serif;font-weight:700;
+  font-size:clamp(29px,8.5vw,38px);letter-spacing:-.03em;line-height:1.12;text-wrap:balance;
+}
+.brand .sub{color:var(--ink-3);font-size:13px;margin-top:6px}
+.progresscard{
+  background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;
+}
+.bar{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--rule-2);gap:2px}
+.bar span{display:block;height:100%}
+.legend{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 14px}
+.legend div{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2)}
+.legend i{width:9px;height:9px;border-radius:3px;flex:none}
+.legend b{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.btn{
+  appearance:none;border:none;border-radius:12px;cursor:pointer;
+  font-size:16px;font-weight:600;padding:15px 18px;width:100%;
+  background:var(--acc);color:var(--on-acc);font-family:inherit;
+}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--rule)}
+.btn.danger{background:var(--bad);color:#fff}
+
+.sectionlist{display:flex;flex-direction:column;gap:8px}
+.lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-family:"IBM Plex Mono",monospace}
+.chip{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  background:var(--card);border:1px solid var(--rule);border-radius:11px;
+  padding:11px 13px;font-size:14px;color:var(--ink);cursor:pointer;font-family:inherit;
+}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip .n{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3)}
+.ubadge{
+  width:22px;height:22px;border-radius:6px;display:grid;place-items:center;flex:none;
+  font-size:11px;font-weight:600;color:#fff;font-family:"IBM Plex Mono",monospace;
+}
+.u1{background:var(--u1)} .u2{background:var(--u2)} .u4{background:var(--u4)}
+.filterrow{display:flex;gap:8px}
+.filterrow .chip{justify-content:center}
+.note{font-size:12.5px;color:var(--ink-3);line-height:1.6}
+.warnnote{background:var(--warn-soft);border:1px solid var(--warn);border-radius:11px;padding:11px 13px;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.warnnote b{display:block;color:var(--ink);margin-bottom:3px}
+.footer{text-align:center;font-size:11.5px;color:var(--ink-3);padding-top:6px;line-height:1.7}
+
+/* ---------- 문제 ---------- */
+.play{flex:1;display:flex;flex-direction:column;padding:0 16px 22px}
+.stagelabel{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);padding:15px 2px 10px;display:flex;gap:8px;align-items:center;
+}
+.stagelabel em{font-style:normal;color:var(--acc)}
+.prompt{padding:8px 2px 18px;margin-top:auto;display:flex;flex-direction:column;gap:12px}
+.qtag{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-3)}
+.qtext{
+  font-family:"Hahmlet",serif;font-weight:500;
+  font-size:clamp(18px,5vw,22px);line-height:1.52;letter-spacing:-.02em;text-wrap:balance;
+}
+.qdef{
+  background:var(--acc-soft);border-left:3px solid var(--acc);border-radius:0 10px 10px 0;
+  padding:12px 14px;font-size:15px;line-height:1.6;color:var(--ink);
+  font-family:"IBM Plex Sans KR",sans-serif;
+}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{
+  display:flex;align-items:flex-start;gap:11px;width:100%;text-align:left;
+  background:var(--card);border:1px solid var(--rule);border-radius:12px;
+  padding:13px 14px;font-size:15px;line-height:1.45;color:var(--ink);cursor:pointer;
+  font-family:inherit;transition:border-color .12s,background .12s;
+}
+.choice:active{transform:translateY(1px)}
+.choice .kx{
+  font-size:11px;color:var(--ink-3);border:1px solid var(--rule);border-radius:6px;
+  width:20px;height:20px;display:grid;place-items:center;flex:none;margin-top:1px;
+  font-family:"IBM Plex Mono",monospace;
+}
+.choice.right{border-color:var(--ok);background:var(--ok-soft)}
+.choice.right .kx{border-color:var(--ok);color:var(--ok)}
+.choice.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.choice.wrong .kx{border-color:var(--bad);color:var(--bad)}
+.choice[disabled]{cursor:default}
+.ox .choice{justify-content:center;font-size:20px;font-weight:600;padding:18px}
+
+/* 주관식 */
+.sabox{display:flex;flex-direction:column;gap:9px}
+.sarow{display:flex;gap:8px}
+.sarow input{
+  flex:1;min-width:0;appearance:none;background:var(--card);border:1px solid var(--rule);
+  border-radius:12px;padding:14px 14px;font-size:17px;font-family:inherit;color:var(--ink);
+}
+.sarow input:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:var(--acc)}
+.sarow button{
+  appearance:none;border:none;border-radius:12px;background:var(--acc);color:var(--on-acc);
+  font-family:inherit;font-size:15px;font-weight:600;padding:0 18px;cursor:pointer;flex:none;
+}
+.sahint{font-size:12.5px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;letter-spacing:.06em}
+.sagiven{
+  border-radius:12px;padding:13px 14px;font-size:16px;font-weight:600;border:1px solid var(--rule);
+  background:var(--card);
+}
+.sagiven.right{border-color:var(--ok);background:var(--ok-soft);color:var(--ok)}
+.sagiven.wrong{border-color:var(--bad);background:var(--bad-soft);color:var(--bad);text-decoration:line-through}
+.skip{
+  appearance:none;background:none;border:none;color:var(--ink-3);font-size:13px;
+  font-family:inherit;cursor:pointer;padding:14px 4px 2px;text-decoration:underline;
+  text-underline-offset:3px;align-self:center;
+}
+
+/* ---------- 자료(그림·지도·그래프) ---------- */
+.fig{
+  margin:0;background:var(--card);border:1px solid var(--rule);border-radius:12px;
+  padding:13px 12px 10px;display:flex;flex-direction:column;gap:8px;overflow-x:auto;
+}
+.fig svg{width:100%;height:auto;display:block;min-width:280px}
+.fig figcaption{font-size:11.5px;color:var(--ink-3);line-height:1.5;font-family:"IBM Plex Mono",monospace}
+.fig text{font-family:"IBM Plex Sans KR",sans-serif;font-size:11px;fill:var(--ink)}
+.fig text.fm{font-family:"IBM Plex Mono",monospace;font-size:10.5px;fill:var(--ink-2);font-variant-numeric:tabular-nums}
+.fig text.fs{font-size:9.5px;fill:var(--ink-3)}
+.fig text.fh{font-size:11.5px;font-weight:600;fill:var(--ink)}
+.fig text.fw{font-size:11.5px;font-weight:600;fill:#fff}
+.fig .bar{fill:var(--acc)}
+.fig .bar2{fill:var(--acc-line)}
+.fig .box{fill:var(--card);stroke:var(--rule);stroke-width:1}
+.fig .boxa{fill:var(--acc-soft);stroke:var(--acc-line);stroke-width:1}
+.fig .fillacc{fill:var(--acc)}
+.fig .ln{stroke:var(--rule);stroke-width:1;fill:none}
+.fig .lna{stroke:var(--acc);stroke-width:2;fill:none}
+.fig .dot{fill:var(--acc)}
+.fig .dotb{fill:var(--bad)}
+.fig .land{fill:var(--rule-2);stroke:var(--rule);stroke-width:1}
+
+/* ---------- 해설 ---------- */
+.reveal{flex:1;display:flex;flex-direction:column;gap:14px;padding-top:6px}
+.revealcard{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.revealcard .head{padding:15px 16px 13px;border-bottom:1px solid var(--rule-2);display:flex;flex-direction:column;gap:8px}
+.revealcard .q{font-size:14px;color:var(--ink-2);line-height:1.5}
+.revealcard .a{font-family:"Hahmlet",serif;font-weight:700;font-size:21px;letter-spacing:-.02em;line-height:1.35;color:var(--ok)}
+.revealcard .a.miss{color:var(--ink)}
+.revealcard .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:11px}
+.kv{display:flex;flex-direction:column;gap:3px}
+.kv .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-family:"IBM Plex Mono",monospace}
+.kv .v{font-size:14.5px;line-height:1.6;color:var(--ink)}
+.verdict{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.verdict.ok{color:var(--ok)} .verdict.no{color:var(--bad)}
+
+/* ---------- 결과 ---------- */
+.result{padding:30px 18px 40px;display:flex;flex-direction:column;gap:20px;flex:1}
+.score{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;padding:10px 0 4px}
+.score .big{font-family:"Hahmlet",serif;font-weight:700;font-size:54px;line-height:1;letter-spacing:-.04em}
+.score .cap{color:var(--ink-3);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--card);border:1px solid var(--rule);border-radius:11px;padding:12px 10px;text-align:center}
+.stat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:20px;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;color:var(--ink-3)}
+
+/* ---------- 목록 ---------- */
+.listwrap{padding:18px 16px 40px;display:flex;flex-direction:column;gap:14px;flex:1}
+.listhead{display:flex;align-items:center;gap:10px}
+.listhead h2{margin:0;font-family:"Hahmlet",serif;font-weight:700;font-size:22px;letter-spacing:-.02em;flex:1}
+.item{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:13px 14px;display:flex;flex-direction:column;gap:7px}
+.item.miss{border-color:var(--bad);background:var(--bad-soft)}
+.item .qq{font-size:14px;line-height:1.5;color:var(--ink)}
+.item .aa{font-size:14px;font-weight:600;color:var(--ok)}
+.item .xx{font-size:13px;color:var(--ink-2);line-height:1.6}
+.item .meta{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--ink-3);font-family:"IBM Plex Mono",monospace}
+.groupcap{font-size:12px;color:var(--ink-3);padding:6px 2px 0;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em}
+.empty{text-align:center;color:var(--ink-3);font-size:14px;padding:50px 20px;line-height:1.7}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important;animation:none !important}}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ============ 소리: 딩동 / 땡 ============ */
+let AC = null;
+function ac() {
+  if (AC === null) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { AC = false; } }
+  if (AC && AC.state === 'suspended') AC.resume();
+  return AC || null;
+}
+function tone(freq, start, dur, vol, type) {
+  const c = ac(); if (!c) return;
+  const o = c.createOscillator(), g = c.createGain();
+  o.type = type || 'sine'; o.frequency.value = freq;
+  const t0 = c.currentTime + start;
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t0); o.stop(t0 + dur + 0.05);
+}
+let SOUND = true;
+try { SOUND = localStorage.getItem('tonghap2-sound') !== 'off'; } catch (e) { }
+function dingdong() {   // 딩-동 (높은음 → 낮은음)
+  if (!SOUND) return;
+  tone(1174.7, 0, 0.30, 0.22);    // D6
+  tone(880.0, 0.17, 0.42, 0.20);  // A5
+}
+function ttaeng() {     // 땡 (낮고 둔탁한 두 음)
+  if (!SOUND) return;
+  tone(196.0, 0, 0.42, 0.20, 'triangle');   // G3
+  tone(155.6, 0.05, 0.50, 0.16, 'triangle');// D#3
+}
+
+/* ============ 자료 그림 ============ */
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function svgWrap(vb, inner, cap, label) {
+  return '<figure class="fig"><svg viewBox="' + vb + '" role="img" aria-label="' + esc(label || cap || '자료') + '">'
+    + inner + '</svg>' + (cap ? '<figcaption>' + esc(cap) + '</figcaption>' : '') + '</figure>';
+}
+// 막대 끝만 둥근 경로 (기준선에 붙임)
+function barPath(x, y, w, h, r) {
+  r = Math.min(r, w, h / 2);
+  return 'M' + x + ',' + y + ' H' + (x + w - r) + ' A' + r + ',' + r + ' 0 0 1 ' + (x + w) + ',' + (y + r)
+    + ' V' + (y + h - r) + ' A' + r + ',' + r + ' 0 0 1 ' + (x + w - r) + ',' + (y + h) + ' H' + x + ' Z';
+}
+// 가로 막대: 단일 계열 · 한 색 · 모든 막대에 값 직접 표기
+function barsH(rows, cap, lw) {
+  lw = lw || 96;
+  const W = 340, rowH = 24, gap = 9, top = 4;
+  const H = top + rows.length * (rowH + gap);
+  const max = Math.max.apply(null, rows.map(r => r.v));
+  const bw = W - lw - 62;
+  let s = '<line class="ln" x1="' + lw + '" y1="' + top + '" x2="' + lw + '" y2="' + (H - 4) + '"/>';
+  rows.forEach((r, i) => {
+    const y = top + i * (rowH + gap);
+    const w = Math.max(3, r.v / max * bw);
+    s += '<text x="' + (lw - 8) + '" y="' + (y + 16) + '" text-anchor="end">' + esc(r.l) + '</text>';
+    s += '<path class="bar" d="' + barPath(lw + 2, y + 3, w, rowH - 6, 3) + '"><title>' + esc(r.l + ' ' + (r.t || r.v)) + '</title></path>';
+    s += '<text class="fm" x="' + (lw + w + 9) + '" y="' + (y + 16) + '">' + esc(r.t || r.v) + '</text>';
+  });
+  return svgWrap('0 0 ' + W + ' ' + H, s, cap);
+}
+// 개념 상자 N개 가로 배열
+function boxRow(items, cap) {
+  const W = 340, n = items.length, gap = 8;
+  const bw = (W - gap * (n - 1)) / n;
+  const maxLines = Math.max.apply(null, items.map(it => (it.b || []).length));
+  const H = 34 + maxLines * 15 + 12;
+  let s = '';
+  items.forEach((it, i) => {
+    const x = i * (bw + gap);
+    s += '<rect class="' + (it.hl ? 'boxa' : 'box') + '" x="' + x + '" y="0" width="' + bw + '" height="' + H + '" rx="9"/>';
+    s += '<text class="fh" x="' + (x + bw / 2) + '" y="20" text-anchor="middle">' + esc(it.h) + '</text>';
+    if (it.s) s += '<text class="fs" x="' + (x + bw / 2) + '" y="33" text-anchor="middle">' + esc(it.s) + '</text>';
+    (it.b || []).forEach((line, j) => {
+      s += '<text class="fs" x="' + (x + bw / 2) + '" y="' + (48 + j * 15) + '" text-anchor="middle">' + esc(line) + '</text>';
+    });
+  });
+  return svgWrap('0 0 ' + W + ' ' + H, s, cap);
+}
+// 연표
+function timeline(items, cap) {
+  const W = 340, H = 96;
+  const n = items.length, step = (W - 24) / (n - 1);
+  let s = '<line class="ln" x1="12" y1="46" x2="' + (W - 12) + '" y2="46"/>';
+  items.forEach((it, i) => {
+    const x = 12 + i * step;
+    const up = i % 2 === 0;
+    s += '<circle class="' + (it.hl ? 'dotb' : 'dot') + '" cx="' + x + '" cy="46" r="' + (it.hl ? 5.5 : 4) + '"/>';
+    s += '<text class="fm" x="' + x + '" y="' + (up ? 30 : 66) + '" text-anchor="middle">' + esc(it.y) + '</text>';
+    s += '<text class="fs" x="' + x + '" y="' + (up ? 17 : 79) + '" text-anchor="middle">' + esc(it.l) + '</text>';
+  });
+  return svgWrap('0 0 ' + W + ' ' + H, s, cap);
+}
+// 단계 흐름 (세로)
+function flow(items, cap) {
+  const W = 340, rowH = 30, gap = 10;
+  const H = items.length * (rowH + gap);
+  let s = '';
+  items.forEach((it, i) => {
+    const y = i * (rowH + gap);
+    s += '<rect class="' + (it.hl ? 'boxa' : 'box') + '" x="0" y="' + y + '" width="' + W + '" height="' + rowH + '" rx="8"/>';
+    s += '<text class="fm" x="12" y="' + (y + 19) + '">' + esc(it.n) + '</text>';
+    s += '<text x="46" y="' + (y + 19) + '">' + esc(it.l) + '</text>';
+    if (i < items.length - 1) s += '<path class="ln" d="M' + (W / 2) + ',' + (y + rowH) + ' v' + gap + '"/>';
+  });
+  return svgWrap('0 0 ' + W + ' ' + H, s, cap);
+}
+
+const FIGS = {
+  /* --- Ⅰ 인권 --- */
+  gen3: () => boxRow([
+    { h: '1세대 인권', s: '시민·정치적 권리', b: ['국가의 불간섭 요구', '신체·표현의 자유', '공정한 재판'] },
+    { h: '2세대 인권', s: '경제·사회·문화적 권리', b: ['국가의 적극적 개입', '근로·교육의 권리', '인간다운 생활'] },
+    { h: '3세대 인권', s: '연대권', b: ['국경 넘은 연대', '자결권·평화권', '재난 구제'] }
+  ], '인권의 확장 - 1·2·3세대 인권'),
+
+  docs: () => timeline([
+    { y: '1215', l: '대헌장' }, { y: '1689', l: '권리 장전' }, { y: '1776', l: '미국 독립' },
+    { y: '1789', l: '프랑스 인권' }, { y: '1919', l: '바이마르' }, { y: '1948', l: '세계 인권' }, { y: '1966', l: '국제 규약' }
+  ], '인권 보장의 역사 - 주요 문서'),
+
+  newr: () => boxRow([
+    { h: '주거권', s: '헌법 35조 ③', b: ['청년 안심 주택'] },
+    { h: '안전권', s: '헌법 34조 ⑥', b: ['지하철 안전문'] },
+    { h: '환경권', s: '헌법 35조 ①', b: ['노후 경유차 저감'] },
+    { h: '문화권', s: '문화 기본법 4조', b: ['배리어 프리'] }
+  ], '현대 사회에서 확장된 인권 4가지'),
+
+  rights5: () => boxRow([
+    { h: '자유권', b: ['간섭 없이', '생활할 권리'] },
+    { h: '평등권', b: ['차별받지', '않을 권리'] },
+    { h: '참정권', b: ['정치에 참여', '할 권리'] },
+    { h: '사회권', b: ['인간다운 삶', '요구할 권리'] },
+    { h: '청구권', b: ['구제를 요구', '수단적 성격'] }
+  ], '헌법이 보장하는 기본권 5가지'),
+
+  limit37: () => boxRow([
+    { h: '목적', s: '무엇을 위해', b: ['국가 안전 보장', '질서 유지', '공공복리'] },
+    { h: '형식', s: '무엇으로', b: ['법률로써', '(대통령령·조례', '불가)'] },
+    { h: '한계', s: '어디까지', b: ['본질적 내용은', '침해 불가'] }
+  ], '기본권 제한의 3요건 - 헌법 제37조 ②'),
+
+  remedy: () => boxRow([
+    { h: '위헌 법률 심판', s: '청구: 법원의 제청', b: ['재판에 쓰이는 법률이', '헌법에 어긋나는지'] },
+    { h: '헌법 소원 심판', s: '청구: 국민 본인', b: ['국가 권력 때문에', '기본권을 침해받았을 때'] }
+  ], '기본권 구제 제도 - 헌법재판소'),
+
+  civdis: () => boxRow([
+    { h: '목적', b: ['공익과 정의'] },
+    { h: '수단', b: ['비폭력'] },
+    { h: '시점', b: ['최후의 수단'] },
+    { h: '책임', b: ['처벌 감수'] }
+  ], '시민불복종의 정당화 조건 4가지'),
+
+  press: () => barsH([
+    { l: '매우 나쁨', v: 20, t: '0~40' }, { l: '나쁨', v: 40, t: '40~55' },
+    { l: '보통', v: 62, t: '55~70' }, { l: '좋음', v: 92, t: '70~100' }
+  ], '세계 언론 자유 지수 구간 - 국경 없는 기자회(RSF), 2023', 70),
+
+  hdi: () => boxRow([
+    { h: '스위스', s: 'HDI 1위', b: ['IHDI 4위'] },
+    { h: '노르웨이', s: 'HDI 2위', b: ['IHDI 2위'] },
+    { h: '대한민국', s: 'HDI 19위', b: ['IHDI 22위'], hl: true },
+    { h: '미국', s: 'HDI 21위', b: ['IHDI 26위'] }
+  ], 'HDI와 IHDI 순위 비교 - 불평등을 반영하면 순위가 내려간다'),
+
+  /* --- Ⅱ 정의 --- */
+  scale: () => svgWrap('0 0 340 128', [
+    '<line class="ln" x1="120" y1="20" x2="120" y2="112"/>',
+    '<line class="ln" x1="72" y1="42" x2="168" y2="42"/>',
+    '<circle class="dot" cx="120" cy="34" r="4"/>',
+    '<path class="ln" d="M72,42 L62,62 h20 Z"/>',
+    '<path class="ln" d="M168,42 L158,62 h20 Z"/>',
+    '<rect class="box" x="104" y="112" width="32" height="8" rx="3"/>',
+    '<text class="fh" x="196" y="30">저울</text><text class="fs" x="196" y="44">엄격하고 공정한 정의의 기준</text>',
+    '<text class="fh" x="196" y="66">칼</text><text class="fs" x="196" y="80">정의를 실현하기 위한 힘</text>',
+    '<text class="fh" x="196" y="102">눈을 가린 띠</text><text class="fs" x="196" y="116">판정할 때의 공평성</text>',
+    '<line class="lna" x1="186" y1="16" x2="186" y2="120"/>'
+  ].join(''), '정의의 여신상이 들고 있는 것의 의미', '정의의 여신상 도식'),
+
+  dist3: () => boxRow([
+    { h: '업적', s: '성과·실적', b: ['장) 평가가 쉽고', '노력 동기', '단) 약자 배려 곤란'] },
+    { h: '능력', s: '육체적·정신적', b: ['장) 능력 개발 동기', '단) 우연적 요소', '개입'] },
+    { h: '필요', s: '기본적 욕구', b: ['장) 불평등 완화', '단) 근로 동기', '약화'] }
+  ], '분배적 정의의 실질적 기준 3가지'),
+
+  just2: () => boxRow([
+    { h: '자유주의', s: '개인선 > 공동선', b: ['독립적 존재', '선택으로 정체성', '밀 · 롤스 · 노직'] },
+    { h: '공동체주의', s: '공동선 > 개인선', b: ['공동체에 뿌리', '역할로 정체성', '매킨타이어'] }
+  ], '두 정의관의 대비'),
+
+  rawls: () => boxRow([
+    { h: '롤스', s: '정의의 3원칙', b: ['평등한 자유', '차등(최소 수혜자)', '기회균등'] },
+    { h: '노직', s: '소유 권리 2원칙', b: ['취득의 원칙', '양도의 원칙', '빈부 격차 무방'] }
+  ], '롤스와 노직 - 둘 다 자유주의자'),
+
+  income: () => barsH([
+    { l: '하위 20%', v: 1076, t: '107.6만 원' },
+    { l: '상위 20%', v: 11483, t: '1,148.3만 원' }
+  ], '가구당 월평균 소득(2023년 1분기) - 통계청. 약 10.7배 차이', 76),
+
+  elderly: () => barsH([
+    { l: '2023년', v: 18.4, t: '18.4%' }, { l: '2030년', v: 25.5, t: '25.5%' },
+    { l: '2040년', v: 34.4, t: '34.4%' }, { l: '2050년', v: 40.1, t: '40.1%' }
+  ], '우리나라 65세 이상 노인 인구 비율 전망 - 통계청, 2021', 66),
+
+  welfare3: () => boxRow([
+    { h: '사회 보험', s: '보험료 분담', b: ['국민연금', '국민 건강 보험', '고용·산재 보험'] },
+    { h: '공공 부조', s: '국가 재정', b: ['기초 연금', '국민 기초 생활', '의료 급여'] },
+    { h: '사회 서비스', s: '서비스 제공', b: ['노인 돌봄', '장애인 활동 지원', '가사·간병'] }
+  ], '사회 복지 제도의 3분류'),
+
+  urbanrural: () => barsH([
+    { l: '도시 근로자', v: 74507, t: '7,450.7만 원' },
+    { l: '농촌 가구', v: 47759, t: '4,775.9만 원' }
+  ], '가구당 연간 소득(2021년) - 통계청. 농촌은 도시의 약 64%', 82),
+
+  wage: () => barsH([
+    { l: '중졸 이하', v: 197, t: '197만 원' }, { l: '고졸', v: 240, t: '240만 원' },
+    { l: '전문대졸', v: 295, t: '295만 원' }, { l: '대졸', v: 381, t: '381만 원' },
+    { l: '대학원졸', v: 547, t: '547만 원' }
+  ], '학력별 월평균 임금(2022년) - 고용 노동부', 76),
+
+  commons: () => boxRow([
+    { h: '가', s: '사유화', b: ['목초지를 나누어', '개인이 소유·관리'] },
+    { h: '나', s: '정부 규제', b: ['적정 가축 수 지정', '초과 시 벌금'] },
+    { h: '다', s: '자발적 합의', b: ['공유자들끼리', '스스로 질서 확립'] }
+  ], '공유지의 비극 - 세 가지 해결 방안'),
+
+  /* --- Ⅳ 세계화와 평화 --- */
+  mnc: () => boxRow([
+    { h: '본사', s: '경영·관리', b: ['본국의 대도시'] },
+    { h: '연구소', s: '연구·개발', b: ['핵심 기술 인력을', '구하기 쉬운 곳'] },
+    { h: '생산 공장', s: '조립·생산', b: ['노동력·원료가', '저렴한 곳'] }
+  ], '다국적 기업의 공간적 분업'),
+
+  globcity: () => barsH([
+    { l: '런던', v: 1646.7, t: '1646.7' }, { l: '뉴욕', v: 1506.4, t: '1506.4' },
+    { l: '도쿄', v: 1375.8, t: '1375.8' }, { l: '파리', v: 1363.7, t: '1363.7' }
+  ], '세계도시 경쟁력 점수(2022년) - 모리 기념 재단', 60),
+
+  loc3: () => boxRow([
+    { h: '지역 브랜드', b: ['로고·슬로건', 'I amsterdam'] },
+    { h: '장소 마케팅', b: ['지역 축제', '산천어·머드 축제'] },
+    { h: '지리적 표시제', b: ['국가가 상표권 인정', '보성 녹차 1호'] }
+  ], '지역화 전략 3가지'),
+
+  gap: () => barsH([
+    { l: '1980년', v: 53, t: '53배' }, { l: '2023년', v: 106, t: '106배' }
+  ], '최상위 20개 부국과 최하위 20개 빈국의 1인당 GDP 격차 - 국제 통화 기금', 62),
+
+  peace2: () => svgWrap('0 0 340 132', [
+    '<rect class="boxa" x="0" y="0" width="340" height="132" rx="10"/>',
+    '<text class="fh" x="14" y="20">적극적 평화</text>',
+    '<text class="fs" x="14" y="34">구조적 폭력 + 문화적 폭력까지 제거된 상태</text>',
+    '<rect class="box" x="14" y="44" width="312" height="44" rx="8"/>',
+    '<text class="fh" x="26" y="62">소극적 평화</text>',
+    '<text class="fs" x="26" y="78">전쟁·테러·범죄 등 직접적·물리적 폭력이 없는 상태</text>',
+    '<text class="fs" x="14" y="104">구조적 폭력: 빈곤 · 정치적 억압 · 경제적 착취</text>',
+    '<text class="fs" x="14" y="120">문화적 폭력: 종교·사상·언어·예술에 스며든 폭력</text>'
+  ].join(''), '평화의 두 층위 - 갈퉁', '소극적 평화와 적극적 평화의 포함 관계'),
+
+  actors: () => boxRow([
+    { h: '국가', s: '가장 기본적', b: ['주권 보유', '자국 이익 우선'] },
+    { h: '국제기구', s: '정부가 회원', b: ['국제 연합(UN)', 'UNHCR · WFP'] },
+    { h: '비정부 기구', s: '민간이 주도', b: ['국경 없는 의사회', '국제 앰네스티'] }
+  ], '국제 사회의 행위 주체'),
+
+  easia: () => svgWrap('0 0 340 176', [
+    '<path class="land" d="M10,36 L96,20 L150,34 L142,78 L96,96 L28,86 Z"/>',
+    '<text class="fs" x="66" y="60" text-anchor="middle">중국</text>',
+    '<path class="land" d="M150,34 L182,30 L206,20 L214,44 L188,58 L156,54 Z"/>',
+    '<text class="fs" x="184" y="44" text-anchor="middle">러시아</text>',
+    '<path class="land" d="M156,60 L176,58 L180,86 L164,96 L152,82 Z"/>',
+    '<text class="fs" x="166" y="80" text-anchor="middle">한국</text>',
+    '<path class="land" d="M200,60 L228,74 L242,104 L222,112 L198,86 Z"/>',
+    '<text class="fs" x="220" y="92" text-anchor="middle">일본</text>',
+    '<path class="land" d="M108,110 L140,116 L138,148 L112,152 Z"/>',
+    '<text class="fs" x="124" y="134" text-anchor="middle">동남아</text>',
+    '<circle class="dotb" cx="188" cy="76" r="4"/><text class="fm" x="196" y="80">독도</text>',
+    '<circle class="dotb" cx="236" cy="42" r="4"/><text class="fm" x="244" y="46">쿠릴 열도</text>',
+    '<circle class="dotb" cx="196" cy="110" r="4"/><text class="fm" x="204" y="114">센카쿠 열도</text>',
+    '<circle class="dotb" cx="120" cy="158" r="4"/><text class="fm" x="128" y="162">시사 군도</text>',
+    '<circle class="dotb" cx="152" cy="170" r="4"/><text class="fm" x="160" y="174">난사 군도</text>'
+  ].join(''), '동아시아 영토 분쟁 지역 모식도 (실제 축척·국경과 다름)', '동아시아 영토 분쟁 위치 모식도'),
+
+  military: () => barsH([
+    { l: '미국 1위', v: 8770, t: '8,770억 달러' }, { l: '중국 2위', v: 2920, t: '2,920억 달러' },
+    { l: '러시아 3위', v: 864, t: '864억 달러' }, { l: '인도 4위', v: 814, t: '814억 달러' },
+    { l: '대한민국 9위', v: 464, t: '464억 달러', hl: true }
+  ], '2022년 세계 군사비 지출 - 스톡홀름 국제 평화 문제 연구소', 88),
+
+  division: () => flow([
+    { n: '1945.8', l: '광복 - 미국·소련이 북위 38도선으로 분할 점령' },
+    { n: '1945.12', l: '모스크바 3국 외상 회의 - 신탁 통치 결정, 좌우 대립' },
+    { n: '1947', l: '국제 연합(UN) - 총선거로 통일 정부 구성 방안' },
+    { n: '1948', l: '남북한에 서로 다른 정부 수립' },
+    { n: '1950', l: '6·25 전쟁 - 분단 고착화' }
+  ], '남북 분단의 과정'),
+
+  eahist: () => boxRow([
+    { h: '영토 문제', b: ['해양 자원 경쟁', '1970년대 이후 심화'] },
+    { h: '동북공정', b: ['중국, 2002~5년간', '고구려·발해를', '중국사로 편입'] },
+    { h: '교과서 왜곡', b: ['일본, 독도 왜곡', '침략 행위 정당화'] }
+  ], '동아시아의 역사 갈등 3가지'),
+
+  globprob: () => boxRow([
+    { h: '문화 획일화', b: ['고유문화 소멸', '다양성 훼손'] },
+    { h: '빈부 격차', b: ['선진국 우위', '격차 확대'] },
+    { h: '윤리 충돌', b: ['보편 윤리 vs', '특수 윤리'] }
+  ], '세계화 시대의 세 가지 문제점')
+};
+</script>
+<script>
+/* ===== Ⅰ. 인권 보장과 헌법 (교과서 6~33쪽) ===== */
+const U1 = [
+/* 1-1 인권의 의미 변화와 확장 (8~15쪽) */
+{i:1001,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"모든 인간이 인간이라는 이유만으로 인간 존엄성을 보장받으며 인간다운 삶을 살아갈 권리",q:"이 권리를 무엇이라고 하는가?",a:"인권",x:"인권은 인간 존엄성을 실현하기 위해 반드시 보장해야 하는 권리다.",s:"hard"},
+{i:1002,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"모든 인간은 존재 가치가 있으며 그 인격이 존중받아야 한다는 이념",q:"이것을 무엇이라고 하는가?",a:"인간 존엄성",alt:["인간존엄성","존엄성"],x:"인권이 보장해야 할 최종 목표가 바로 인간 존엄성이다.",s:"new"},
+{i:1003,u:1,g:"1. 인권의 의미 변화와 확장",def:"하늘이 인권을 부여했다는 뜻으로, 어떠한 권력도 인간의 기본적 권리를 부당하게 침해할 수 없음을 의미한다.",q:"이 개념은?",a:"천부 인권",d:["국민 주권","자연법","저항권"],x:"천부 인권은 인권의 특징 중 '천부성'과 직결된다.",s:"new"},
+{i:1004,u:1,g:"1. 인권의 의미 변화와 확장",def:"인간이 태어나면서부터 당연하게 가지는 권리라는 뜻",q:"인권의 네 가지 특징 중 무엇인가?",a:"천부성",d:["보편성","불가침성","항구성"],x:"국가가 만들어 준 권리가 아니라는 뜻이다.",s:"hard"},
+{i:1005,u:1,g:"1. 인권의 의미 변화와 확장",def:"성별, 인종, 계급, 신분과 관계없이 모든 사람이 가지는 권리라는 뜻",q:"인권의 네 가지 특징 중 무엇인가?",a:"보편성",d:["천부성","불가침성","항구성"],x:"예외가 되는 사람이 없다는 뜻으로 '누구나'로 기억한다.",s:"new"},
+{i:1006,u:1,g:"1. 인권의 의미 변화와 확장",def:"국가나 다른 사람이 부당하게 침해할 수 없고 양도할 수도 없는 권리라는 뜻",q:"인권의 네 가지 특징 중 무엇인가?",a:"불가침성",d:["항구성","보편성","천부성"],x:"빼앗을 수도, 남에게 넘길 수도 없다는 뜻이다.",s:"hard"},
+{i:1007,u:1,g:"1. 인권의 의미 변화와 확장",def:"일시적 권리가 아니라 영구히 보장된다는 뜻",q:"인권의 네 가지 특징 중 무엇인가?",a:"항구성",d:["불가침성","보편성","천부성"],x:"기간 제한이 없다는 뜻이다. '한시적으로 보장된다'는 서술은 항상 틀린 선지다.",s:"hard"},
+{i:1008,u:1,g:"1. 인권의 의미 변화와 확장",t:"ox",q:"인권은 일정 기간 한시적으로 보장되는 권리이다.",a:"X",x:"틀렸다. 항구성에 어긋난다. 교과서 단원 퀴즈에 그대로 나온 함정 문장이다.",s:"hard"},
+{i:1009,u:1,g:"1. 인권의 의미 변화와 확장",t:"ox",q:"인권은 국가가 법으로 만들어 주었기 때문에 생긴 권리이다.",a:"X",x:"틀렸다. 인권은 천부적 권리이고, 국가는 그것을 확인하고 보장할 의무를 질 뿐이다.",s:"hard"},
+{i:1010,u:1,g:"1. 인권의 의미 변화와 확장",f:"gen3",q:"자료에서 '국가의 적극적인 개입'을 요구하는 인권은 몇 세대인가?",a:"2세대 인권",d:["1세대 인권","3세대 인권","1세대와 3세대 인권"],x:"1세대는 국가의 불간섭, 2세대는 국가의 적극적 개입, 3세대는 국경을 넘은 연대를 요구한다.",s:"hard"},
+{i:1011,u:1,g:"1. 인권의 의미 변화와 확장",f:"gen3",q:"자료의 세 인권 중 '자결권, 발전의 권리, 평화에 관한 권리'가 속하는 것은?",a:"3세대 인권",d:["1세대 인권","2세대 인권","어디에도 속하지 않는다"],x:"3세대 인권은 연대권이라고도 하며 전 지구적 차원의 권리다.",s:"hard"},
+{i:1012,u:1,g:"1. 인권의 의미 변화와 확장",q:"신체의 자유, 표현의 자유, 집회 및 결사의 자유, 공정한 재판을 받을 권리가 속하는 것은?",a:"1세대 인권(시민·정치적 권리)",d:["2세대 인권(경제·사회·문화적 권리)","3세대 인권(연대권)","4세대 인권(정보 인권)"],x:"1세대는 '국가야 간섭하지 마'에 해당하는 자유권 계열이다.",s:"hard"},
+{i:1013,u:1,g:"1. 인권의 의미 변화와 확장",q:"근로의 권리, 교육에 관한 권리, 사회 보장을 받을 권리, 쾌적한 환경에서 생활할 권리가 속하는 것은?",a:"2세대 인권(경제·사회·문화적 권리)",d:["1세대 인권(시민·정치적 권리)","3세대 인권(연대권)","5세대 인권(디지털 인권)"],x:"2세대는 '국가야 도와줘'에 해당한다.",s:"hard"},
+{i:1014,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"다른 나라의 간섭 없이 자유롭게 통치 형태를 결정하고 경제·사회·문화적 발전을 추구할 수 있는 권리",q:"이 권리를 무엇이라고 하는가?",a:"자결권",x:"3세대 인권(연대권)에 속한다.",s:"new"},
+{i:1015,u:1,g:"1. 인권의 의미 변화와 확장",f:"docs",q:"자료의 연표에서 1919년에 해당하는 문서는?",a:"독일 바이마르 헌법",d:["세계 인권 선언","프랑스 인간과 시민의 권리 선언","국제 인권 규약"],x:"바이마르 헌법은 사회권을 세계 최초로 명시했다.",s:"hard"},
+{i:1016,u:1,g:"1. 인권의 의미 변화와 확장",f:"docs",q:"자료의 연표에서 1948년에 채택된 것으로, 인권 보장의 국제적 기준이 된 문서는?",a:"세계 인권 선언",d:["국제 인권 규약","권리 장전","아동 권리 협약"],x:"제2차 세계 대전 이후 국제 연합(UN) 총회에서 채택되었다.",s:"hard"},
+{i:1017,u:1,g:"1. 인권의 의미 변화와 확장",f:"docs",t:"sa",q:"자료의 연표에서 가장 먼저 나온 문서는 1215년 영국의 무엇인가?",a:"대헌장",alt:["마그나카르타","마그나 카르타","영국 대헌장"],x:"국왕이 의회 승인 없이 과세할 수 없고, 법에 따르지 않고는 체포할 수 없다고 규정했다.",s:"new"},
+{i:1018,u:1,g:"1. 인권의 의미 변화와 확장",def:"1688년 영국에서 의회가 전제 군주를 폐위하고 메리와 윌리엄을 공동 왕으로 추대하여 정권 교체가 이루어진 사건",q:"이 사건은?",a:"명예혁명",d:["청교도 혁명","프랑스 혁명","산업 혁명"],x:"이 결과 1689년 권리 장전이 승인되었다.",s:"new"},
+{i:1019,u:1,g:"1. 인권의 의미 변화와 확장",q:"1689년 영국 권리 장전의 의의로 옳은 것은?",a:"법을 통한 왕권 제한과 의회의 권한을 명시하여 입헌 군주제의 기초를 확립했다",d:["사회권을 세계 최초로 명시했다","천부 인권과 국민 주권을 처음 선언했다","국제 사회의 인권 기준을 제시했다"],x:"명예혁명의 결과물이다.",s:"new"},
+{i:1020,u:1,g:"1. 인권의 의미 변화와 확장",q:"1776년 미국 독립 선언에 담긴 내용으로 옳은 것은?",a:"영국의 부당한 식민 지배에 반발하여 저항권과 자유권 등을 담았다",d:["왕의 과세권을 제한했다","사회권을 최초로 규정했다","여성의 참정권을 보장했다"],x:"모든 인간은 태어날 때부터 자유롭고 평등한 권리를 가진다는 내용이 명시되었다.",s:"new"},
+{i:1021,u:1,g:"1. 인권의 의미 변화와 확장",q:"1789년 프랑스 인간과 시민의 권리 선언이 침해 불가로 명시한 권리가 아닌 것은?",a:"사회 보장을 받을 권리",d:["천부 인권","국민 주권","저항권"],x:"재산권도 포함된다. 사회 보장을 받을 권리는 1919년 바이마르 헌법의 사회권이다.",s:"hard"},
+{i:1022,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"1919년 제정되어 모든 국민이 최소한의 인간다운 생활을 보장받아야 한다는 사회권을 세계 최초로 명시한 헌법",q:"이 헌법의 이름은?",a:"바이마르 헌법",alt:["독일 바이마르 헌법","바이마르헌법"],x:"이후 세계 각국이 헌법에 사회권을 구체화하여 도입했다.",s:"hard"},
+{i:1023,u:1,g:"1. 인권의 의미 변화와 확장",q:"1966년 국제 인권 규약에 대한 설명으로 옳은 것은?",a:"세계 인권 선언에 명시된 권리를 국제법상 조약 형태로 구체화한 것이다",d:["제2차 세계 대전을 막기 위해 체결되었다","사회권을 최초로 규정한 문서이다","유럽 국가들만 가입한 조약이다"],x:"1세대 인권 규약과 2세대 인권 규약 두 가지로 이루어졌다.",s:"new"},
+{i:1024,u:1,g:"1. 인권의 의미 변화와 확장",def:"19세기 영국에서 일정 수준 이상의 재산이 있는 성인 남성만 투표권을 갖자, 노동자들이 인민헌장을 통해 선거권 확대와 비밀 투표를 요구한 운동",q:"이 운동은?",a:"차티스트 운동",d:["여성 참정권 운동","흑인 민권 운동","명예혁명"],x:"시민 혁명 이후에도 남아 있던 선거권 제한을 바꾸려는 노력이었다.",s:"hard"},
+{i:1025,u:1,g:"1. 인권의 의미 변화와 확장",def:"1865년 미국에서 노예 제도가 폐지된 뒤에도 투표권 제한 등 차별을 받던 사람들이 백인과 동등한 시민권 보장을 주장한 운동",q:"이 운동은?",a:"흑인 민권 운동",d:["차티스트 운동","여성 참정권 운동","배리어 프리 운동"],x:"공공시설 분리, 참정권 행사 곤란 등의 차별이 배경이다.",s:"new"},
+{i:1026,u:1,g:"1. 인권의 의미 변화와 확장",q:"시민 혁명을 통해 시민들이 확립한 권리를 바르게 묶은 것은?",a:"자유권 · 평등권 · 참정권",d:["자유권 · 사회권 · 청구권","평등권 · 사회권 · 연대권","참정권 · 사회권 · 환경권"],x:"사회권은 산업 혁명 이후 바이마르 헌법에서 확립되었다.",s:"hard"},
+{i:1027,u:1,g:"1. 인권의 의미 변화와 확장",t:"ox",q:"시민 혁명으로 모든 사람이 곧바로 자유롭고 평등한 대우를 받게 되었다.",a:"X",x:"틀렸다. 재산·직업·성별에 따라 선거권이 여전히 제한되었다.",s:"new"},
+{i:1028,u:1,g:"1. 인권의 의미 변화와 확장",q:"산업 혁명 이후 사회권이 등장하게 된 배경으로 옳은 것은?",a:"사회 전체의 부는 증가했지만 노동자가 열악한 조건에 시달리며 빈부 격차가 심화되었다",d:["전쟁으로 난민이 대규모로 발생했다","신분 제도가 강화되었다","여성의 참정권이 박탈되었다"],x:"그래서 국가가 사회적 약자를 적극적으로 보호해야 한다는 생각이 나타났다.",s:"new"},
+{i:1029,u:1,g:"1. 인권의 의미 변화와 확장",q:"제2차 세계 대전 이후 연대권이 강조되게 된 이유로 옳은 것은?",a:"전쟁·기아·차별로 인권을 침해당하는 사회적 약자를 국제적으로 연대하여 보호해야 하기 때문",d:["국가의 불간섭이 더 중요해졌기 때문","선진국의 경제 성장을 위해서","신분 제도를 폐지하기 위해서"],x:"연대권은 3세대 인권이다.",s:"new"},
+{i:1030,u:1,g:"1. 인권의 의미 변화와 확장",f:"newr",q:"자료에서 근거가 헌법이 아니라 개별 법률인 권리는?",a:"문화권",d:["주거권","안전권","환경권"],x:"문화권은 문화 기본법 제4조가 근거다. 나머지 셋은 헌법 조항이 근거다.",s:"hard"},
+{i:1031,u:1,g:"1. 인권의 의미 변화와 확장",f:"newr",q:"자료에서 '지하철 안전문 설치'와 연결되는 권리는?",a:"안전권",d:["주거권","환경권","문화권"],x:"헌법 제34조 ⑥의 국가 재해 예방 의무가 근거다.",s:"hard"},
+{i:1032,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"쾌적하고 안정적인 환경에서 인간다운 주거 생활을 할 권리",q:"이 권리를 무엇이라고 하는가?",a:"주거권",x:"헌법 제35조 ③에 근거하며, 청년 안심 주택이 대표 사례다.",s:"new"},
+{i:1033,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"생명과 안녕을 위협하는 각종 위험으로부터 안전할 권리",q:"이 권리를 무엇이라고 하는가?",a:"안전권",x:"헌법 제34조 ⑥에 국가의 재해 예방 의무가 명시되어 있다.",s:"new"},
+{i:1034,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",def:"계층, 민족, 문화적 배경에 상관없이 누구나 문화생활에 참여하고 문화를 향유할 수 있는 권리",q:"이 권리를 무엇이라고 하는가?",a:"문화권",x:"문화 기본법 제4조가 근거이며, 국가는 지리적 고립·경제적·신체적 이유로 문화권을 누리지 못하는 사람을 지원한다.",s:"new"},
+{i:1035,u:1,g:"1. 인권의 의미 변화와 확장",t:"ox",q:"우리 헌법은 환경권을 국민의 권리인 동시에 의무로도 규정하고 있다.",a:"O",x:"옳다. '국가와 국민은 환경 보전을 위하여 노력하여야 한다'(헌법 제35조 ①)고 정한다.",s:"hard"},
+{i:1036,u:1,g:"1. 인권의 의미 변화와 확장",def:"장벽이 없다는 뜻으로, 공연계에서는 수어 통역·자막·화면 해설 등으로 장애인의 문화 접근 권리와 창조 권리를 보장하는 것",q:"이것을 무엇이라고 하는가?",a:"배리어 프리",d:["유니버설 디자인","적극적 평등 실현 조치","지역화 전략"],x:"문화권 확장의 대표 사례다.",s:"new"},
+{i:1037,u:1,g:"1. 인권의 의미 변화와 확장",q:"현대 사회에서 새로운 인권이 등장하게 된 배경으로 보기 어려운 것은?",a:"신분 제도에 따른 차별의 강화",d:["인구의 도시 집중에 따른 주택 부족","각종 재난과 범죄 및 안전사고","환경 문제와 문화 소외 계층의 발생"],x:"신분 제도 차별은 근대 이전의 문제다.",s:"new"},
+{i:1038,u:1,g:"1. 인권의 의미 변화와 확장",q:"인권 보호를 위한 국제 조약과 채택 연도가 바르게 짝지어진 것은?",a:"아동 권리 협약 - 1989년",d:["인종 차별 철폐 협약 - 1979년","여성 차별 철폐 협약 - 1965년","장애인 권리 협약 - 1996년"],x:"인종 차별 철폐 1965년, 여성 차별 철폐 1979년, 아동 권리 1989년, 장애인 권리 2006년이다.",s:"known"},
+
+/* 1-2 인권 보장을 위한 헌법의 역할과 시민 참여 (16~23쪽) */
+{i:1050,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"헌법으로 보장되는 국민의 기본적 권리",q:"이것을 무엇이라고 하는가?",a:"기본권",x:"인권이 천부적 권리라면, 기본권은 그 인권을 헌법이 규정한 형태다.",s:"new"},
+{i:1051,u:1,g:"2. 헌법의 역할과 시민 참여",q:"'모든 국민은 인간으로서의 존엄과 가치를 가지며, 행복을 추구할 권리를 가진다'는 조항은?",a:"헌법 제10조",d:["헌법 제34조","헌법 제35조","헌법 제37조"],x:"국가는 불가침의 기본적 인권을 확인하고 보장할 의무를 진다는 내용이 이어진다.",s:"hard"},
+{i:1052,u:1,g:"2. 헌법의 역할과 시민 참여",q:"헌법이 인권 보장에서 하는 역할을 가장 잘 나타낸 것은?",a:"국민의 인권 보호를 위한 최후의 보호막",d:["국가 권력을 강화하는 수단","국민의 의무를 규정하는 목록","국제 사회의 기준을 담은 조약"],x:"국가 최고법인 헌법은 인권을 기본권의 형태로 규정한다.",s:"new"},
+{i:1053,u:1,g:"2. 헌법의 역할과 시민 참여",def:"개인이 자기 운명을 결정할 수 있는 권리로, 인간 존엄을 보장하기 위한 권리로 인정된다.",q:"이 권리는?",a:"자기 결정권",d:["행복 추구권","청구권","저항권"],x:"연명 치료 중단(존엄사)을 인정한 대법원 판결의 근거가 되었다.",s:"new"},
+{i:1054,u:1,g:"2. 헌법의 역할과 시민 참여",q:"대법원이 헌법 제10조를 근거로 회복 불가능한 환자의 연명 치료 중단을 인정한 판결에서 인정한 것은?",a:"품위 있게 죽을 권리(존엄사)",d:["안락사를 전면 허용할 권리","의사의 진료 거부권","가족의 재산 상속권"],x:"이 판결 이후 연명 의료 결정에 관한 법률이 제정되었다.",s:"new"},
+{i:1055,u:1,g:"2. 헌법의 역할과 시민 참여",f:"rights5",t:"sa",q:"자료의 다섯 기본권 중 '수단적 성격'을 지녀 다른 기본권이 침해되었을 때 구제를 요구하는 권리는?",a:"청구권",x:"청원권, 재판 청구권, 국가 배상 청구권이 여기에 속한다.",s:"hard"},
+{i:1056,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"국가 권력의 간섭 없이 자유롭게 생활할 수 있는 권리",q:"이 기본권은?",a:"자유권",x:"신체의 자유, 양심의 자유, 사생활의 비밀과 자유, 언론·출판·집회·결사의 자유가 있다.",s:"new"},
+{i:1057,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"성별, 종교, 사회적 신분 등을 이유로 불합리한 차별을 받지 않을 권리",q:"이 기본권은?",a:"평등권",x:"법 앞에서의 평등, 혼인과 가족생활에서의 양성평등이 예다.",s:"new"},
+{i:1058,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"국민이 국가의 의사 결정 과정에 참여할 수 있는 권리",q:"이 기본권은?",a:"참정권",x:"선거권, 공무 담임권, 국민 투표권이 여기에 속한다.",s:"new"},
+{i:1059,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"인간다운 삶의 보장을 국가에 요구할 수 있는 권리",q:"이 기본권은?",a:"사회권",x:"교육을 받을 권리, 근로의 권리, 사회 보장을 받을 권리, 쾌적한 환경에서 생활할 권리가 있다.",s:"new"},
+{i:1060,u:1,g:"2. 헌법의 역할과 시민 참여",q:"'18세 이상의 국민은 선거에 참여하여 투표할 수 있다'는 어떤 기본권인가?",a:"참정권",d:["청구권","자유권","평등권"],x:"선거권은 참정권에 속한다.",s:"new"},
+{i:1061,u:1,g:"2. 헌법의 역할과 시민 참여",q:"'원하는 직업을 스스로 선택할 수 있다'는 어떤 기본권인가?",a:"자유권",d:["사회권","평등권","참정권"],x:"직업 선택의 자유는 자유권이다.",s:"new"},
+{i:1062,u:1,g:"2. 헌법의 역할과 시민 참여",q:"'기초 생활 수급자로 선정되면 국가로부터 기본적인 생활비를 지원받을 수 있다'는 어떤 기본권인가?",a:"사회권",d:["청구권","자유권","평등권"],x:"인간다운 생활을 국가에 요구하는 것이므로 사회권이다.",s:"new"},
+{i:1063,u:1,g:"2. 헌법의 역할과 시민 참여",q:"'도로가 파손되어 정비해 달라고 청원을 제기할 수 있다'는 어떤 기본권인가?",a:"청구권",d:["참정권","사회권","자유권"],x:"청원권은 청구권이다. 참정권과 헷갈리기 쉬우니 주의한다.",s:"hard"},
+{i:1064,u:1,g:"2. 헌법의 역할과 시민 참여",q:"'직장에서 결혼이나 출산과 관계없이 모두에게 똑같은 승진 기회가 주어진다'는 어떤 기본권인가?",a:"평등권",d:["사회권","자유권","청구권"],x:"불합리한 차별을 받지 않을 권리이므로 평등권이다.",s:"new"},
+{i:1065,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"국가의 의사를 결정하는 최고 권력인 주권이 국민에게 있다는 원리",q:"이것을 무엇이라고 하는가?",a:"국민 주권의 원리",alt:["국민주권의 원리","국민 주권","국민주권"],x:"선거 제도와 국민 투표를 통한 헌법 개정 등으로 구현된다.",s:"new"},
+{i:1066,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"국민의 대표로 구성된 국회가 법률을 제정하고 이에 근거하여 국가를 운영하는 것",q:"이것을 무엇이라고 하는가?",a:"법치주의",x:"법률의 목적과 내용 또한 인권 보장에 적법해야 한다.",s:"new"},
+{i:1067,u:1,g:"2. 헌법의 역할과 시민 참여",def:"입법권은 국회, 행정권은 정부, 사법권은 법원에서 담당하게 하여 상호 독립성을 유지하면서 견제와 균형을 이루도록 하는 것",q:"이 제도는?",a:"권력 분립 제도",d:["법치주의","국민 주권의 원리","지방 자치 제도"],x:"국가 권력의 남용을 막아 국민의 인권을 보장한다.",s:"new"},
+{i:1068,u:1,g:"2. 헌법의 역할과 시민 참여",f:"remedy",q:"자료에서 '법원의 제청'으로 시작되는 심판은?",a:"위헌 법률 심판",d:["헌법 소원 심판","탄핵 심판","권한 쟁의 심판"],x:"법원이 재판하면서 적용 법률의 위헌 여부가 문제 될 때 제청한다.",s:"hard"},
+{i:1069,u:1,g:"2. 헌법의 역할과 시민 참여",f:"remedy",q:"자료에서 국가 권력의 행사 또는 불행사로 기본권을 침해받은 국민이 직접 청구하는 심판은?",a:"헌법 소원 심판",d:["위헌 법률 심판","민사 재판","행정 심판"],x:"육군 훈련소의 종교 행사 강제 참석을 위헌으로 본 결정이 이 심판의 사례다.",s:"hard"},
+{i:1070,u:1,g:"2. 헌법의 역할과 시민 참여",q:"헌법 소원 심판 중 '위헌 심사형'에 해당하는 경우는?",a:"재판 당사자가 법원에 위헌 법률 심판 제청을 신청했으나 받아들여지지 않은 경우",d:["국가 권력으로 기본권을 침해받은 국민이 청구하는 경우","법원이 직접 제청하는 경우","국회가 청구하는 경우"],x:"권리 구제형은 국가 권력의 행사·불행사로 기본권을 침해받은 국민이 청구한다.",s:"new"},
+{i:1071,u:1,g:"2. 헌법의 역할과 시민 참여",f:"limit37",q:"자료에서 기본권 제한의 '목적'에 해당하지 않는 것은?",a:"경제 성장",d:["국가 안전 보장","질서 유지","공공복리"],x:"헌법 제37조 ②가 정한 목적은 이 세 가지뿐이다.",s:"hard"},
+{i:1072,u:1,g:"2. 헌법의 역할과 시민 참여",f:"limit37",q:"자료에서 기본권 제한의 '형식'으로 옳은 것은?",a:"법률로써 제한해야 한다",d:["대통령령으로 제한할 수 있다","지방 자치 단체의 조례로 제한할 수 있다","행정 기관의 재량으로 제한할 수 있다"],x:"하위 법령으로는 기본권을 제한할 수 없다.",s:"hard"},
+{i:1073,u:1,g:"2. 헌법의 역할과 시민 참여",t:"ox",q:"기본권을 제한하는 경우에도 자유와 권리의 본질적인 내용은 침해할 수 없다.",a:"O",x:"옳다. 헌법 제37조 ②의 '한계'에 해당한다.",s:"new"},
+{i:1074,u:1,g:"2. 헌법의 역할과 시민 참여",q:"헌법 제37조 ①에 따라 헌법에 열거되지 않아도 보장되는 권리의 예가 아닌 것은?",a:"국민 투표권",d:["소비자의 권리","일조권","수면권"],x:"국민 투표권은 헌법에 명시된 참정권이다.",s:"new"},
+{i:1075,u:1,g:"2. 헌법의 역할과 시민 참여",q:"제7차 개정 헌법(1972년)과 비교했을 때 제9차 개정 헌법(1987년)에서 새로 들어간 내용은?",a:"기본권을 제한하더라도 본질적인 내용은 침해할 수 없다는 한계 조항",d:["체포·구금 시 변호인의 조력을 받을 권리","국민의 자유와 권리를 제한하는 법률의 제정","국가 안전 보장을 위한 제한 사유"],x:"제9차 개정 헌법은 체포·구속 시 이유와 변호인 조력권 고지, 가족 통지 의무도 강화했다.",s:"new"},
+{i:1076,u:1,g:"2. 헌법의 역할과 시민 참여",q:"1988년에 설립되어 동성동본 금혼 규정을 개정하게 한 기관은?",a:"헌법재판소",d:["국가 인권 위원회","국민 권익 위원회","중앙 노동 위원회"],x:"해당 민법 규정이 행복 추구권과 평등권을 침해한다고 보았다.",s:"known"},
+{i:1077,u:1,g:"2. 헌법의 역할과 시민 참여",q:"2001년에 설립되어 크레파스의 '살색' 명칭을 '살구색'으로 바꾸도록 권고한 기관은?",a:"국가 인권 위원회",d:["국민 권익 위원회","헌법재판소","고용 노동부"],x:"특정 색을 살색이라 부르는 것이 인종 차별에 해당한다고 보았다.",s:"known"},
+{i:1078,u:1,g:"2. 헌법의 역할과 시민 참여",q:"2008년에 설립되어 점자 블록 설치 등을 국토 교통부에 권고한 기관은?",a:"국민 권익 위원회",d:["국가 인권 위원회","헌법재판소","중앙 노동 위원회"],x:"교통 약자의 이동을 위한 경계 턱 낮추기도 이 기관의 권고 사례다.",s:"known"},
+{i:1079,u:1,g:"2. 헌법의 역할과 시민 참여",q:"시민 참여가 필요한 이유로 옳지 않은 것은?",a:"대의 민주주의를 대체하여 모든 정책을 직접 결정하기 위해",d:["대의 민주주의의 한계를 보완하기 위해","국가 권력을 견제하고 감시하기 위해","공동체 문제 해결 역량을 기르기 위해"],x:"시민 참여는 대의 민주주의를 대체하는 것이 아니라 보완하는 것이다.",s:"hard"},
+{i:1080,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"국민이 법률이 정한 절차에 따라 손해의 구제, 법률·명령·규칙의 제정 및 개폐 등을 국회·관공서·지방 의회 등에 청구하는 것",q:"이것을 무엇이라고 하는가?",a:"청원",x:"청원권은 청구권에 속하는 기본권이다.",s:"new"},
+{i:1081,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",def:"공익을 수호하려는 목적에서 부당한 법이나 정책에 대항하여 양심적으로 행하는 의도적인 위법 행위",q:"이것을 무엇이라고 하는가?",a:"시민불복종",alt:["시민 불복종"],x:"핵심은 '의도적인 위법 행위'라는 점이다. 합법적 방법이 아니다.",s:"hard"},
+{i:1082,u:1,g:"2. 헌법의 역할과 시민 참여",f:"civdis",q:"자료의 네 조건 중 '책임'에 해당하는 내용으로 옳은 것은?",a:"위법 행위에 대한 처벌을 감수하여 법체계를 존중하고 있음을 밝힌다",d:["처벌을 피할 수 있는 방법을 미리 마련한다","법적 책임을 지지 않는 범위에서만 행동한다","국가가 처벌하지 못하도록 다수를 모은다"],x:"처벌 회피가 아니라 처벌 감수라는 점이 자주 출제된다.",s:"hard"},
+{i:1083,u:1,g:"2. 헌법의 역할과 시민 참여",t:"ox",q:"시민불복종은 합법적인 방법으로 이루어지는 시민 참여이다.",a:"X",x:"틀렸다. 시민불복종은 의도적인 위법 행위이며, 합법적 방법이 모두 통하지 않을 때의 최후 수단이다.",s:"hard"},
+{i:1084,u:1,g:"2. 헌법의 역할과 시민 참여",def:"1930년 영국이 인도인의 소금 제조와 판매를 금지하자, 평화적으로 행진하여 바다에서 직접 소금을 만들고 체포를 감수한 사건",q:"이 사건의 주인공은?",a:"간디",d:["롤스","마틴 루서 킹","넬슨 만델라"],x:"이 운동의 결과 소금법은 1931년에 폐지되었다.",s:"new"},
+{i:1085,u:1,g:"2. 헌법의 역할과 시민 참여",q:"《정의론》에서 '시민불복종은 법에 대한 충실성의 한계 내에서 부정의에 항거함으로써 정의로부터의 이탈을 방지하고 교정한다'고 본 사상가는?",a:"롤스",d:["노직","매킨타이어","싱어"],x:"롤스는 Ⅱ단원의 정의론에서도 다시 나온다.",s:"new"},
+{i:1086,u:1,g:"2. 헌법의 역할과 시민 참여",q:"청소년들의 시민 참여 결과 2019년에 낮아진 선거 가능 연령은?",a:"18세",d:["16세","17세","19세"],x:"2005년 19세, 2019년 18세로 낮아졌고 2021년에는 피선거권도 18세가 되었다.",s:"known"},
+{i:1087,u:1,g:"2. 헌법의 역할과 시민 참여",q:"시민 참여의 방안으로 보기 어려운 것은?",a:"재판을 통해 법률을 직접 제정하는 것",d:["청원 및 민원 제기","1인 시위와 서명 운동","정당 가입을 통한 참여"],x:"법률 제정은 국회의 권한이다. 시민은 청원 등으로 제정·개정을 요구할 수 있다.",s:"new"},
+
+/* 1-3 인권 문제의 양상과 해결 방안 (24~31쪽) */
+{i:1100,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",def:"신체적·문화적 특징 때문에 다른 집단과 구별되고 차별받으며, 자신이 차별받는 집단에 속한다는 의식을 가진 사람",q:"이들을 무엇이라고 하는가?",a:"사회적 소수자",x:"'차별받는 집단에 속한다는 의식'을 가진다는 점이 정의의 핵심이다.",s:"hard"},
+{i:1101,u:1,g:"3. 인권 문제의 양상과 해결",q:"사회적 약자와 사회적 소수자의 관계로 옳은 것은?",a:"사회적 약자가 사회적 소수자를 포함한다",d:["사회적 소수자가 사회적 약자를 포함한다","두 개념은 완전히 같다","두 개념은 서로 겹치지 않는다"],x:"사회적 소수자는 사회적 약자의 부분집합이다.",s:"hard"},
+{i:1102,u:1,g:"3. 인권 문제의 양상과 해결",q:"사회적 소수자 차별이 일으키는 문제로 옳지 않은 것은?",a:"사회 구성원의 경쟁력을 높인다",d:["인간 존엄성을 훼손한다","갈등을 유발한다","사회 통합을 저해한다"],x:"차별은 통합을 저해할 뿐 경쟁력과 무관하다.",s:"new"},
+{i:1103,u:1,g:"3. 인권 문제의 양상과 해결",q:"사회적 소수자 차별 해결을 위한 '개인적 차원'의 노력은?",a:"소수자의 입장을 이해하고 다양성 존중의 태도를 기른다",d:["차별 금지 법률을 제정한다","인권 교육 제도를 마련한다","지원 정책을 시행한다"],x:"나머지 셋은 모두 사회적 차원의 노력이다.",s:"hard"},
+{i:1104,u:1,g:"3. 인권 문제의 양상과 해결",q:"다문화 가족 구성원의 삶의 질 향상과 사회 통합을 목적으로 하는 법률은?",a:"다문화 가족 지원법",d:["양성평등 기본법","장애인 차별 금지 및 권리 구제 등에 관한 법률","문화 기본법"],x:"양성평등 기본법은 전 영역의 양성평등 실현이 목적이다.",s:"new"},
+{i:1105,u:1,g:"3. 인권 문제의 양상과 해결",q:"장애인의 완전한 사회 참여와 평등권을 실현하여 인간으로서의 존엄과 가치를 구현하려는 법률은?",a:"장애인 차별 금지 및 권리 구제 등에 관한 법률",d:["다문화 가족 지원법","양성평등 기본법","근로 기준법"],x:"사회적 소수자 관련 법률 세 가지를 묶어서 외운다.",s:"new"},
+{i:1106,u:1,g:"3. 인권 문제의 양상과 해결",q:"청소년의 노동권에 대한 설명으로 옳은 것은?",a:"성인과 동일한 권리를 보장받으면서 위험·유해 업무 금지 등 더 강한 보호를 받는다",d:["성인보다 약하게 보호된다","성인과 완전히 같은 기준만 적용된다","근로 계약서를 쓰지 않아도 된다"],x:"동일 보장 + 추가 보호가 핵심이다.",s:"hard"},
+{i:1107,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",q:"근로 기준법상 15세 이상 18세 미만인 사람의 1일 근로 시간 한도는 몇 시간인가? (숫자만)",a:"7",alt:["7시간","7 시간"],x:"1일 7시간, 1주 35시간이며 합의 시 1일 1시간·1주 5시간까지 연장할 수 있다.",s:"hard"},
+{i:1108,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",q:"근로 기준법상 15세 이상 18세 미만인 사람의 1주 근로 시간 한도는 몇 시간인가? (숫자만)",a:"35",alt:["35시간","35 시간"],x:"성인(주 40시간)보다 짧게 정해 청소년을 더 강하게 보호한다.",s:"hard"},
+{i:1109,u:1,g:"3. 인권 문제의 양상과 해결",q:"근로 시간이 4시간인 경우 사용자가 주어야 하는 휴게 시간은?",a:"30분 이상",d:["15분 이상","1시간 이상","휴게 시간을 주지 않아도 된다"],x:"8시간이면 1시간 이상을 근로 시간 도중에 주어야 한다.",s:"new"},
+{i:1110,u:1,g:"3. 인권 문제의 양상과 해결",t:"ox",q:"임금의 절반을 그 가게에서 쓸 수 있는 이용권으로 지급해도 된다.",a:"X",x:"틀렸다. 근로 기준법 제43조에 따라 임금은 통화로 직접 근로자에게 전액을 지급해야 한다.",s:"hard"},
+{i:1111,u:1,g:"3. 인권 문제의 양상과 해결",q:"근로 기준법 제66조에 따라 사용자가 18세 미만인 사람에 대해 사업장에 갖추어 두어야 하는 것은?",a:"연령을 증명하는 가족 관계 기록 사항 증명서와 친권자(후견인)의 동의서",d:["학교장의 추천서","건강 진단서와 주민 등록 등본","근로 능력 평가서"],x:"연소자 증명서 조항이다.",s:"new"},
+{i:1112,u:1,g:"3. 인권 문제의 양상과 해결",def:"근로자가 사용자에게 근로를 제공하고 사용자는 이에 대하여 임금을 지급하는 것을 목적으로 체결하는 계약서로, 임금·근로 시간·근로 조건 등을 명시해야 한다.",q:"이 문서는?",a:"근로 계약서",d:["연소자 증명서","단체 협약서","고용 보험 증서"],x:"많은 청소년이 이것을 쓰지 않아 부당한 대우를 받는다.",s:"new"},
+{i:1113,u:1,g:"3. 인권 문제의 양상과 해결",q:"노동관계에서 발생하는 노사 간의 이익 및 권리 분쟁을 판정하고 조정하는 행정 기관은?",a:"중앙 노동 위원회",d:["국가 인권 위원회","국민 권익 위원회","대한 법률 구조 공단"],x:"고용 노동부, 중앙 노동 위원회, 대한 법률 구조 공단이 구제 기관으로 함께 제시된다.",s:"new"},
+{i:1114,u:1,g:"3. 인권 문제의 양상과 해결",q:"세계 인권 문제의 원인 중 '정치적 이유'에 해당하는 것은?",a:"전쟁이나 독재로 생명이 박탈되고 난민이 발생하는 것",d:["국가의 경제 수준이 낮아 기아가 발생하는 것","종교적 이유로 특정 민족을 차별하는 것","문화적 요인으로 여성의 권리를 침해하는 것"],x:"정치적·경제적·사회문화적 원인으로 나누어 정리한다.",s:"new"},
+{i:1115,u:1,g:"3. 인권 문제의 양상과 해결",f:"press",q:"자료의 세계 언론 자유 지수에서 점수가 100에 가까울수록 의미하는 것은?",a:"언론의 자유 정도가 좋다",d:["언론의 자유 정도가 매우 나쁘다","인구가 많다","경제 수준이 높다"],x:"국경 없는 기자회(RSF)가 발표하며 다원주의, 자기 검열 수준, 권력으로부터의 독립 등을 측정한다.",s:"new"},
+{i:1116,u:1,g:"3. 인권 문제의 양상과 해결",q:"세계 언론 자유 지수를 발표하는 기관은?",a:"국경 없는 기자회(RSF)",d:["프리덤 하우스(FH)","국제 노동조합 총연맹(ITUC)","경제평화 연구소(IEP)"],x:"FH는 세계 자유 지수, ITUC는 세계 노동 권리 지수, IEP는 세계 평화 지수를 발표한다.",s:"new"},
+{i:1117,u:1,g:"3. 인권 문제의 양상과 해결",q:"세계 노동 권리 지수를 발표하는 기관은?",a:"국제 노동조합 총연맹(ITUC)",d:["국경 없는 기자회(RSF)","국제 식량 정책 연구소(IFPRI)","국제 연합 개발 계획(UNDP)"],x:"지수와 발표 기관을 짝짓는 문제가 자주 나온다.",s:"known"},
+{i:1118,u:1,g:"3. 인권 문제의 양상과 해결",q:"세계 기아 지수를 발표하는 기관은?",a:"국제 식량 정책 연구소(IFPRI)",d:["세계 보건 기구(WHO)","세계 식량 계획(WFP)","경제평화 연구소(IEP)"],x:"경제평화 연구소는 세계 평화 지수를 발표한다.",s:"known"},
+{i:1119,u:1,g:"3. 인권 문제의 양상과 해결",f:"hdi",q:"자료에서 대한민국의 HDI 순위와 IHDI 순위를 비교할 때 알 수 있는 것은?",a:"불평등을 반영하면 순위가 내려간다",d:["불평등을 반영하면 순위가 올라간다","두 지수는 항상 같은 순위를 보인다","소득 수준만 반영된 결과이다"],x:"불평등 정도가 클수록 IHDI는 HDI보다 낮아진다.",s:"hard"},
+{i:1120,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",def:"기대 수명, 교육 기간, 1인당 국민 총소득 등을 바탕으로 한 국가의 인간 개발 수준을 나타낸 지수로, 국제 연합 개발 계획(UNDP)이 발표한다.",q:"이 지수의 이름은? (한글 또는 영문 약자)",a:"인간 개발 지수",alt:["HDI","인간개발지수","hdi"],x:"여기에 불평등 요소를 반영해 조정한 것이 IHDI다.",s:"new"},
+{i:1121,u:1,g:"3. 인권 문제의 양상과 해결",q:"글로벌 성평등 지수(GGPI)에 대한 설명으로 옳은 것은?",a:"1에 가까울수록 남성과 비교한 여성의 권리 수준 격차가 작다",d:["1에 가까울수록 격차가 크다","여성의 절대적 권리 수준만 측정한다","남성의 권리 수준만 나타낸다"],x:"여성 임파워먼트 지수(WEI)는 1에 가까울수록 여성의 절대적 권리 수준이 높다.",s:"new"},
+{i:1122,u:1,g:"3. 인권 문제의 양상과 해결",t:"ox",q:"인권지수는 특정 국가의 절대적인 인권 수준을 그대로 보여 준다.",a:"X",x:"틀렸다. 기준을 정하는 방식에 따라 수치가 달라지므로 절대적 수준을 반영하지 않는다.",s:"hard"},
+{i:1123,u:1,g:"3. 인권 문제의 양상과 해결",q:"국제 연합 난민 기구(UNHCR) 기준 2022년 전 세계 난민 수는?",a:"약 1억 800만 명",d:["약 1천만 명","약 3천 750만 명","약 8천만 명"],x:"난민 통계를 시작한 이래 가장 많은 수치다.",s:"known"},
+{i:1124,u:1,g:"3. 인권 문제의 양상과 해결",q:"난민이 발생하는 주요 원인으로 교과서가 제시한 것이 아닌 것은?",a:"인구 고령화",d:["전쟁이나 분쟁","소수 민족 차별과 박해","기근"],x:"소말리아·에티오피아의 심각한 가뭄도 난민 증가의 원인으로 제시된다.",s:"new"},
+{i:1125,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",def:"보편적 인간애를 바탕으로 특정 민족이나 국가를 넘어 인류를 하나의 운명 공동체로 인식하여, 지구상에서 발생하는 문제에 관심을 가지고 해결하려 노력하는 태도",q:"이것을 무엇이라고 하는가?",a:"세계시민 의식",alt:["세계 시민 의식","세계시민의식"],x:"Ⅳ단원 세계화 문제 해결에서도 같은 개념이 다시 나온다.",s:"hard"},
+{i:1126,u:1,g:"3. 인권 문제의 양상과 해결",q:"세계 인권 문제 해결에서 비정부 기구(NGO)의 역할로 옳은 것은?",a:"인권 문제의 실상을 국제 사회에 알리고 난민 구호 등의 활동을 한다",d:["주요 인권 문제를 의제로 다루고 조약을 제정한다","회원국 간 이해관계를 공식적으로 조정한다","국가를 대표하여 조약을 체결한다"],x:"조약 제정과 의제 설정은 국제기구(UN)의 역할이다.",s:"hard"},
+{i:1127,u:1,g:"3. 인권 문제의 양상과 해결",q:"오스트레일리아 원주민 인종 차별 사례에서 나타난 사실로 옳은 것은?",a:"전체 인구의 3.3%인데 교도소 수감자의 4분의 1 이상을 차지한다",d:["전체 인구의 절반을 차지한다","기대 수명이 평균보다 길다","교육 수준이 평균보다 높다"],x:"부정적 편견이 차별적 행동으로 이어져 생활 수준 저하로 연결된다.",s:"known"},
+{i:1128,u:1,g:"3. 인권 문제의 양상과 해결",q:"대중 매체 속 차별 표현을 바로잡아야 하는 이유로 가장 알맞은 것은?",a:"왜곡된 사회적 인식을 형성하여 편견을 굳히기 때문",d:["방송 제작비가 늘어나기 때문","시청률이 떨어지기 때문","광고 수익이 줄어들기 때문"],x:"'여경'처럼 불필요하게 성별을 명시하는 표현은 성차별 인식을 담고 있다.",s:"new"}
+];
+/* ===== Ⅱ. 사회정의와 불평등 (교과서 34~61쪽) ===== */
+const U2 = [
+/* 2-1 정의의 의미와 정의의 실질적 기준 (36~43쪽) */
+{i:2001,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"인간이 지켜야 할 올바른 도리 또는 사회를 구성하고 유지하는 공정한 도리",q:"이것을 무엇이라고 하는가?",a:"정의",x:"현대 사회에서도 개인과 사회가 추구해야 할 기본적이고 핵심적인 가치다.",s:"new"},
+{i:2002,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"다양한 사회적 가치를 마땅히 받을 만한 사람이 받게 함으로써 각자가 자신의 몫을 누릴 수 있게 하는 것",q:"이것을 무엇이라고 하는가?",a:"분배적 정의",x:"'각자에게 그의 몫을'로 요약된다.",s:"hard"},
+{i:2003,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"어떤 사람이 잘못을 했을 때 처벌함으로써 부정의한 상태를 정의로운 상태로 되돌리는 것",q:"이것을 무엇이라고 하는가?",a:"교정적 정의",x:"'바로잡기'다. 사형 제도 논쟁이 대표 쟁점이다.",s:"hard"},
+{i:2004,u:2,g:"1. 정의의 의미와 실질적 기준",q:"교정적 정의가 공정하게 실현되기 위한 조건이 아닌 것은?",a:"잘못의 크기와 상관없이 모두 동일한 처벌을 해야 한다",d:["법을 근거로 처벌해야 한다","그 법 자체가 공정해야 한다","잘못과 처벌 사이에 적정한 균형이 있어야 한다"],x:"작은 잘못에는 작은 벌, 큰 잘못에는 큰 벌이 가해져야 공정하다.",s:"new"},
+{i:2005,u:2,g:"1. 정의의 의미와 실질적 기준",q:"아리스토텔레스가 말한 '일반적 정의'의 내용은?",a:"법을 준수하는 것",d:["각자의 가치에 따라 분배하는 것","같은 가치의 물건을 교환하는 것","해를 끼친 만큼 보상하게 하는 것"],x:"법을 지키는 사람은 정의로운 사람, 지키지 않는 사람은 부정의한 사람이라고 보았다.",s:"new"},
+{i:2006,u:2,g:"1. 정의의 의미와 실질적 기준",q:"아리스토텔레스의 '특수적 정의'에 포함되지 않는 것은?",a:"일반적 정의",d:["교정적 정의","분배적 정의","교환적 정의"],x:"특수적 정의는 교정적·분배적·교환적 정의로 나뉜다.",s:"hard"},
+{i:2007,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"같은 가치를 지닌 두 물건을 교환하게 함으로써 교환의 결과를 공정하게 하는 것",q:"아리스토텔레스가 말한 이 정의는?",a:"교환적 정의",x:"아리스토텔레스의 분류에만 나오는 개념이라 함정으로 쓰인다.",s:"hard"},
+{i:2008,u:2,g:"1. 정의의 의미와 실질적 기준",q:"아리스토텔레스가 말한 '분배적 정의'의 내용은?",a:"각자의 가치에 따라 권력, 명예, 재화를 분배하여 공정함을 실현하는 것",d:["법을 준수하는 것","같은 가치의 물건을 교환하는 것","범죄자를 처벌하는 것"],x:"교정적 정의는 동등하지 않음을 바로잡는 것이다.",s:"new"},
+{i:2009,u:2,g:"1. 정의의 의미와 실질적 기준",q:"정의가 요청되는 이유로 옳지 않은 것은?",a:"경쟁을 없애 모두가 같은 몫을 받게 하기 위해",d:["모든 구성원이 기본적 권리를 누리며 인간답게 살기 위해","사회적 가치가 일부 집단에 편중되는 것을 막기 위해","사회 통합을 이루기 위해"],x:"정의는 결과의 획일적 평등이 아니라 공정한 기준을 세우는 것이다.",s:"new"},
+{i:2010,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"공동의 이익 또는 공동체가 추구하는 가치나 목표",q:"이것을 무엇이라고 하는가?",a:"공동선",x:"반대 개념은 개인의 이익이나 목표를 뜻하는 개인선이다.",s:"new"},
+{i:2011,u:2,g:"1. 정의의 의미와 실질적 기준",f:"scale",q:"자료의 정의의 여신상에서 '저울'이 상징하는 것은?",a:"엄격하고 공정한 정의의 기준",d:["정의를 실현하기 위한 힘","판정할 때의 공평성","법에 대한 무지"],x:"칼은 정의를 실현하는 힘, 가린 눈은 공평성을 뜻한다.",s:"hard"},
+{i:2012,u:2,g:"1. 정의의 의미와 실질적 기준",f:"scale",q:"자료에서 '눈을 가리고 있는 띠'가 상징하는 것은?",a:"판정할 때의 공평성",d:["엄격하고 공정한 정의의 기준","정의를 실현하기 위한 힘","재판의 비공개 원칙"],x:"누구인지 보지 않고 판단한다는 뜻이다.",s:"hard"},
+{i:2013,u:2,g:"1. 정의의 의미와 실질적 기준",q:"'형벌은 오직 범죄를 저질렀기 때문에 가해지는 것이며, 동등성의 원리에 따라 살인한 사람은 사형에 처해져야 한다'고 본 사상가는?",a:"칸트",d:["베카리아","롤스","싱어"],x:"교정적 정의를 강조한 사형 제도 찬성 입장이다.",s:"hard"},
+{i:2014,u:2,g:"1. 정의의 의미와 실질적 기준",q:"'사형으로는 범죄 예방 효과를 기대하기 어렵고 종신 노역형이 더 효과적'이라며 사형에 반대한 사상가는?",a:"베카리아",d:["칸트","노직","매킨타이어"],x:"형벌의 목적을 해악 방지와 유사 행위 억제로 보았다.",s:"hard"},
+{i:2015,u:2,g:"1. 정의의 의미와 실질적 기준",q:"우리나라가 국제 앰네스티로부터 '실질적 사형 폐지국'으로 분류된 이유는?",a:"1997년 12월을 마지막으로 사형 집행이 이루어지지 않았기 때문",d:["법률로 사형 제도를 폐지했기 때문","사형 선고가 한 번도 없었기 때문","국제 조약에 가입했기 때문"],x:"제도는 남아 있으나 집행이 없어 '실질적' 폐지국이다.",s:"hard"},
+{i:2016,u:2,g:"1. 정의의 의미와 실질적 기준",f:"dist3",q:"자료에서 '성과와 실적에 따라 분배하는 것'은 어떤 기준인가?",a:"업적에 따른 분배",d:["능력에 따른 분배","필요에 따른 분배","절대적 평등에 따른 분배"],x:"성과 연봉제가 대표 사례다.",s:"hard"},
+{i:2017,u:2,g:"1. 정의의 의미와 실질적 기준",f:"dist3",q:"자료에서 '우연적 요소가 개입될 수 있다'는 단점을 가진 분배 기준은?",a:"능력에 따른 분배",d:["업적에 따른 분배","필요에 따른 분배","교환에 따른 분배"],x:"능력은 노력뿐 아니라 선천적 자질이나 부모의 사회적·경제적 지위에 영향을 받는다.",s:"hard"},
+{i:2018,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"인간다운 삶을 위한 기본적인 욕구를 충족할 수 있도록 분배하는 것으로, 생계비나 의료비를 지원하는 복지 정책이 이에 해당한다.",q:"이 분배 기준은?",a:"필요에 따른 분배",alt:["필요","필요에 따른분배"],x:"사회적 약자에게 최소한의 인간다운 삶을 보장하고 불평등을 완화한다.",s:"new"},
+{i:2019,u:2,g:"1. 정의의 의미와 실질적 기준",q:"업적에 따른 분배의 장점으로 옳은 것은?",a:"객관적으로 평가·측정하기가 비교적 쉽고 노력하려는 동기를 제공한다",d:["사회적 약자를 배려하기 쉽다","우연적 요소의 개입을 막을 수 있다","사회적 불평등을 근본적으로 없앤다"],x:"단점은 서로 다른 업적의 비교가 어렵고 약자 배려가 곤란하며 경쟁 과열을 부른다는 점이다.",s:"hard"},
+{i:2020,u:2,g:"1. 정의의 의미와 실질적 기준",q:"필요에 따른 분배의 단점으로 옳은 것은?",a:"열심히 일하려는 동기를 약화하여 경제적 효율성을 떨어뜨릴 수 있다",d:["객관적 평가 기준을 세우기 어렵다","사회적 약자를 배려하기 어렵다","서로 다른 업적을 비교하기 어렵다"],x:"자원이 한정되어 모든 필요를 충족할 수 없다는 점도 단점이다.",s:"hard"},
+{i:2021,u:2,g:"1. 정의의 의미와 실질적 기준",t:"ox",q:"업적·능력·필요 중 하나를 유일한 분배 기준으로 정하는 것이 가장 바람직하다.",a:"X",x:"틀렸다. 세 기준에 각각 장단점이 있으므로 사회적 합의를 통해 상황에 가장 적합한 기준을 마련해야 한다.",s:"hard"},
+{i:2022,u:2,g:"1. 정의의 의미와 실질적 기준",q:"《공정하다는 착각》에서 능력에 근거한 입시 제도도 부유한 가정에 유리하다고 지적한 사상가는?",a:"샌델",d:["롤스","노직","싱어"],x:"사설 입시 상담, 개인 지도, 엘리트 체육, 해외 봉사 주선 등을 근거로 들었다.",s:"new"},
+{i:2023,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",def:"소득 수준에 상관없이 모든 사람에게 복지 혜택을 제공하는 것",q:"이것을 무엇이라고 하는가?",a:"보편적 복지",x:"소득이 낮거나 혜택이 절실한 사람에게만 제공하는 것이 선별적 복지다.",s:"new"},
+{i:2024,u:2,g:"1. 정의의 의미와 실질적 기준",q:"노인 지하철 무료 승차 제도를 '유지해야 한다'는 논거로 알맞은 것은?",a:"노인의 사회 참여와 여가·문화생활 활성화에 도움이 된다",d:["지하철 운영사의 경영난이 심각하다","고령화로 무료 승차 대상자가 늘었다","청년층의 부담이 커진다"],x:"나머지는 모두 폐지 주장의 논거다.",s:"new"},
+
+/* 2-2 자유주의와 공동체주의 정의관 (44~49쪽) */
+{i:2040,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",def:"개인의 이익 또는 개인이 추구하는 가치나 목표",q:"이것을 무엇이라고 하는가?",a:"개인선",x:"자유주의는 공동선보다 개인선이 우선한다고 본다.",s:"new"},
+{i:2041,u:2,g:"2. 자유주의와 공동체주의 정의관",f:"just2",q:"자료에서 '국가나 사회는 개인의 자유와 권리를 보호·증진하는 수단'이라고 보는 입장은?",a:"자유주의",d:["공동체주의","공리주의","전체주의"],x:"자유주의는 국가가 중립적 입장에서 개인의 자유로운 삶을 최대한 허용해야 한다고 본다.",s:"hard"},
+{i:2042,u:2,g:"2. 자유주의와 공동체주의 정의관",f:"just2",q:"자료에서 '자아 정체성은 자신에게 주어진 사회적 역할을 수행함으로써 형성된다'고 보는 입장은?",a:"공동체주의",d:["자유주의","자유 지상주의","공리주의"],x:"자유주의는 공동체가 부여한 역할보다 자신의 선택으로 형성되는 정체성을 중시한다.",s:"hard"},
+{i:2043,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"'타인에게 영향을 미치지 않는 행위에 대해서는 개인의 절대적 자유를 주장한' 자유주의 사상가는?",a:"밀",d:["매킨타이어","노직","아리스토텔레스"],x:"자기 삶을 설계하고 좋은 대로 살아갈 자유가 존중되지 않는 사회는 자유로운 사회가 아니라고 했다.",s:"new"},
+{i:2044,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"《덕의 상실》에서 '현대 사회의 분열은 인간을 자유롭고 독립적인 존재로만 보는 자유주의적 인간관에서 비롯한다'고 비판한 사상가는?",a:"매킨타이어",d:["밀","노직","싱어"],x:"'내 삶의 역사는 내 정체성을 도출해 내는 공동체의 역사 속에 편입되어 있다'고 말했다.",s:"hard"},
+{i:2045,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"조상이 노예를 소유한 잘못에 대해 후손이 사과하고 배상할 책임이 있다고 보는 입장은?",a:"공동체주의적 정의관",d:["자유주의적 정의관","공리주의","자유 지상주의"],x:"후손의 정체성과 사회적 책무는 공동체의 역사·전통에서 물려받는다고 보기 때문이다.",s:"hard"},
+{i:2046,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"개발 제한 구역 정책에 대해 '개인의 권리와 사익을 부당하게 침해한다'고 볼 입장은?",a:"자유주의적 정의관",d:["공동체주의적 정의관","공리주의","롤스의 차등 원칙"],x:"공동체주의는 환경 보호 의무가 있으므로 정책이 필요하다고 본다.",s:"new"},
+{i:2047,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",def:"'내 뒷마당에는 안 된다'의 줄임말로, 위험 시설이나 혐오 시설이 자신이 살고 있는 지역에 들어서는 것을 강력하게 반대하는 현상",q:"이 현상을 무엇이라고 하는가?",a:"님비",alt:["님비 현상","NIMBY","nimby","님비현상"],x:"공동체주의 관점에서는 공동선을 해치는 사익 추구로 비판받는다.",s:"new"},
+{i:2048,u:2,g:"2. 자유주의와 공동체주의 정의관",f:"rawls",q:"자료에서 '최소 수혜자에게 최대의 이익을 보장해야 한다'는 원칙의 이름은?",a:"차등의 원칙",d:["평등한 자유의 원칙","기회균등의 원칙","취득의 원칙"],x:"롤스의 정의의 원칙 중 하나다.",s:"hard"},
+{i:2049,u:2,g:"2. 자유주의와 공동체주의 정의관",f:"rawls",q:"자료에서 노직이 제시한 두 원칙으로 옳은 것은?",a:"취득의 원칙과 양도의 원칙",d:["차등의 원칙과 기회균등의 원칙","평등한 자유의 원칙과 차등의 원칙","공정의 원칙과 보상의 원칙"],x:"두 원칙이 지켜졌다면 빈부 격차가 생겨도 문제되지 않는다고 보았다.",s:"hard"},
+{i:2050,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"롤스의 정의의 원칙 세 가지에 포함되지 않는 것은?",a:"양도의 원칙",d:["평등한 자유의 원칙","차등의 원칙","기회균등의 원칙"],x:"취득의 원칙과 양도의 원칙은 노직의 것이다.",s:"hard"},
+{i:2051,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"롤스가 정의의 원칙을 도출하기 위해 가정한 상황은?",a:"자신의 사회적 지위, 재능, 가치관 등을 모른다고 가정한 상황",d:["모든 정보를 완전히 아는 상황","다수결로 결정하는 상황","시장에서 자유롭게 거래하는 상황"],x:"여기서 평등한 자유·차등·기회균등의 원칙이 도출된다.",s:"hard"},
+{i:2052,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"롤스와 노직의 공통점으로 옳은 것은?",a:"둘 다 개인의 자유와 권리를 보호·존중하는 것이 정의라고 보았다",d:["둘 다 공동선이 개인선보다 우선한다고 보았다","둘 다 재분배 정책에 찬성했다","둘 다 소유 권리를 부정했다"],x:"둘 다 자유주의자라는 점이 공통점이고, 차이는 불평등과 재분배를 어떻게 볼 것인가다.",s:"hard"},
+{i:2053,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"ox",q:"자유주의적 정의관과 공동체주의적 정의관은 대립하기만 할 뿐 서로 보완될 수 없다.",a:"X",x:"틀렸다. 상호 보완적 관점에서 개인선을 실현하면서도 공동선을 훼손하지 않는 대안을 찾을 수 있다.",s:"new"},
+{i:2054,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"권리와 의무, 사익과 공익의 관계에 대한 설명으로 옳지 않은 것은?",a:"공익만을 강조할 때 개인의 권리가 가장 잘 보장된다",d:["권리는 의무를, 의무는 권리를 전제로 한다","사익만 내세우면 공동체가 파괴되어 개인의 권리도 보장받지 못한다","양자가 조화를 이룰 때 더 잘 실현된다"],x:"공익만 강조하면 개인의 희생을 강요하게 된다.",s:"new"},
+{i:2055,u:2,g:"2. 자유주의와 공동체주의 정의관",q:"상속세 유지에 찬성하는 입장의 논거로 알맞은 것은?",a:"부의 영구적 대물림을 막고 재분배를 통해 사회적 불평등을 완화한다",d:["경제 활동을 둔화시킨다","국민의 납세 회피를 부른다","기업이 국외로 이전한다"],x:"나머지는 스웨덴 사례를 든 폐지 주장의 논거다.",s:"new"},
+
+/* 2-3 사회 및 공간 불평등 현상과 해결 방안 (50~57쪽) */
+{i:2070,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"한 사회에서 희소한 자원이 개인이나 집단에 차등적으로 분배되어 사회 구성원들이 차지하는 위치가 서열화되어 있는 현상",q:"이것을 무엇이라고 하는가?",a:"사회 불평등 현상",alt:["사회불평등 현상","사회 불평등","사회불평등"],x:"어느 정도의 불평등은 불가피하지만 정도가 심해지면 정의로운 사회라 할 수 없다.",s:"new"},
+{i:2071,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"비슷한 수준의 사회적 자원을 가진 사람들이 위계적인 층을 이루고 있는 것",q:"이것을 무엇이라고 하는가?",a:"사회 계층",alt:["사회계층","계층"],x:"이 중 중간 계층이 줄고 상층과 하층이 늘어나는 것이 사회 계층의 양극화다.",s:"new"},
+{i:2072,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"사회 계층 중 중간 계층의 비중이 점점 줄어들고 상층과 하층의 비중이 늘어나며 양극단으로 쏠리는 현상",q:"이것을 무엇이라고 하는가?",a:"사회 계층의 양극화",alt:["계층의 양극화","양극화","사회계층의 양극화"],x:"대표적 원인은 재산과 소득 차이에 따른 경제적 격차다.",s:"hard"},
+{i:2073,u:2,g:"3. 사회 및 공간 불평등",q:"사회 계층의 양극화가 지속될 때 나타나는 문제로 보기 어려운 것은?",a:"계층 이동이 활발해진다",d:["계층 간 위화감이 조성된다","계층 이동이 어려워진다","계층 간 갈등이 발생한다"],x:"양극화는 오히려 계층 이동을 어렵게 한다.",s:"new"},
+{i:2074,u:2,g:"3. 사회 및 공간 불평등",f:"income",q:"자료에서 상위 20% 가구와 하위 20% 가구의 월평균 소득 격차는 약 몇 배인가?",a:"약 10.7배",d:["약 2.5배","약 6.5배","약 20배"],x:"균등화 처분 가능 소득 기준의 소득 5분위 배율은 6.45배로 별개의 지표다.",s:"hard"},
+{i:2075,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"상위 20%의 평균 소득을 하위 20%의 평균 소득으로 나눈 값으로, 값이 높을수록 소득 불평등이 심하다.",q:"이 지표를 무엇이라고 하는가?",a:"소득 5분위 배율",alt:["소득5분위배율","5분위 배율","소득 5분위배율"],x:"2023년 1분기 기준 6.45배였다.",s:"hard"},
+{i:2076,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"가구가 직접 벌어들인 소득에 연금 등의 소득은 더하고, 세금과 사회 보험료 등의 지출은 뺀 소득",q:"이것을 무엇이라고 하는가?",a:"균등화 처분 가능 소득",alt:["처분 가능 소득","균등화처분가능소득"],x:"소득 5분위 배율을 계산할 때 기준이 되는 소득이다.",s:"new"},
+{i:2077,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"지역 간에 사회적·경제적·문화적으로 격차가 발생하는 현상",q:"이것을 무엇이라고 하는가?",a:"공간 불평등",x:"선진국과 개발 도상국, 수도권과 비수도권, 도시와 촌락, 도시 내 격차 등이 있다.",s:"hard"},
+{i:2078,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"성장 잠재력이 큰 지역을 집중적으로 육성하고, 그 효과가 주변 지역으로 확산하도록 하는 지역 개발 방식",q:"이것을 무엇이라고 하는가?",a:"성장 거점 개발",alt:["성장거점개발","거점 개발"],x:"우리나라는 수도권·대도시 중심으로 추진했고 그 결과 공간 불평등이 심화되었다.",s:"hard"},
+{i:2079,u:2,g:"3. 사회 및 공간 불평등",f:"urbanrural",q:"자료에서 농촌 가구 소득은 도시 근로자 가구 소득의 약 몇 %인가?",a:"약 64%",d:["약 45%","약 80%","약 95%"],x:"공간 불평등이 소득으로 드러난 대표 자료다.",s:"new"},
+{i:2080,u:2,g:"3. 사회 및 공간 불평등",f:"wage",q:"자료에서 학력과 월평균 임금의 관계로 옳은 것은?",a:"학력이 높을수록 월평균 임금이 높아진다",d:["학력과 임금은 관계가 없다","학력이 높을수록 임금이 낮아진다","전문대졸이 대학원졸보다 높다"],x:"교육 불평등이 다시 소득 격차로 이어지는 다중 격차의 한 고리다.",s:"new"},
+{i:2081,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"소득, 자산, 주거, 교육, 문화, 건강 등 여러 영역에서 격차가 연쇄적으로 벌어지는 현상",q:"이것을 무엇이라고 하는가?",a:"다중 격차",alt:["다중격차"],x:"소득 격차 → 자산 → 주거 → 교육 → 대학 진학 → 다시 소득 격차로 순환한다.",s:"hard"},
+{i:2082,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"사회에서 신체적·정치적·경제적·사회적·문화적으로 소외되어 인간다운 삶을 영위하는 데 어려움을 겪는 개인이나 집단",q:"이들을 무엇이라고 하는가?",a:"사회적 약자",x:"장애인, 노인, 빈곤층 등이 해당하며 사회적 소수자를 포함하는 넓은 개념이다.",s:"hard"},
+{i:2083,u:2,g:"3. 사회 및 공간 불평등",q:"무인 정보 단말기(키오스크) 확대로 노인 계층이 겪는 어려움은 무엇의 사례인가?",a:"사회적 약자에 대한 차별",d:["사회 계층의 양극화","공간 불평등","역차별"],x:"과거에는 없던 새로운 배제와 차별이 생긴 것이라는 비판이 제기된다.",s:"new"},
+{i:2084,u:2,g:"3. 사회 및 공간 불평등",f:"welfare3",q:"자료에서 '국민과 정부, 사업주가 보험료를 분담'하는 사회 복지 제도는?",a:"사회 보험",d:["공공 부조","사회 서비스","적극적 평등 실현 조치"],x:"국민연금, 국민 건강 보험, 고용 보험, 산업 재해 보상 보험이 해당한다.",s:"hard"},
+{i:2085,u:2,g:"3. 사회 및 공간 불평등",f:"welfare3",q:"자료에서 기초 연금이 속하는 사회 복지 제도는?",a:"공공 부조",d:["사회 보험","사회 서비스","민간 보험"],x:"보험료 분담 없이 국가 재정으로 최저 생활을 보장하므로 공공 부조다. 사회 보험으로 착각하기 쉬운 대표 함정이다.",s:"hard"},
+{i:2086,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"국가와 지방 자치 단체의 책임하에 생활 유지 능력이 없거나 생활이 어려운 국민의 최저 생활을 보장하고 자립을 지원하는 제도",q:"이것을 무엇이라고 하는가?",a:"공공 부조",alt:["공공부조"],x:"국민 기초 생활 보장 제도, 기초 연금, 의료 급여가 대표적이다.",s:"hard"},
+{i:2087,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"도움이 필요한 모든 국민에게 상담, 재활, 돌봄, 복지 시설 이용, 사회 참여 지원 등을 제공하는 제도",q:"이것을 무엇이라고 하는가?",a:"사회 서비스",alt:["사회서비스"],x:"노인 돌봄 서비스, 장애인 활동 지원, 가사·간병 서비스가 해당한다.",s:"new"},
+{i:2088,u:2,g:"3. 사회 및 공간 불평등",q:"기초 연금 제도에 대한 설명으로 옳은 것은?",a:"2014년에 도입되었고, 2020년에 노인 상대적 빈곤율이 처음 30%대로 떨어지는 데 기여했다",d:["1988년에 도입된 사회 보험이다","모든 노인에게 소득과 무관하게 지급된다","근로자와 사업주가 보험료를 분담한다"],x:"65세 이상 중 가구 소득 인정액이 선정 기준 이하인 노인에게 지급한다.",s:"new"},
+{i:2089,u:2,g:"3. 사회 및 공간 불평등",f:"elderly",q:"자료에서 2050년 우리나라 65세 이상 노인 인구 비율 전망치는?",a:"40.1%",d:["18.4%","25.5%","34.4%"],x:"2023년 18.4%에서 빠르게 증가한다는 것이 자료의 핵심이다.",s:"known"},
+{i:2090,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"현재 주소지를 제외하고 원하는 지방 자치 단체에 기부하면 세금 감면 혜택과 지역 특산품을 답례로 받는 제도",q:"이 제도를 무엇이라고 하는가?",a:"고향 사랑 기부제",alt:["고향사랑기부제"],x:"지역 경제 활성화와 재정 확충으로 국가 균형 발전에 기여하는 지역 격차 완화 정책이다.",s:"hard"},
+{i:2091,u:2,g:"3. 사회 및 공간 불평등",def:"이전된 공공 기관과 지역의 대학, 연구소, 산업체, 지방 자치 단체가 협력하여 지역의 새로운 성장 동력을 창출하는 기반이 되는 미래형 도시",q:"이것은?",a:"혁신 도시",d:["행정 중심 복합 도시","경제 자유 구역","기업 도시"],x:"2005년 정부가 국가 균형 발전을 위해 전국에 10대 혁신 도시를 지정했다.",s:"hard"},
+{i:2092,u:2,g:"3. 사회 및 공간 불평등",q:"공공 기관 지방 이전 정책의 한계로 교과서가 제시한 것은?",a:"여전히 40%가 넘는 공공 기관이 수도권에 있고 혁신 도시의 계획 인구 목표도 달성하지 못했다",d:["이전한 공공 기관이 전혀 없다","수도권 인구가 오히려 줄었다","지방 재정이 악화되었다"],x:"그래서 2차 공공 기관 지방 이전이 추진될 예정이다.",s:"new"},
+{i:2093,u:2,g:"3. 사회 및 공간 불평등",q:"수도권 과밀화 해소와 국토 균형 발전을 위해 2012년 행정 중심 복합 도시로 출범한 곳은?",a:"세종특별자치시",d:["대전광역시","충청북도 진천군","경상북도 김천시"],x:"서울에 있던 다양한 정부 기관이 이곳으로 옮겨 왔다.",s:"known"},
+{i:2094,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"오랫동안 사회적으로 차별받아 온 사회적 약자에게 직간접적으로 혜택을 주어 실질적인 기회의 평등을 보장하는 정책",q:"이것을 무엇이라고 하는가?",a:"적극적 평등 실현 조치",alt:["적극적평등실현조치","적극적 우대 조치"],x:"장애인 의무 고용 제도, 여성 할당제, 소수 집단 우대 정책이 사례다.",s:"hard"},
+{i:2095,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"부당하게 받는 차별을 시정하기 위해 마련한 제도나 장치가 너무 강하여 도리어 반대편이 차별받게 되는 경우",q:"이것을 무엇이라고 하는가?",a:"역차별",x:"적극적 평등 실현 조치를 시행할 때 이 문제가 생길 수 있어 사회적 합의가 필요하다.",s:"hard"},
+{i:2096,u:2,g:"3. 사회 및 공간 불평등",q:"장애인 의무 고용 제도의 한계로 교과서가 제시한 것은?",a:"기업 규모와 상관없이 같은 비율을 적용해 대기업이 의무 고용률에 미달하기 쉽다",d:["장애인의 사회 참여를 막는다","공공 기관에는 적용되지 않는다","고용률 기준이 해마다 낮아진다"],x:"의의는 장애인의 경제적 자립과 삶의 질 향상이다.",s:"new"},
+{i:2097,u:2,g:"3. 사회 및 공간 불평등",q:"《정의란 무엇인가》에 나오는 홉우드 사건에서 대학이 내세운 반박 논거는?",a:"인종적·민족적 다양성을 높이는 것이 법학 대학원의 사명이며 소수 집단 학생이 공동선에 기여한다",d:["성적이 가장 중요한 기준이다","백인 지원자를 우대해야 한다","입학 정원을 늘려야 한다"],x:"적극적 평등 실현 조치를 둘러싼 찬반 토론의 대표 사례다.",s:"new"},
+{i:2098,u:2,g:"3. 사회 및 공간 불평등",q:"《물에 빠진 아이 구하기》에서 지구촌 사람들을 돕는 것이 '의무'라고 본 공리주의 사상가는?",a:"싱어",d:["롤스","노직","하딘"],x:"세계시민의 한 사람으로서 인류의 고통을 줄이고 행복을 증진해야 한다고 보았다.",s:"new"},
+{i:2099,u:2,g:"3. 사회 및 공간 불평등",def:"이동 약자의 이동을 어렵게 하는 도시의 계단 정보를 시민이 직접 모아 지도를 만드는 비영리 단체의 활동",q:"이 사례가 보여 주는 것은?",a:"정의로운 사회를 위한 시민의 실천",d:["적극적 평등 실현 조치","지역 격차 완화 정책","공공 부조"],x:"시민이 직접 참여해 쉽게 만들 수 있다는 점에 의의가 있다.",s:"new"},
+{i:2100,u:2,g:"3. 사회 및 공간 불평등",t:"sa",def:"지하자원, 초원, 공기, 바다의 물고기처럼 모두가 함께 사용해야 할 자원을 마구잡이로 사용해 고갈될 위험에 처하는 현상",q:"이것을 무엇이라고 하는가?",a:"공유지의 비극",alt:["공유지 비극"],x:"미국의 생물학자 개릿 하딘이 제시한 개념이다.",s:"hard"},
+{i:2101,u:2,g:"3. 사회 및 공간 불평등",f:"commons",q:"자료의 세 가지 해결 방안 중 '정부가 적정 가축 수를 정하고 초과 시 벌금을 부과'하는 것은?",a:"나 - 정부 규제",d:["가 - 사유화","다 - 자발적 합의","세 가지 모두"],x:"가는 사유화, 다는 공유자들의 자발적 합의다.",s:"new"},
+{i:2102,u:2,g:"3. 사회 및 공간 불평등",q:"공유지의 비극이 던지는 핵심 메시지는?",a:"사익의 극대화가 공익에 악영향을 끼친다",d:["공익만 추구하면 개인이 희생된다","자원은 무한하므로 걱정할 필요가 없다","정부 규제만이 유일한 해결책이다"],x:"개인이 자기 이익만 추구하면 결국 공동체 전체가 피해를 본다.",s:"hard"}
+];
+/* ===== Ⅳ. 세계화와 평화 (교과서 98~123쪽) ===== */
+const U4 = [
+/* 4-1 세계화의 다양한 양상과 문제 해결 (100~107쪽) */
+{i:4001,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"지역 간의 상호 의존성이 높아지고 국가의 경계를 넘어 세계가 하나로 통합되어 가는 현상",q:"이것을 무엇이라고 하는가?",a:"세계화",x:"교통·통신의 발달과 자유 무역의 확산이 배경이다.",s:"hard"},
+{i:4002,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"세계화의 흐름 속에서 특정 지역이 고유한 특성을 바탕으로 세계 차원에서 가치를 갖는 현상",q:"이것을 무엇이라고 하는가?",a:"지역화",x:"'가장 지역적인 것이 세계적인 것이 되기도 한다'는 말로 설명된다.",s:"hard"},
+{i:4003,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"지역의 고유한 특성을 살리면서 보편적인 세계 문화와 조화를 이루어 지역 경쟁력을 높이는 전략",q:"이것을 무엇이라고 하는가?",a:"지역화 전략",alt:["지역화전략"],x:"지역 브랜드, 장소 마케팅, 지리적 표시제가 대표적이다.",s:"new"},
+{i:4004,u:4,g:"1. 세계화의 양상과 문제 해결",t:"ox",q:"세계화와 지역화는 서로 대립하는 현상이므로 동시에 나타날 수 없다.",a:"X",x:"틀렸다. 둘은 동시에 이루어지며 상호 보완적인 관계다. 교과서 단원 퀴즈에 나온 문장이다.",s:"hard"},
+{i:4005,u:4,g:"1. 세계화의 양상과 문제 해결",f:"loc3",q:"자료에서 'I amsterdam'처럼 지역 자체에 부여한 고유한 상표를 활용하는 전략은?",a:"지역 브랜드",d:["장소 마케팅","지리적 표시제","공간적 분업"],x:"로고, 슬로건, 캐릭터 등을 활용해 만든다.",s:"hard"},
+{i:4006,u:4,g:"1. 세계화의 양상과 문제 해결",f:"loc3",q:"자료에서 보성 녹차가 우리나라 제1호로 등록된 전략은?",a:"지리적 표시제",d:["지역 브랜드","장소 마케팅","원산지 표시제"],x:"상품의 품질과 특성이 생산지의 자연환경과 재배 방법에서 비롯될 때 국가가 지역 이름을 상표권으로 인정한다.",s:"hard"},
+{i:4007,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"특정 장소나 지역이 가진 자산이나 특징을 이용하여 장소를 매력적인 상품으로 가꾸어 판매하는 것으로, 대표적인 사례가 지역 축제다.",q:"이 전략을 무엇이라고 하는가?",a:"장소 마케팅",alt:["장소마케팅"],x:"화천 산천어 축제, 보령 머드 축제가 사례다.",s:"new"},
+{i:4008,u:4,g:"1. 세계화의 양상과 문제 해결",q:"보령 머드 축제가 2021년에 세계 축제 협회로부터 선정된 것은?",a:"아시아 3대 축제",d:["세계 3대 축제","유네스코 무형 문화유산","국가 무형유산"],x:"타이 송끄란 축제, 중국 하얼빈 국제 빙설 대세계와 함께 선정되었다.",s:"known"},
+{i:4009,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"경제, 정치, 문화 등 다양한 측면에서 전 세계의 중심지 역할을 하는 도시",q:"이것을 무엇이라고 하는가?",a:"세계도시",alt:["세계 도시"],x:"뉴욕, 런던, 도쿄, 파리 등이 대표적이다.",s:"hard"},
+{i:4010,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"상품이나 서비스의 생산과 유통 과정에 필요한 서비스로, 금융·보험·부동산·회계·법률 등이 대표적이다.",q:"이것을 무엇이라고 하는가?",a:"생산자 서비스",alt:["생산자서비스"],x:"세계도시에 집중되는 대표적 기능이다.",s:"hard"},
+{i:4011,u:4,g:"1. 세계화의 양상과 문제 해결",q:"세계도시에 밀집하는 기능으로 보기 어려운 것은?",a:"저렴한 노동력을 이용한 조립 생산 기능",d:["다국적 기업의 본사","국제 금융 업무 기능","생산자 서비스 기능"],x:"조립·생산 기능은 다국적 기업의 생산 공장이 맡는다.",s:"hard"},
+{i:4012,u:4,g:"1. 세계화의 양상과 문제 해결",f:"globcity",q:"자료에서 2022년 세계도시 경쟁력 점수가 가장 높은 도시는?",a:"런던",d:["뉴욕","도쿄","파리"],x:"런던 > 뉴욕 > 도쿄 > 파리 순이다.",s:"known"},
+{i:4013,u:4,g:"1. 세계화의 양상과 문제 해결",q:"세계도시 경쟁력을 평가하는 지표로 교과서가 제시한 것이 아닌 것은?",a:"인구 규모",d:["경제","연구·개발","거주 적합성"],x:"문화 교류, 환경, 교통·접근성도 지표에 포함된다.",s:"new"},
+{i:4014,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"국경을 넘어 세계적인 규모로 생산 및 유통, 판매 활동을 하는 기업",q:"이것을 무엇이라고 하는가?",a:"다국적 기업",alt:["다국적기업"],x:"활동 범위를 넓히고 여러 산업에 진출해 영향력이 커지고 있다.",s:"new"},
+{i:4015,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"기업의 규모가 커지면서 본사, 연구소, 생산 공장 등 각 기능이 공간적으로 분리되는 현상",q:"이것을 무엇이라고 하는가?",a:"공간적 분업",alt:["공간적분업"],x:"다국적 기업이 각 기능을 가장 적절한 장소에 배치하면서 나타난다.",s:"hard"},
+{i:4016,u:4,g:"1. 세계화의 양상과 문제 해결",f:"mnc",q:"자료에서 '본국의 대도시'에 입지하는 기능은?",a:"본사",d:["연구소","생산 공장","판매 법인"],x:"본사는 경영 및 관리 기능을 맡는다.",s:"hard"},
+{i:4017,u:4,g:"1. 세계화의 양상과 문제 해결",f:"mnc",q:"자료에서 '핵심 기술 인력을 구하기 쉬운 곳'에 입지하는 기능은?",a:"연구소",d:["본사","생산 공장","물류 창고"],x:"연구소는 연구 및 개발 기능을 맡는다.",s:"hard"},
+{i:4018,u:4,g:"1. 세계화의 양상과 문제 해결",q:"다국적 기업의 생산 공장이 입지하는 조건으로 보기 어려운 것은?",a:"경영·관리 인력이 풍부한 본국의 대도시",d:["노동력과 원료를 저렴하게 확보할 수 있는 곳","무역 장벽을 극복하고 판매 시장을 확보할 수 있는 곳","각종 기업 활동을 지원해 주는 곳"],x:"본국의 대도시는 본사의 입지 조건이다.",s:"hard"},
+{i:4019,u:4,g:"1. 세계화의 양상과 문제 해결",t:"ox",q:"다국적 기업의 본사는 주로 노동력과 원료를 저렴하게 확보할 수 있는 국가에 위치한다.",a:"X",x:"틀렸다. 그것은 생산 공장의 조건이다. 교과서 단원 퀴즈에 그대로 나온 함정이다.",s:"hard"},
+{i:4020,u:4,g:"1. 세계화의 양상과 문제 해결",q:"다국적 기업의 산업 시설이 '들어선' 지역에서 나타나는 현상으로 옳은 것은?",a:"일자리가 늘고 지역 경제가 활성화되지만 경쟁력이 부족한 자국 기업은 피해를 볼 수 있다",d:["실업자가 증가하고 지역 경제가 침체된다","모든 자국 기업의 경쟁력이 높아진다","지역 인구가 줄어든다"],x:"시설이 '빠져나간' 지역은 실업자가 늘고 경제가 침체된다.",s:"hard"},
+{i:4021,u:4,g:"1. 세계화의 양상과 문제 해결",q:"정보 기술 대기업들이 중국의 생산 공장을 베트남·인도로 옮긴 주된 이유는?",a:"지난 10년간 중국 제조업 근로자의 연간 소득이 3배 증가하여 인건비가 올랐기 때문",d:["중국의 기술력이 떨어졌기 때문","베트남의 소비 시장이 가장 크기 때문","중국이 공장 설립을 금지했기 때문"],x:"베트남이 이 상황의 최대 수혜국이 되었다.",s:"new"},
+{i:4022,u:4,g:"1. 세계화의 양상과 문제 해결",f:"globprob",q:"자료의 세 문제 중 '선진국의 문화가 보편화되면서 각국의 고유한 문화가 사라지는 것'은?",a:"문화의 획일화와 소멸",d:["빈부 격차의 심화","보편 윤리와 특수 윤리의 갈등","자원 고갈"],x:"문화의 다양성이 훼손되는 문제다.",s:"hard"},
+{i:4023,u:4,g:"1. 세계화의 양상과 문제 해결",f:"gap",q:"자료에서 최상위 20개 부국과 최하위 20개 빈국의 1인당 GDP 격차는 1980년과 2023년 사이에 어떻게 변했는가?",a:"53배에서 106배로 약 2배 벌어졌다",d:["106배에서 53배로 줄었다","거의 변하지 않았다","10배 이내로 줄었다"],x:"세계화로 빈부 격차가 심화된 것을 보여 주는 자료다.",s:"hard"},
+{i:4024,u:4,g:"1. 세계화의 양상과 문제 해결",q:"세계화로 국가 간 빈부 격차가 커지는 이유로 옳은 것은?",a:"선진국은 첨단 산업·생산자 서비스업이, 개발 도상국은 저렴한 노동력 기반의 제조업·농업이 발달하기 때문",d:["개발 도상국이 첨단 산업을 독점하기 때문","선진국이 무역에 참여하지 않기 때문","모든 국가의 산업 구조가 같기 때문"],x:"빈부 격차는 국가 간뿐 아니라 지역 간, 기업 간에도 나타난다.",s:"hard"},
+{i:4025,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",def:"자유, 평등, 인권처럼 모든 사회에서 공통으로 적용되는 윤리",q:"이것을 무엇이라고 하는가?",a:"보편 윤리",alt:["보편윤리"],x:"특정 사회의 고유 가치나 자국민의 권리를 우선하는 것은 특수 윤리다.",s:"hard"},
+{i:4026,u:4,g:"1. 세계화의 양상과 문제 해결",q:"EU 회원국들이 난민 의무 수용 협정에 자국민의 반감과 사회 보장 비용을 이유로 반대한 것은 무엇의 충돌 사례인가?",a:"보편 윤리와 특수 윤리",d:["세계화와 지역화","개인선과 공동선","소극적 평화와 적극적 평화"],x:"인권이라는 보편 윤리와 자국민 우선이라는 특수 윤리가 부딪친 경우다.",s:"hard"},
+{i:4027,u:4,g:"1. 세계화의 양상과 문제 해결",q:"보편 윤리와 특수 윤리의 갈등을 해결하는 태도로 알맞은 것은?",a:"각 사회의 특수 윤리를 존중하되 인류의 보편적 가치를 훼손하지 않는지 비판적으로 살핀다",d:["특수 윤리를 모두 없앤다","보편 윤리를 포기한다","힘이 센 나라의 기준을 따른다"],x:"해결은 합리적이고 평화적인 방법으로 이루어져야 한다.",s:"new"},
+{i:4028,u:4,g:"1. 세계화의 양상과 문제 해결",q:"유네스코가 제주어를 분류한 소멸 위기 언어 단계는?",a:"치명적 위험",d:["취약","확실히 위험","상당히 위험"],x:"1950년대 이전 출생 고령층 1만 명 정도만 제주어를 자유자재로 구사한다.",s:"known"},
+{i:4029,u:4,g:"1. 세계화의 양상과 문제 해결",q:"한 언어가 사라질 때 함께 사라지는 것으로 교과서가 제시한 것은?",a:"전통, 문화, 지식",d:["인구와 영토","산업과 자본","법과 제도"],x:"그래서 언어 보존은 문화 다양성 보전의 핵심이다.",s:"new"},
+{i:4030,u:4,g:"1. 세계화의 양상과 문제 해결",q:"세계화로 발생한 이익이 선진국에 지나치게 집중되지 않도록 하기 위한 무역 방식은?",a:"공정 무역",d:["보호 무역","자유 무역","중계 무역"],x:"상호 공존의 무역을 지향하는 방법이다.",s:"hard"},
+
+/* 4-2 평화의 중요성과 국제 사회의 노력 (108~115쪽) */
+{i:4050,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",def:"범죄, 테러, 전쟁 등과 같은 직접적·물리적 폭력이 없는 상태",q:"이것을 무엇이라고 하는가?",a:"소극적 평화",alt:["소극적평화"],x:"인류가 생존 위협에서 벗어나 안전하게 살 환경을 만들지만, 진정한 평화에는 이르지 못한다.",s:"hard"},
+{i:4051,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",def:"직접적·물리적 폭력뿐만 아니라 구조적 폭력과 문화적 폭력까지 제거된 상태",q:"이것을 무엇이라고 하는가?",a:"적극적 평화",alt:["적극적평화"],x:"적극적 평화가 실현되어야 인류가 인간답게 살아갈 수 있다.",s:"hard"},
+{i:4052,u:4,g:"2. 평화와 국제 사회의 노력",f:"peace2",q:"자료에서 '빈곤, 정치적 억압, 경제적 착취'는 어떤 폭력에 해당하는가?",a:"구조적 폭력",d:["직접적 폭력","문화적 폭력","물리적 폭력"],x:"종교·사상·언어·예술에 스며든 것은 문화적 폭력이다.",s:"hard"},
+{i:4053,u:4,g:"2. 평화와 국제 사회의 노력",f:"peace2",q:"자료에서 소극적 평화와 적극적 평화의 관계로 옳은 것은?",a:"적극적 평화가 소극적 평화를 포함하는 더 넓은 개념이다",d:["둘은 서로 배타적인 개념이다","소극적 평화가 적극적 평화를 포함한다","둘은 완전히 같은 개념이다"],x:"진정한 평화는 소극적 평화에 머무르지 않고 적극적 평화를 실현할 때 이루어진다.",s:"hard"},
+{i:4054,u:4,g:"2. 평화와 국제 사회의 노력",q:"《평화적 수단에 의한 평화》를 쓴 현대 평화학의 창시자는?",a:"갈퉁",d:["손무","칸트","피카소"],x:"'평화는 평화적 수단으로만 이루어져야 한다'고 주장했다.",s:"hard"},
+{i:4055,u:4,g:"2. 평화와 국제 사회의 노력",q:"갈퉁이 평화학의 창시자라고 평가한, '싸우지 않고 적을 굴복시키는 것이 최상'이라고 한 인물은?",a:"손무",d:["칸트","베카리아","간디"],x:"《손자병법》을 쓴 인물이다.",s:"known"},
+{i:4056,u:4,g:"2. 평화와 국제 사회의 노력",q:"에스파냐 내전의 참상을 알리기 위해 〈게르니카〉를 그린 화가는?",a:"피카소",d:["고야","달리","마티스"],x:"1937년 작품으로 전쟁의 비극을 표현했다.",s:"known"},
+{i:4057,u:4,g:"2. 평화와 국제 사회의 노력",q:"'빈곤으로 고통받는 국가에 경제 원조를 하는 것'은 어떤 평화의 실현에 해당하는가?",a:"적극적 평화",d:["소극적 평화","일시적 평화","형식적 평화"],x:"구조적 폭력을 제거하는 활동이다. 반대로 휴전·정전은 소극적 평화다.",s:"hard"},
+{i:4058,u:4,g:"2. 평화와 국제 사회의 노력",q:"'무력 충돌을 멈추고 휴전에 합의하는 것'은 어떤 평화의 실현에 해당하는가?",a:"소극적 평화",d:["적극적 평화","구조적 평화","문화적 평화"],x:"직접적·물리적 폭력을 없앤 상태다.",s:"hard"},
+{i:4059,u:4,g:"2. 평화와 국제 사회의 노력",q:"이스라엘-팔레스타인 분쟁의 원인으로 옳은 것은?",a:"영토 분쟁에서 시작되어 민족적·종교적 정체성 갈등으로 심화되었다",d:["해양 자원을 둘러싼 경쟁","언어 차이에 따른 갈등","역사 교과서 왜곡"],x:"유대인과 팔레스타인 사람들 간의 갈등이다.",s:"new"},
+{i:4060,u:4,g:"2. 평화와 국제 사회의 노력",q:"카슈미르 분리 분쟁의 주된 원인은?",a:"이슬람교도가 많은 지역이 힌두교도가 많은 인도에 편입되었기 때문",d:["석유 자원을 둘러싼 경쟁","민족 간 언어 차이","식민 지배의 잔재"],x:"종교가 주된 원인인 분쟁이다.",s:"new"},
+{i:4061,u:4,g:"2. 평화와 국제 사회의 노력",q:"에티오피아 내전의 원인으로 옳은 것은?",a:"80여 개 민족 간 종교와 언어 차이, 경제적·정치적 차별",d:["해양 영유권 분쟁","석유 자원 경쟁","역사 인식 차이"],x:"민족 갈등이 주된 원인이다.",s:"new"},
+{i:4062,u:4,g:"2. 평화와 국제 사회의 노력",q:"포클랜드 분쟁의 주된 원인과 당사국이 바르게 짝지어진 것은?",a:"석유 자원과 영유권 - 영국과 아르헨티나",d:["종교 갈등 - 인도와 파키스탄","민족 차별 - 에티오피아 내부","역사 왜곡 - 한국과 일본"],x:"주변에 석유가 매장되어 있는 제도의 소유권 분쟁이다.",s:"known"},
+{i:4063,u:4,g:"2. 평화와 국제 사회의 노력",def:"20세기 초 남극 대륙을 놓고 영유권 분쟁이 심각해지자 12개국이 협력해 체결한 조약으로, 어떤 국가도 영유권을 주장할 수 없고 과학 연구나 교류 목적으로만 이용할 수 있게 했다.",q:"이 조약은?",a:"남극 조약",d:["해양법 협약","교토 의정서","파리 협정"],x:"국제 사회가 갈등을 협력으로 해결한 대표 사례다.",s:"new"},
+{i:4064,u:4,g:"2. 평화와 국제 사회의 노력",f:"actors",q:"자료에서 '각국의 정부를 회원으로 하는' 행위 주체는?",a:"국제기구",d:["국가","비정부 기구","다국적 기업"],x:"국제 연합(UN), 유니세프(UNICEF), UNHCR, WFP 등이 해당한다.",s:"hard"},
+{i:4065,u:4,g:"2. 평화와 국제 사회의 노력",f:"actors",q:"자료에서 '개인이나 민간단체의 주도로 만들어진' 행위 주체는?",a:"비정부 기구",d:["국제기구","국가","지방 정부"],x:"국경 없는 의사회, 국제 앰네스티, 그린피스가 대표적이다.",s:"hard"},
+{i:4066,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",def:"일정한 영토와 국민을 바탕으로 주권을 가진, 국제 사회에서 법적 지위를 갖고 공식적인 활동을 할 수 있는 가장 기본적인 행위 주체",q:"이것은 무엇인가?",a:"국가",x:"국가는 자국의 이익을 최우선으로 추구한다.",s:"new"},
+{i:4067,u:4,g:"2. 평화와 국제 사회의 노력",q:"국제 사회의 행위 주체로 교과서가 제시한 것이 아닌 것은?",a:"개별 가정",d:["국제적 영향력이 큰 개인","다국적 기업","개별 국가 내 지방 정부"],x:"국가·국제기구·비정부 기구 외에 이 세 가지가 추가로 제시된다.",s:"new"},
+{i:4068,u:4,g:"2. 평화와 국제 사회의 노력",q:"국제 연합 난민 기구(UNHCR)가 미얀마 실향민에게 구호 물품을 배포한 것은 어떤 행위 주체의 활동인가?",a:"국제기구",d:["비정부 기구","국가","국제적 영향력이 큰 개인"],x:"UNHCR은 국제 연합 산하 기구다.",s:"hard"},
+{i:4069,u:4,g:"2. 평화와 국제 사회의 노력",q:"국제 앰네스티가 보고서로 미얀마 군부에 대한 항공 연료 공급 중단을 요구한 것은 어떤 행위 주체의 활동인가?",a:"비정부 기구",d:["국제기구","국가","다국적 기업"],x:"국제 앰네스티는 대표적인 비정부 기구다.",s:"hard"},
+{i:4070,u:4,g:"2. 평화와 국제 사회의 노력",q:"미국 정부가 미얀마 석유 가스 회사에 금융 제재를 발표한 것은 어떤 행위 주체의 활동인가?",a:"국가",d:["국제기구","비정부 기구","다국적 기업"],x:"군부 정권의 무기 구매 자금을 차단하려는 조치였다.",s:"new"},
+{i:4071,u:4,g:"2. 평화와 국제 사회의 노력",q:"코트디부아르 내전 당시 축구 선수가 무릎을 꿇고 휴전을 호소한 것은 어떤 행위 주체의 활동인가?",a:"국제적 영향력이 큰 개인",d:["국제기구","비정부 기구","지방 정부"],x:"그 결과 일주일 동안 총성이 멎었고 월드컵 기간 한 달간 휴전이 이루어졌다.",s:"hard"},
+{i:4072,u:4,g:"2. 평화와 국제 사회의 노력",q:"코트디부아르 내전의 근본적인 원인으로 교과서가 제시한 것은?",a:"뿌리 깊은 남북 지역 간 경제·종족·종교 갈등",d:["석유 자원을 둘러싼 경쟁","식민 지배국과의 영토 분쟁","언어 정책의 실패"],x:"남부 가톨릭 세력과 북부 이슬람 세력의 오랜 대립이 배경이다.",s:"new"},
+{i:4073,u:4,g:"2. 평화와 국제 사회의 노력",q:"한국 국제 협력단(KOICA)이 코트디부아르 청소년의 심리적·신체적 상처 치유를 위해 협력 센터를 지은 것은 어떤 평화에 기여한 것인가?",a:"적극적 평화",d:["소극적 평화","형식적 평화","일시적 평화"],x:"구조적 폭력을 줄이는 활동이므로 적극적 평화다.",s:"hard"},
+{i:4074,u:4,g:"2. 평화와 국제 사회의 노력",q:"1999년 인도주의적 의료 서비스 제공 공로로 노벨 평화상을 받은 단체는?",a:"국경 없는 의사회(MSF)",d:["국제 연합 세계 식량 계획(WFP)","국제 앰네스티","세이브 더 칠드런"],x:"인종·종교·이념과 관계없이 마지막까지 긴급 구호 활동을 펼치는 단체다.",s:"known"},
+{i:4075,u:4,g:"2. 평화와 국제 사회의 노력",q:"2020년에 기아 퇴치 공로로 노벨 평화상을 받은 기구는?",a:"국제 연합 세계 식량 계획(WFP)",d:["국경 없는 의사회(MSF)","국제 연합 난민 기구(UNHCR)","유니세프(UNICEF)"],x:"굶주림이 전쟁과 갈등의 무기로 쓰이는 것을 막는 활동을 인정받았다.",s:"known"},
+{i:4076,u:4,g:"2. 평화와 국제 사회의 노력",q:"2021년 필리핀 독재 정권의 권력 남용을 폭로한 공로로 노벨 평화상을 받은 언론인은?",a:"마리아 레사",d:["말랄라 유사프자이","넬슨 만델라","아웅산 수치"],x:"민주주의와 표현의 자유 수호에 기여했다.",s:"known"},
+{i:4077,u:4,g:"2. 평화와 국제 사회의 노력",q:"세계 평화를 위한 개인의 바람직한 역할로 알맞은 것은?",a:"세계시민으로서 책임감을 갖고 캠페인·기부·봉사 등에 적극 참여한다",d:["자국의 이익만을 우선한다","국제 문제는 국가에 맡기고 관여하지 않는다","분쟁 지역과의 교류를 끊는다"],x:"개인은 한 국가의 구성원인 동시에 지구 공동체의 일원이다.",s:"new"},
+
+/* 4-3 남북 분단 및 동아시아의 역사 갈등과 세계 평화 (116~123쪽) */
+{i:4100,u:4,g:"3. 남북 분단과 세계 평화",f:"division",q:"자료에서 남북 분단이 시작된 직접적인 계기는?",a:"미국과 소련이 북위 38도선을 경계로 한반도를 분할 점령한 것",d:["6·25 전쟁의 발발","모스크바 3국 외상 회의의 결정","남북한에 서로 다른 정부가 수립된 것"],x:"1945년 8월 15일 광복과 동시에 분할 점령이 이루어졌다.",s:"hard"},
+{i:4101,u:4,g:"3. 남북 분단과 세계 평화",f:"division",q:"자료의 흐름에서 1945년 12월에 열려 신탁 통치를 결정한 회의는?",a:"모스크바 3국 외상 회의",d:["얄타 회담","포츠담 회담","카이로 회담"],x:"미국·영국·소련 3국의 외상 회의로, 최고 5년간의 신탁 통치 등을 결정했다.",s:"hard"},
+{i:4102,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",def:"국제 연합(UN)의 위임을 받은 국가가 아직 자치 능력이 없는 지역을 일정 기간 통치하는 것",q:"이것을 무엇이라고 하는가?",a:"신탁 통치",alt:["신탁통치"],x:"모스크바 3국 외상 회의의 결정을 둘러싸고 좌익과 우익의 찬반 논쟁이 깊어졌다.",s:"hard"},
+{i:4103,u:4,g:"3. 남북 분단과 세계 평화",q:"광복 당시 국제 정세에 대한 설명으로 옳은 것은?",a:"자유주의 진영의 미국과 공산주의 진영의 소련 간 냉전 질서로 재편되었다",d:["국제 연맹이 결성되어 평화가 유지되었다","제1차 세계 대전이 막 끝난 상태였다","미국과 소련이 동맹 관계였다"],x:"이 냉전 질서가 한반도 분단의 국제적 배경이다.",s:"new"},
+{i:4104,u:4,g:"3. 남북 분단과 세계 평화",q:"국제 연합(UN)이 마련한 총선거를 통한 통일 정부 구성 방안이 무산된 이유는?",a:"소련과 북한이 거부했기 때문",d:["미국이 반대했기 때문","6·25 전쟁이 먼저 일어났기 때문","신탁 통치가 연장되었기 때문"],x:"그 결과 1948년 남북한에 서로 다른 정부가 수립되었다.",s:"new"},
+{i:4105,u:4,g:"3. 남북 분단과 세계 평화",f:"division",q:"자료에서 남북 분단을 더욱 고착시킨 1950년의 사건은?",a:"북한의 남침으로 일어난 6·25 전쟁",d:["모스크바 3국 외상 회의","남북한 정부 수립","국제 연합의 총선거 결정"],x:"이후 70년 넘게 군사적 긴장 상태가 유지되고 있다.",s:"new"},
+{i:4106,u:4,g:"3. 남북 분단과 세계 평화",f:"military",q:"자료에서 2022년 세계 군사비 지출 1위 국가와 대한민국의 순위는?",a:"미국 1위, 대한민국 9위",d:["중국 1위, 대한민국 5위","미국 1위, 대한민국 3위","러시아 1위, 대한민국 9위"],x:"북한은 GDP 대비 군사비 지출이 세계에서 가장 많다.",s:"hard"},
+{i:4107,u:4,g:"3. 남북 분단과 세계 평화",q:"2022년 기준 국내 총생산(GDP) 대비 군사비 지출이 세계에서 가장 많은 나라는?",a:"북한",d:["미국","중국","대한민국"],x:"총액은 미국이 1위지만, GDP 대비로는 북한이 가장 높다.",s:"hard"},
+{i:4108,u:4,g:"3. 남북 분단과 세계 평화",q:"평화통일의 이점으로 보기 어려운 것은?",a:"군사비 지출을 늘려 국방력을 강화할 수 있다",d:["북한 주민의 삶을 개선하고 이산가족의 아픔을 해소한다","군사 대립 비용을 줄여 경제 발전을 이룬다","한반도가 물류 중심지로 성장할 수 있다"],x:"통일은 오히려 과다한 군사비 지출을 줄인다.",s:"new"},
+{i:4109,u:4,g:"3. 남북 분단과 세계 평화",q:"통일이 되면 한반도가 물류 중심지로 성장할 수 있는 이유는?",a:"태평양과 유라시아를 연결하는 위치에 있기 때문",d:["지하자원이 가장 풍부하기 때문","인구가 가장 많기 때문","군사력이 강해지기 때문"],x:"지리적 요충지라는 이점은 세계 평화 기여 방안에서도 다시 나온다.",s:"new"},
+{i:4110,u:4,g:"3. 남북 분단과 세계 평화",t:"ox",q:"평화통일을 위해 남북한은 군사적 긴장 관계를 지속적으로 추진해야 한다.",a:"X",x:"틀렸다. 교류와 협력을 지속적으로 추진해야 한다. 교과서 단원 퀴즈에 나온 함정 문장이다.",s:"hard"},
+{i:4111,u:4,g:"3. 남북 분단과 세계 평화",q:"남북한이 지금까지 이어 온 교류와 협력의 사례가 아닌 것은?",a:"공동 화폐 발행",d:["이산가족 상봉","문화·예술·체육 교류","남북 정상 회담"],x:"남북 교역도 교류 사례에 포함된다.",s:"new"},
+{i:4112,u:4,g:"3. 남북 분단과 세계 평화",q:"2000년 남북 정상 회담에서 합의되어 제1차 이산가족 대면 상봉으로 이어진 선언은?",a:"6·15 남북 공동 선언",d:["7·4 남북 공동 성명","10·4 남북 공동 선언","판문점 선언"],x:"1985년 최초의 고향 방문단 교환 이후 중단되었던 상봉이 재개되었다.",s:"known"},
+{i:4113,u:4,g:"3. 남북 분단과 세계 평화",q:"독일 통일에 기여한 요인으로 보기 어려운 것은?",a:"서독의 동독에 대한 경제 봉쇄",d:["동독과 꾸준히 교류를 추진한 서독 정부의 노력","동독 내부의 변화","냉전 체제의 붕괴"],x:"통일 후 서독은 동독 주민의 생활 수준 향상 정책으로 격차를 줄였다.",s:"new"},
+{i:4114,u:4,g:"3. 남북 분단과 세계 평화",q:"통일 30년 후 독일의 상황으로 교과서가 제시한 것은?",a:"동독 주민의 소득이 서독 주민의 85% 수준이 되었고 유럽에서 경제 규모가 가장 큰 나라가 되었다",d:["동서독 격차가 더 벌어졌다","통일 비용 때문에 경제가 붕괴했다","동독 주민의 소득이 서독을 앞질렀다"],x:"통일 비용 문제를 겪었지만 격차를 줄이는 정책을 꾸준히 추진한 결과다.",s:"new"},
+{i:4115,u:4,g:"3. 남북 분단과 세계 평화",f:"easia",q:"자료에서 우리나라와 일본 사이에 위치하며 일본이 영유권을 왜곡 주장하는 섬은?",a:"독도",d:["쿠릴 열도","센카쿠 열도","난사 군도"],x:"독도는 울릉도에서 87.4km 떨어져 있어 맑은 날 맨눈으로 보인다.",s:"hard"},
+{i:4116,u:4,g:"3. 남북 분단과 세계 평화",f:"easia",q:"자료에서 러시아와 일본 사이에 위치한 분쟁 지역은?",a:"쿠릴 열도(북방 도서)",d:["센카쿠 열도","시사 군도","난사 군도"],x:"동아시아 해양 영토 분쟁 지역의 위치를 묻는 문제가 자주 나온다.",s:"hard"},
+{i:4117,u:4,g:"3. 남북 분단과 세계 평화",f:"easia",q:"자료에서 중국이 '댜오위다오'라고 부르며 일본과 다투는 지역은?",a:"센카쿠 열도",d:["쿠릴 열도","시사 군도","난사 군도"],x:"시사 군도는 파라셀 제도, 난사 군도는 스프래틀리 군도로도 불린다.",s:"hard"},
+{i:4118,u:4,g:"3. 남북 분단과 세계 평화",q:"1970년대 이후 동아시아 해양 영토 분쟁이 더욱 심화된 이유는?",a:"해양 자원의 중요성이 이전보다 강조되었기 때문",d:["인구가 급격히 늘었기 때문","냉전이 시작되었기 때문","국제 연합이 개입했기 때문"],x:"청일 전쟁·러일 전쟁 등 복잡한 역사적 배경에 자원 경쟁이 더해졌다.",s:"new"},
+{i:4119,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",def:"중국이 2002년 2월부터 5년간 추진한 동북 3성(헤이룽장성·지린성·랴오닝성)의 역사·지리·문화에 관한 연구 사업",q:"이것을 무엇이라고 하는가?",a:"동북공정",x:"고조선·부여·고구려·발해의 역사를 중국사의 일부라고 주장했다.",s:"hard"},
+{i:4120,u:4,g:"3. 남북 분단과 세계 평화",q:"중국이 동북공정을 추진한 근본적인 목적은?",a:"현재 중국에 있는 소수 민족의 분리 독립을 막기 위해",d:["고구려 유적을 보존하기 위해","한국과 학술 교류를 확대하기 위해","해양 자원을 확보하기 위해"],x:"고구려와 발해를 중국 소수 민족의 지방 정권으로 평가하는 것이 그 방법이다.",s:"hard"},
+{i:4121,u:4,g:"3. 남북 분단과 세계 평화",q:"동북공정의 대상이 된 동북 3성에 해당하지 않는 곳은?",a:"내몽고 자치구",d:["헤이룽장성","지린성","랴오닝성"],x:"동북 3성은 이 세 곳이다.",s:"known"},
+{i:4122,u:4,g:"3. 남북 분단과 세계 평화",f:"eahist",q:"자료의 세 갈등 중 '일본이 침략 전쟁과 식민 지배를 미화하고 독도를 자국 영토라고 왜곡'하는 문제는?",a:"역사 교과서 왜곡",d:["영토 문제","동북공정","신탁 통치"],x:"일본군 '위안부'와 '강제 연행'을 각각 위안부·징용으로 수정해 침략 행위를 정당화했다.",s:"hard"},
+{i:4123,u:4,g:"3. 남북 분단과 세계 평화",q:"동아시아 역사 갈등의 해결 방안으로 알맞지 않은 것은?",a:"각국이 자국 중심의 역사 서술을 강화한다",d:["서로의 역사 인식을 공유하고 과거의 잘못을 인정·반성한다","한·중·일 공동 역사 연구와 공동 역사 교재를 만든다","청소년 역사 체험 캠프 등 국제 연대와 교류를 활성화한다"],x:"갈등의 원인인 역사 왜곡을 바로잡는 것이 출발점이다.",s:"new"},
+{i:4124,u:4,g:"3. 남북 분단과 세계 평화",q:"한국과 일본이 공동 역사 연구를 시작한 해는?",a:"2002년",d:["1995년","2010년","2019년"],x:"두 차례에 걸쳐 진행되었고 이후 일본과 중국 간에도 공동 역사 연구가 이루어졌다.",s:"known"},
+{i:4125,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",def:"일본 교과서의 역사 왜곡을 바로잡기 위해 카드 뉴스를 제작해 알리고, 외국 지도·교과서의 '일본해'를 '동해'로 바꾸는 활동을 하는 사이버 외교 사절단",q:"이 단체의 이름은?",a:"반크",alt:["VANK","vank","반크(VANK)"],x:"민간 차원의 국제 연대 활동 사례다.",s:"new"},
+{i:4126,u:4,g:"3. 남북 분단과 세계 평화",q:"독도가 대한민국의 고유 영토임을 보여 주는 근거가 아닌 것은?",a:"1905년 일본 시마네현의 고시",d:["《세종실록지리지》(1454)의 기록","《만기요람》(1808)의 기록","1900년 대한 제국 칙령 제41호"],x:"1877년 일본 태정관도 독도가 일본 영토가 아님을 인정했다.",s:"hard"},
+{i:4127,u:4,g:"3. 남북 분단과 세계 평화",q:"'울릉도와 독도, 두 섬이 서로 거리가 멀지 않아 날씨가 맑으면 바라볼 수 있다'고 기록한 문헌은?",a:"《세종실록지리지》",d:["《만기요람》","《동국여지승람》","《삼국사기》"],x:"1454년 기록이다. 《만기요람》(1808)에는 독도가 우산국의 영토였다는 내용이 있다.",s:"known"},
+{i:4128,u:4,g:"3. 남북 분단과 세계 평화",q:"1900년 10월 대한 제국이 울릉군수가 독도를 관할한다고 확고히 한 문서는?",a:"칙령 제41호",d:["태정관 지령","을사늑약","대한 제국 헌법"],x:"독도가 우리 영토임을 국가가 공식 문서로 밝힌 근거다.",s:"known"},
+{i:4129,u:4,g:"3. 남북 분단과 세계 평화",q:"독도와 울릉도 사이의 거리는?",a:"87.4km",d:["8.7km","187.4km","247.4km"],x:"울릉도에서 맨눈으로 볼 수 있는 거리다.",s:"known"},
+{i:4130,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",def:"경제 협력 개발 기구(OECD) 산하 위원회 중 하나로, 선진국의 개발 도상국에 대한 원조 규범을 제정하고 정책 조정 업무를 총괄하는 기구",q:"이 기구의 이름은? (한글 또는 영문 약자)",a:"개발 원조 위원회",alt:["DAC","dac","개발원조위원회"],x:"우리나라는 원조를 받던 나라에서 이 위원회의 회원국이 되었다.",s:"hard"},
+{i:4131,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",def:"정부를 포함한 공공 기관이 개발 도상국의 경제 개발과 복지 향상을 목적으로 제공하는 원조",q:"이것을 무엇이라고 하는가? (한글 또는 영문 약자)",a:"공적 개발 원조",alt:["ODA","oda","공적개발원조"],x:"농촌 진흥청의 케냐 무병 씨감자 지원이 사례다.",s:"hard"},
+{i:4132,u:4,g:"3. 남북 분단과 세계 평화",q:"우리나라 외교부 산하에서 정부 차원의 대외 무상 협력 사업을 전담하는 기관은?",a:"한국 국제 협력단(KOICA)",d:["반크(VANK)","동북아 역사 재단","국가 인권 위원회"],x:"요르단 난민 아동 학교 설립, 코트디부아르 청소년 협력 센터 건립 등을 했다.",s:"hard"},
+{i:4133,u:4,g:"3. 남북 분단과 세계 평화",q:"농촌 진흥청이 케냐에 무병 씨감자를 지원하고 재배 기술을 교육한 것은 무엇의 사례인가?",a:"공적 개발 원조(ODA)",d:["공정 무역","적극적 평등 실현 조치","지역화 전략"],x:"개발 도상국의 식량 안보와 농가 소득 증대에 기여했다.",s:"new"},
+{i:4134,u:4,g:"3. 남북 분단과 세계 평화",q:"우리나라의 국제적 위상 변화를 가장 잘 나타낸 것은?",a:"6·25 전쟁 때 원조를 받던 나라에서 다른 나라를 원조하는 나라가 되었다",d:["국제기구에서 탈퇴했다","군사 강국이 되어 원조를 중단했다","무역을 중단하고 자급자족을 택했다"],x:"국제 스포츠 대회 개최, 국제기구 활동, 대중문화의 인기도 위상 확대의 사례다.",s:"new"},
+{i:4135,u:4,g:"3. 남북 분단과 세계 평화",q:"우리나라가 세계 평화에 기여할 수 있는 방안으로 보기 어려운 것은?",a:"분쟁 지역에서 자국 기업의 이익을 우선 확보한다",d:["개발 도상국에 기술을 지원한다","국제 연합의 평화 유지 활동에 군대를 파견한다","주변 국가의 갈등을 중재하고 소통에 기여한다"],x:"빈곤으로 고통받는 국가를 위한 원조 참여도 기여 방안이다.",s:"new"},
+{i:4136,u:4,g:"3. 남북 분단과 세계 평화",q:"우리나라가 주도적으로 활동하는, 세계 주요 20개 국가의 협의체는?",a:"G20 정상 회의",d:["G7 정상 회의","OECD 각료 회의","APEC 정상 회의"],x:"국제 사회가 직면한 문제 해결에 힘쓰고 있다.",s:"known"}
+];
+/* ===== 표기 주의 주관식 - 말로는 알아도 쓰면 틀리기 쉬운 것들 ===== */
+const SPELL = [
+/* --- Ⅰ. 인권 보장과 헌법 --- */
+{i:5001,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"외래어 표기 · ㅁ으로 시작",def:"1215년 영국에서 왕의 권한을 제한한 문서로, '대헌장'을 뜻하는 라틴어 이름",q:"이 문서의 라틴어 이름을 쓰시오.",a:"마그나 카르타",alt:["마그나카르타"],x:"'마그나 카르타'로 적는다. '마그나카르타'처럼 붙여 써도 되지만 '마그나칼타'는 틀린 표기다.",s:"hard"},
+{i:5002,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"외래어 표기 · 5글자",def:"1919년 사회권을 세계 최초로 명시한 독일 헌법의 이름",q:"'○○○○ 헌법'의 빈칸을 정확히 쓰시오.",a:"바이마르",x:"'바이마르'다. '바이바르', '바이말'로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5003,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"외래어 + 한자어 · 운동 이름",def:"19세기 영국 노동자들이 인민헌장을 내세워 선거권 확대와 비밀 투표를 요구한 운동",q:"이 운동의 이름을 쓰시오.",a:"차티스트 운동",alt:["차티스트운동"],x:"'차티스트'다. '챠티스트', '차티스크'는 틀린 표기다. 인민헌장(People's Charter)에서 온 말이다.",s:"hard"},
+{i:5004,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"4글자 · 문서 이름",def:"차티스트 운동에서 노동자들이 선거권 확대를 요구하며 내건 문서",q:"이 문서의 이름을 쓰시오.",a:"인민헌장",alt:["인민 헌장"],x:"'인민헌장'이다. '국민헌장'이 아니다.",s:"hard"},
+{i:5005,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"띄어쓰기 주의 · 8글자",def:"1948년 국제 연합 총회가 채택한, 인권 보장의 국제적 기준이 된 문서",q:"이 문서의 이름을 정확히 쓰시오.",a:"세계 인권 선언",alt:["세계인권선언"],x:"'세계 인권 선언'이다. '세계 인권 헌장', '국제 인권 선언'과 혼동하기 쉽다.",s:"hard"},
+{i:5006,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"1966년 · 6글자",def:"세계 인권 선언에 명시된 권리를 국제법상 조약 형태로 구체화한 1966년의 문서",q:"이 문서의 이름을 쓰시오.",a:"국제 인권 규약",alt:["국제인권규약"],x:"'규약'이다. '협약', '선언'과 헷갈리기 쉽다. 협약은 개별 주제별 조약에 쓴다.",s:"hard"},
+{i:5007,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"외래어 · 장벽이 없다는 뜻",def:"장애인의 문화 접근 권리와 창조 권리를 보장하기 위해 수어 통역·자막·화면 해설 등을 제공하는 것",q:"이것을 가리키는 외래어를 쓰시오.",a:"배리어 프리",alt:["배리어프리","Barrier-free","barrier free","배리어-프리"],x:"'배리어 프리(Barrier-free)'다. '베리어', '바리어'는 틀린 표기다.",s:"hard"},
+{i:5008,u:1,g:"1. 인권의 의미 변화와 확장",t:"sa",h:"3글자 · 권리 이름",def:"다른 나라의 간섭 없이 스스로 통치 형태를 결정하고 발전을 추구할 수 있는, 3세대 인권에 속하는 권리",q:"이 권리의 이름을 쓰시오.",a:"자결권",x:"'자결권'이다. '자기결정권'은 헌법 제10조의 개인의 권리로 다른 개념이니 구별한다.",s:"hard"},
+{i:5009,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",h:"띄어쓰기 주의 · 7글자",def:"법원의 제청에 따라 재판에 적용되는 법률이 헌법에 위반되는지를 판단하는 심판",q:"이 심판의 이름을 정확히 쓰시오.",a:"위헌 법률 심판",alt:["위헌법률심판"],x:"'위헌 법률 심판'이다. '위법'이 아니라 '위헌'이다.",s:"hard"},
+{i:5010,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",h:"6글자 · '소원'이 들어간다",def:"국가 권력의 행사 또는 불행사 때문에 기본권을 침해받은 국민이 헌법재판소에 직접 청구하는 심판",q:"이 심판의 이름을 쓰시오.",a:"헌법 소원 심판",alt:["헌법소원심판","헌법 소원","헌법소원"],x:"'소원(訴願)'이다. '소송', '소청'이 아니다.",s:"hard"},
+{i:5011,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",h:"붙여 쓴다 · 5글자",def:"공익을 수호하려는 목적에서 부당한 법이나 정책에 대항하여 양심적으로 행하는 의도적인 위법 행위",q:"이것을 쓰시오.",a:"시민불복종",alt:["시민 불복종"],x:"'불복종'이다. '불복정', '불복충'으로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5012,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",h:"인도 독립운동가 · 2글자",def:"1930년 영국의 소금법에 맞서 평화 행진을 하고 직접 소금을 만들어 체포를 감수한 인물",q:"이 인물의 이름을 쓰시오.",a:"간디",x:"'간디'다. 《마하트마 간디 평전》에 나오는 소금법 폐지 운동이다.",s:"new"},
+{i:5013,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",h:"《정의론》의 저자 · 2글자",def:"'시민불복종은 법에 대한 충실성의 한계 내에서 부정의에 항거함으로써 정의로부터의 이탈을 방지한다'고 본 사상가",q:"이 사상가의 이름을 쓰시오.",a:"롤스",x:"'롤스'다. Ⅱ단원의 정의의 원칙에서도 같은 인물이 나온다.",s:"hard"},
+{i:5014,u:1,g:"2. 헌법의 역할과 시민 참여",t:"sa",h:"기관 이름 · 6글자",def:"2001년 설립되어 크레파스의 '살색' 명칭을 '살구색'으로 바꾸도록 권고한 기관",q:"이 기관의 이름을 쓰시오.",a:"국가 인권 위원회",alt:["국가인권위원회"],x:"'국가 인권 위원회'다. '국민 권익 위원회'(2008년 설립)와 혼동하지 않는다.",s:"hard"},
+{i:5015,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"법률 이름 · 띄어쓰기 주의",def:"정치·경제·사회·문화 모든 영역에서 양성평등을 실현하기 위해 국가와 지방 자치 단체의 책무를 규정한 법률",q:"이 법률의 이름을 쓰시오.",a:"양성평등 기본법",alt:["양성평등기본법"],x:"'양성평등 기본법'이다. '남녀평등 기본법'이 아니다.",s:"hard"},
+{i:5016,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"법률 이름 · 7글자",def:"다문화 가족 구성원의 삶의 질 향상과 사회 통합에 이바지함을 목적으로 하는 법률",q:"이 법률의 이름을 쓰시오.",a:"다문화 가족 지원법",alt:["다문화가족지원법"],x:"'지원법'이다. '보호법', '육성법'이 아니다.",s:"hard"},
+{i:5017,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"기관 이름 · '위원회'로 끝난다",def:"노동관계에서 발생하는 노사 간의 이익 및 권리 분쟁을 판정하고 조정하는 행정 기관",q:"이 기관의 이름을 쓰시오.",a:"중앙 노동 위원회",alt:["중앙노동위원회"],x:"'중앙 노동 위원회'다. '고용 노동부'는 정부 부처로 다른 기관이다.",s:"hard"},
+{i:5018,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"단체 이름 · 띄어쓰기 주의",def:"세계 언론 자유 지수를 발표하는 비정부 기구",q:"이 단체의 이름을 쓰시오.",a:"국경 없는 기자회",alt:["국경없는기자회","RSF","rsf"],x:"'국경 없는 기자회(RSF)'다. '국경 없는 의사회(MSF)'와 헷갈리기 쉽다.",s:"hard"},
+{i:5019,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"기구 이름 · 영문 약자 UNDP",def:"인간 개발 지수(HDI)와 불평등 조정 인간 개발 지수(IHDI)를 발표하는 국제 연합 산하 기구",q:"이 기구의 이름을 쓰시오. (한글 또는 영문 약자)",a:"국제 연합 개발 계획",alt:["UNDP","undp","국제연합개발계획","유엔 개발 계획"],x:"'국제 연합 개발 계획(UNDP)'이다. '개발 원조 위원회(DAC)'와 다르다.",s:"hard"},
+{i:5020,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"긴 이름 · 앞에 '불평등 조정'이 붙는다",def:"인간 개발 지수에 불평등 요소를 반영하여 조정한 지수",q:"이 지수의 이름을 쓰시오. (한글 또는 영문 약자)",a:"불평등 조정 인간 개발 지수",alt:["IHDI","ihdi","불평등조정인간개발지수"],x:"불평등 정도가 클수록 이 값이 낮아진다.",s:"hard"},
+{i:5021,u:1,g:"3. 인권 문제의 양상과 해결",t:"sa",h:"연구소 이름 · 영문 약자 IFPRI",def:"세계 기아 지수를 발표하는 기관",q:"이 기관의 이름을 쓰시오. (한글 또는 영문 약자)",a:"국제 식량 정책 연구소",alt:["IFPRI","ifpri","국제식량정책연구소"],x:"'국제 식량 정책 연구소(IFPRI)'다. '세계 식량 계획(WFP)'은 노벨 평화상을 받은 국제기구로 다르다.",s:"hard"},
+
+/* --- Ⅱ. 사회정의와 불평등 --- */
+{i:5040,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",h:"고대 그리스 철학자 · 7글자",def:"정의를 일반적 정의와 특수적 정의로 나누고, 특수적 정의를 교정적·분배적·교환적 정의로 구분한 사상가",q:"이 사상가의 이름을 쓰시오.",a:"아리스토텔레스",x:"'아리스토텔레스'다. '아리스토텔레즈', '아리스토텔러스'는 틀린 표기다.",s:"hard"},
+{i:5041,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",h:"책 이름 · 외래어",def:"아리스토텔레스가 정의를 일반적 정의와 특수적 정의로 나누어 설명한 책",q:"이 책의 이름을 쓰시오.",a:"니코마코스 윤리학",alt:["니코마코스윤리학"],x:"'니코마코스'다. '니코마쿠스', '니코마코스의'로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5042,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",h:"이탈리아 사상가 · 4글자",def:"'사형으로는 범죄 예방 효과를 기대하기 어렵고 종신 노역형이 더 효과적'이라며 사형에 반대한 사상가",q:"이 사상가의 이름을 쓰시오.",a:"베카리아",x:"'베카리아'다. '베까리아', '베카리야'는 틀린 표기다.",s:"hard"},
+{i:5043,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",h:"독일 철학자 · 2글자",def:"'동등성의 원리에 따라 살인한 사람은 사형에 처해져야 한다'고 본 사상가",q:"이 사상가의 이름을 쓰시오.",a:"칸트",x:"'칸트'다. 형벌은 오직 범죄를 저질렀기 때문에 가해진다고 보았다.",s:"new"},
+{i:5044,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",h:"단체 이름 · 외래어",def:"사형 집행이 오랫동안 없는 우리나라를 '실질적 사형 폐지국'으로 분류한 국제 인권 단체",q:"이 단체의 이름을 쓰시오.",a:"국제 앰네스티",alt:["국제앰네스티","앰네스티","Amnesty"],x:"'앰네스티'다. '엠네스티', '암네스티'는 틀린 표기다.",s:"hard"},
+{i:5045,u:2,g:"1. 정의의 의미와 실질적 기준",t:"sa",h:"책 이름 · 6글자",def:"능력에 근거한 입시 제도도 실제로는 부유한 가정에 유리하다고 지적한 샌델의 책",q:"이 책의 이름을 쓰시오.",a:"공정하다는 착각",alt:["공정하다는착각"],x:"《공정하다는 착각》이다. 샌델의 다른 책 《정의란 무엇인가》와 구별한다.",s:"hard"},
+{i:5046,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",h:"공동체주의 사상가 · 5글자",def:"《덕의 상실》에서 현대 사회의 분열이 자유주의적 인간관에서 비롯한다고 비판한 사상가",q:"이 사상가의 이름을 쓰시오.",a:"매킨타이어",x:"교과서 표기는 '매킨타이어'다. '맥킨타이어'로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5047,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",h:"책 이름 · 5글자",def:"매킨타이어가 공동체주의적 인간관을 설명한 책",q:"이 책의 이름을 쓰시오.",a:"덕의 상실",alt:["덕의상실"],x:"《덕의 상실》이다. '덕의 상실'을 '득의 상실'로 잘못 쓰지 않도록 주의한다.",s:"new"},
+{i:5048,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",h:"자유주의 사상가 · 2글자 · 소유 권리",def:"취득의 원칙과 양도의 원칙이 지켜졌다면 빈부 격차가 생겨도 문제되지 않는다고 본 사상가",q:"이 사상가의 이름을 쓰시오.",a:"노직",x:"'노직'이다. '노직'과 '롤스'를 바꿔 쓰지 않도록 주의한다.",s:"hard"},
+{i:5049,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",h:"띄어쓰기 주의 · 원칙 이름",def:"롤스의 정의의 원칙 중, 사회에서 가장 불리한 처지에 있는 최소 수혜자에게 최대의 이익을 보장해야 한다는 원칙",q:"이 원칙의 이름을 쓰시오.",a:"차등의 원칙",alt:["차등 원칙","차등의원칙"],x:"'차등의 원칙'이다. '차별의 원칙'이 아니다.",s:"hard"},
+{i:5050,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",h:"롤스의 원칙 · '기회'로 시작",def:"롤스의 정의의 원칙 중, 불평등의 계기가 되는 직책이나 지위는 모든 사람에게 개방되어야 한다는 원칙",q:"이 원칙의 이름을 쓰시오.",a:"기회균등의 원칙",alt:["기회 균등의 원칙","기회균등 원칙"],x:"'기회균등의 원칙'이다. 나머지 하나는 '평등한 자유의 원칙'이다.",s:"hard"},
+{i:5051,u:2,g:"2. 자유주의와 공동체주의 정의관",t:"sa",h:"영어 줄임말 · 한글로 4글자",def:"'내 뒷마당에는 안 된다'의 줄임말로, 혐오 시설이 자기 지역에 들어서는 것을 강력히 반대하는 현상",q:"이 현상의 이름을 쓰시오.",a:"님비 현상",alt:["님비","NIMBY","nimby","님비현상"],x:"'님비(NIMBY)'다. Not In My Back Yard의 줄임말이다.",s:"hard"},
+{i:5052,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"띄어쓰기 주의 · '조정'이 들어간다",def:"오랫동안 사회적으로 차별받아 온 사회적 약자에게 직간접적으로 혜택을 주는 정책",q:"이 정책의 이름을 정확히 쓰시오.",a:"적극적 평등 실현 조치",alt:["적극적평등실현조치"],x:"'실현 조치'다. '실천 조치', '실현 정책'으로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5053,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"긴 이름 · '균등화'로 시작",def:"가구가 직접 벌어들인 소득에 연금 등은 더하고 세금과 사회 보험료 등은 뺀 소득",q:"이 소득의 이름을 정확히 쓰시오.",a:"균등화 처분 가능 소득",alt:["균등화처분가능소득"],x:"'처분 가능 소득'이다. '처분 가처분 소득', '가처분 소득'과 표기를 구별한다.",s:"hard"},
+{i:5054,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"숫자가 들어간다 · '배율'로 끝난다",def:"상위 20%의 평균 소득을 하위 20%의 평균 소득으로 나눈 값",q:"이 지표의 이름을 쓰시오.",a:"소득 5분위 배율",alt:["소득5분위배율","5분위 배율"],x:"'5분위 배율'이다. '5분위 비율', '5분위 지수'가 아니다.",s:"hard"},
+{i:5055,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"제도 이름 · '기부제'로 끝난다",def:"현재 주소지를 제외한 지방 자치 단체에 기부하면 세금 감면과 지역 특산품을 받는 제도",q:"이 제도의 이름을 쓰시오.",a:"고향 사랑 기부제",alt:["고향사랑기부제"],x:"'고향 사랑 기부제'다. '고향 기부제', '고향 사랑 기부금제'가 아니다.",s:"hard"},
+{i:5056,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"띄어쓰기 주의 · '거점'이 들어간다",def:"성장 잠재력이 큰 지역을 집중 육성하고 그 효과가 주변으로 확산되도록 하는 지역 개발 방식",q:"이 개발 방식의 이름을 쓰시오.",a:"성장 거점 개발",alt:["성장거점개발"],x:"'거점(據點)'이다. '성장 기점 개발'이 아니다.",s:"hard"},
+{i:5057,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"미국 생물학자 · 3글자",def:"모두가 함께 써야 할 자원을 마구잡이로 사용해 고갈될 위험에 처하는 현상, 즉 '공유지의 비극'을 제시한 학자",q:"이 학자의 이름을 쓰시오.",a:"하딘",alt:["개릿 하딘","개릿하딘"],x:"'하딘(Hardin, G.)'이다. '하든', '하딘스'가 아니다.",s:"hard"},
+{i:5058,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"실천 윤리학자 · 2글자",def:"《물에 빠진 아이 구하기》에서 지구촌의 고통받는 사람을 돕는 것이 의무라고 본 공리주의 사상가",q:"이 사상가의 이름을 쓰시오.",a:"싱어",x:"'싱어(Singer, P.)'다. '싱거'가 아니다.",s:"hard"},
+{i:5059,u:2,g:"3. 사회 및 공간 불평등",t:"sa",h:"제도 이름 · '부조'로 끝난다",def:"국가와 지방 자치 단체의 책임하에 생활이 어려운 국민의 최저 생활을 보장하고 자립을 지원하는 제도",q:"이 제도의 이름을 쓰시오.",a:"공공 부조",alt:["공공부조"],x:"'부조(扶助)'다. '공공 부양', '공공 보조'가 아니다. 기초 연금이 여기에 속한다.",s:"hard"},
+
+/* --- Ⅳ. 세계화와 평화 --- */
+{i:5080,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",h:"제도 이름 · '표시제'로 끝난다",def:"상품의 품질과 특성이 생산지의 자연환경과 재배 방법에서 비롯되고 그 우수성이 인정될 때 국가가 지역 이름을 상표권으로 인정해 주는 제도",q:"이 제도의 이름을 쓰시오.",a:"지리적 표시제",alt:["지리적표시제"],x:"'지리적 표시제'다. '지역 표시제', '원산지 표시제'가 아니다. 보성 녹차가 제1호다.",s:"hard"},
+{i:5081,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",h:"띄어쓰기 주의 · '분업'으로 끝난다",def:"기업의 규모가 커지면서 본사, 연구소, 생산 공장 등 각 기능이 공간적으로 분리되는 현상",q:"이 현상의 이름을 쓰시오.",a:"공간적 분업",alt:["공간적분업"],x:"'공간적 분업'이다. '국제 분업'은 나라별 생산 특화를 뜻하는 다른 개념이다.",s:"hard"},
+{i:5082,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",h:"'생산자'로 시작 · 5글자",def:"금융, 보험, 부동산, 회계, 법률처럼 상품이나 서비스의 생산과 유통 과정에 필요한 서비스",q:"이것의 이름을 쓰시오.",a:"생산자 서비스",alt:["생산자서비스"],x:"'생산자 서비스'다. '소비자 서비스'와 반대 개념이다.",s:"hard"},
+{i:5083,u:4,g:"1. 세계화의 양상과 문제 해결",t:"sa",h:"국제기구 · 4글자",def:"제주어를 소멸 위기 언어 4단계인 '치명적 위험'으로 분류한 국제 연합 전문 기구",q:"이 기구의 이름을 쓰시오.",a:"유네스코",alt:["UNESCO","unesco"],x:"'유네스코(UNESCO)'다. '유니세프(UNICEF)'는 아동 기구로 다르다.",s:"hard"},
+{i:5084,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"노르웨이 학자 · 2글자",def:"《평화적 수단에 의한 평화》를 쓴 현대 평화학의 창시자로, 소극적 평화와 적극적 평화를 구분한 학자",q:"이 학자의 이름을 쓰시오.",a:"갈퉁",x:"'갈퉁(Galtung, J.)'이다. '갈통', '갈퉁크'가 아니다.",s:"hard"},
+{i:5085,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"《손자병법》의 저자 · 2글자",def:"갈퉁이 평화학의 창시자라고 평가한, '싸우지 않고 적을 굴복시키는 것이 최상'이라고 한 인물",q:"이 인물의 이름을 쓰시오.",a:"손무",x:"'손무(孫武)'다. 책 이름 '손자병법'과 사람 이름 '손무'를 구별한다.",s:"hard"},
+{i:5086,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"그림 제목 · 외래어 4글자",def:"피카소가 에스파냐 내전의 참상을 알리기 위해 1937년에 그린 작품",q:"이 작품의 제목을 쓰시오.",a:"게르니카",x:"'게르니카'다. '게르니까', '게르니가'는 틀린 표기다.",s:"hard"},
+{i:5087,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"지역 이름 · 인도와 파키스탄 사이",def:"주민 대부분이 이슬람교를 믿는데 힌두교도가 많은 인도에 편입되면서 분쟁이 발생한 지역",q:"이 지역의 이름을 쓰시오.",a:"카슈미르",x:"'카슈미르'다. '카쉬미르', '캐시미어'로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5088,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"아프리카 국가 · 5글자",def:"80여 개 민족의 종교·언어 차이와 경제적·정치적 차별로 내전이 발생한 아프리카 국가",q:"이 나라의 이름을 쓰시오.",a:"에티오피아",x:"'에티오피아'다. '이디오피아'는 틀린 표기다.",s:"hard"},
+{i:5089,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"섬 이름 · 영국과 아르헨티나",def:"주변에 석유가 매장되어 있어 영국과 아르헨티나가 소유권을 다투는 제도",q:"이 제도의 이름을 쓰시오.",a:"포클랜드",alt:["포클랜드 제도","포클랜드제도"],x:"'포클랜드'다. '포클랜트', '포크랜드'는 틀린 표기다.",s:"hard"},
+{i:5090,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"서아프리카 국가 · 6글자",def:"두 차례 내전을 겪었고, 축구 선수의 휴전 호소와 국제 연합·프랑스의 군사 작전, 한국 국제 협력단의 지원이 이어진 나라",q:"이 나라의 이름을 쓰시오.",a:"코트디부아르",x:"'코트디부아르'다. '코트디브아르', '코트디부와르'로 잘못 쓰기 쉽다.",s:"hard"},
+{i:5091,u:4,g:"2. 평화와 국제 사회의 노력",t:"sa",h:"단체 이름 · 1999년 노벨 평화상",def:"인종·종교·이념과 관계없이 인도주의적 의료 서비스를 제공해 1999년 노벨 평화상을 받은 비정부 기구",q:"이 단체의 이름을 쓰시오.",a:"국경 없는 의사회",alt:["국경없는의사회","MSF","msf"],x:"'국경 없는 의사회(MSF)'다. '국경 없는 기자회(RSF)'와 혼동하지 않는다.",s:"hard"},
+{i:5092,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"회의 이름 · 도시 이름 + 3국",def:"1945년 12월 한국에 임시 민주 정부를 수립하고 최고 5년간의 신탁 통치를 하기로 결정한 회의",q:"이 회의의 이름을 정확히 쓰시오.",a:"모스크바 3국 외상 회의",alt:["모스크바 삼국 외상 회의","모스크바3국외상회의","모스크바 3상 회의","모스크바3상회의"],x:"'외상(外相)'은 외무 장관을 뜻한다. '모스크바 3상 회의'로도 줄여 쓴다.",s:"hard"},
+{i:5093,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"4글자 · '신탁'이 들어간다",def:"국제 연합의 위임을 받은 국가가 아직 자치 능력이 없는 지역을 일정 기간 통치하는 것",q:"이것의 이름을 쓰시오.",a:"신탁 통치",alt:["신탁통치"],x:"'신탁(信託)'이다. '신택', '신탁 지배'가 아니다.",s:"hard"},
+{i:5094,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"4글자 · 중국의 역사 연구 사업",def:"중국이 2002년부터 5년간 동북 3성의 역사·지리·문화를 연구하며 고구려와 발해를 중국사로 편입하려 한 사업",q:"이 사업의 이름을 쓰시오.",a:"동북공정",alt:["동북 공정"],x:"'공정(工程)'이다. '동북 공작', '동북 정책'이 아니다.",s:"hard"},
+{i:5095,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"동북 3성 · ㅎ으로 시작",def:"동북공정의 대상이 된 동북 3성은 지린성, 랴오닝성 그리고 한 곳이 더 있다.",q:"나머지 한 곳의 이름을 쓰시오.",a:"헤이룽장성",alt:["헤이룽장","흑룡강성"],x:"'헤이룽장성'이다. 내몽고 자치구는 동북 3성에 포함되지 않는다.",s:"hard"},
+{i:5096,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"섬 이름 · 러시아와 일본 사이",def:"러시아와 일본이 영유권을 다투는 열도로, 북방 도서라고도 불리는 지역",q:"이 열도의 이름을 쓰시오.",a:"쿠릴 열도",alt:["쿠릴열도","쿠릴"],x:"'쿠릴'이다. '쿠일', '쿠릴레'가 아니다.",s:"hard"},
+{i:5097,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"섬 이름 · 중국은 댜오위다오라 부른다",def:"중국이 댜오위다오라고 부르며 일본과 영유권을 다투는 열도",q:"이 열도의 일본식 이름을 쓰시오.",a:"센카쿠 열도",alt:["센카쿠열도","센카쿠"],x:"'센카쿠'다. '센가쿠', '샌카쿠'는 틀린 표기다.",s:"hard"},
+{i:5098,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"군도 이름 · 파라셀 제도라고도 한다",def:"남중국해에 있으며 파라셀 제도라고도 불리는 분쟁 지역",q:"이 군도의 이름을 쓰시오.",a:"시사 군도",alt:["시사군도","시사"],x:"'시사 군도(파라셀 제도)'다. 난사 군도는 스프래틀리 군도라고도 한다.",s:"hard"},
+{i:5099,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"문헌 이름 · 6글자",def:"'울릉도와 독도, 두 섬이 서로 거리가 멀지 않아 날씨가 맑으면 바라볼 수 있다'고 1454년에 기록한 문헌",q:"이 문헌의 이름을 쓰시오.",a:"세종실록지리지",alt:["세종실록 지리지","세종 실록 지리지"],x:"'세종실록지리지'다. 《만기요람》(1808)과 구별한다.",s:"hard"},
+{i:5100,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"문헌 이름 · 4글자 · 1808년",def:"'독도가 울릉도와 함께 우산국의 영토였다'는 내용이 기록된 1808년 문헌",q:"이 문헌의 이름을 쓰시오.",a:"만기요람",alt:["만기 요람"],x:"'만기요람(萬機要覽)'이다. '만기요강'이 아니다.",s:"hard"},
+{i:5101,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"기관 이름 · 영문 약자 KOICA",def:"우리나라 외교부 산하에서 정부 차원의 대외 무상 협력 사업을 전담하는 기관",q:"이 기관의 이름을 쓰시오. (한글 또는 영문 약자)",a:"한국 국제 협력단",alt:["KOICA","koica","한국국제협력단","코이카"],x:"'한국 국제 협력단(KOICA)'이다. 요르단 난민 아동 학교를 세웠다.",s:"hard"},
+{i:5102,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"단체 이름 · 외래어 2글자",def:"일본 교과서의 역사 왜곡을 바로잡고 '일본해'를 '동해'로 바꾸는 활동을 하는 사이버 외교 사절단",q:"이 단체의 이름을 쓰시오.",a:"반크",alt:["VANK","vank"],x:"'반크(VANK)'다. '방크', '뱅크'가 아니다.",s:"hard"},
+{i:5103,u:4,g:"3. 남북 분단과 세계 평화",t:"sa",h:"기구 이름 · 영문 약자 DAC",def:"경제 협력 개발 기구(OECD) 산하에서 선진국의 개발 도상국 원조 규범을 제정하고 정책을 조정하는 위원회",q:"이 위원회의 이름을 쓰시오. (한글 또는 영문 약자)",a:"개발 원조 위원회",alt:["DAC","dac","개발원조위원회"],x:"'개발 원조 위원회(DAC)'다. 공적 개발 원조(ODA)는 원조 그 자체를 가리키는 다른 말이다.",s:"hard"}
+];
+const DATA = U1.concat(U2, U4, SPELL);
+
+/* ============ 저장 ============ */
+const KEY = 'tonghap2-v2';
+const DAY = 86400000;
+const STEPS = [1, 2, 4, 9, 20, 45];
+const BATCH = 12;
+const LENGTHS = [['endless', '끝까지'], ['30', '30문제'], ['12', '12문제']];
+const UNITS = [[1, 'Ⅰ', '인권 보장과 헌법'], [2, 'Ⅱ', '사회정의와 불평등'], [4, 'Ⅳ', '세계화와 평화']];
+const UNAME = Object.fromEntries(UNITS.map(u => [u[0], u[1] + '. ' + u[2]]));
+const UROMAN = Object.fromEntries(UNITS.map(u => [u[0], u[1]]));
+
+const byId = Object.fromEntries(DATA.map(d => [d.i, d]));
+let CAN_SAVE = true;
+try { localStorage.setItem(KEY + '-probe', '1'); localStorage.removeItem(KEY + '-probe'); }
+catch (e) { CAN_SAVE = false; }
+
+let sessionLen = 'endless';
+try { sessionLen = localStorage.getItem(KEY + '-len') || 'endless'; } catch (e) { }
+
+let store = load();
+function load() {
+  let s = {};
+  try { s = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { s = {}; }
+  if (!s.rec) s = { rec: {}, done: 0 };
+  const now = Date.now();
+  for (const d of DATA) {
+    if (!s.rec[d.i]) s.rec[d.i] = {
+      n: 0, w: 0,
+      d: d.s === 'known' ? now + 2 * DAY : 0,
+      p: d.s === 'hard' ? 0 : (d.s === 'new' ? 1 : 2)
+    };
+  }
+  return s;
+}
+function save() {
+  if (!CAN_SAVE) return;
+  try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { CAN_SAVE = false; }
+}
+function statusOf(id) {
+  const r = store.rec[id], base = byId[id].s;
+  if (r.n >= 3) return 'know';
+  if (r.n >= 1) return 'learn';
+  if (base === 'hard' || r.w >= 2) return 'hard';
+  if (base === 'known') return 'know';
+  return 'new';
+}
+// 오답 노트: 틀린 적이 있고 아직 다시 맞히지 못한 문제
+function isWrongNote(id) { const r = store.rec[id]; return r.w > 0 && r.n === 0; }
+function wrongPool() { return DATA.filter(d => filterUnits.has(d.u) && isWrongNote(d.i)); }
+function allWrong() { return DATA.filter(d => isWrongNote(d.i)); }
+function counts(pool) {
+  const c = { know: 0, learn: 0, hard: 0, new: 0 };
+  for (const d of pool) c[statusOf(d.i)]++;
+  return c;
+}
+
+/* ============ 유틸 ============ */
+const $ = h => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstElementChild; };
+const app = document.getElementById('app');
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
+function ubadge(u) { return '<span class="ubadge u' + u + '">' + UROMAN[u] + '</span>'; }
+// 주관식 채점: 공백·괄호·가운뎃점·마침표 무시
+function norm(s) { return String(s).toLowerCase().replace(/[\s()（）·.,'"«»《》〈〉-]/g, ''); }
+function saOk(input, d) {
+  const got = norm(input);
+  if (!got) return false;
+  const cands = [d.a].concat(d.alt || []);
+  return cands.some(c => norm(c) === got);
+}
+function lenHint(a) {
+  const core = String(a).replace(/\s/g, '');
+  return core.length + '글자';
+}
+
+/* ============ 홈 ============ */
+let filterUnits = new Set(UNITS.map(u => u[0]));
+try {
+  const f = JSON.parse(localStorage.getItem(KEY + '-units') || 'null');
+  if (Array.isArray(f) && f.length) filterUnits = new Set(f);
+} catch (e) { }
+function saveFilter() { try { localStorage.setItem(KEY + '-units', JSON.stringify([...filterUnits])); } catch (e) { } }
+
+function screenHome() {
+  const pool = DATA.filter(d => filterUnits.has(d.u));
+  const wrongN = wrongPool().length;
+  const c = counts(pool);
+  const tot = pool.length || 1;
+  const pct = k => (c[k] / tot * 100).toFixed(2) + '%';
+  const due = pool.filter(d => store.rec[d.i].d <= Date.now()).length;
+  const nSa = DATA.filter(d => d.t === 'sa').length;
+  const nFig = DATA.filter(d => d.f).length;
+
+  app.innerHTML = '';
+  app.append($(
+    '<div class="home">' +
+    '<div class="brand"><h1>통합사회2 개념 맞히기</h1>' +
+    '<div class="sub">천재교육 박윤경 · 시험 범위 Ⅰ · Ⅱ · Ⅳ단원<br>' +
+    '문제 ' + DATA.length + '개 (주관식 ' + nSa + ' · 자료 문제 ' + nFig + ')</div></div>' +
+
+    '<div class="progresscard"><div class="bar">' +
+    '<span style="width:' + pct('know') + ';background:var(--ok)"></span>' +
+    '<span style="width:' + pct('learn') + ';background:var(--acc)"></span>' +
+    '<span style="width:' + pct('hard') + ';background:var(--bad)"></span>' +
+    '<span style="width:' + pct('new') + ';background:var(--rule)"></span>' +
+    '</div><div class="legend">' +
+    '<div><i style="background:var(--ok)"></i>외웠다 <b>' + c.know + '</b></div>' +
+    '<div><i style="background:var(--acc)"></i>외우는 중 <b>' + c.learn + '</b></div>' +
+    '<div><i style="background:var(--bad)"></i>못 외웠다 <b>' + c.hard + '</b></div>' +
+    '<div><i style="background:var(--rule)"></i>아직 안 봄 <b>' + c.new + '</b></div>' +
+    '</div></div>' +
+
+    '<button class="btn" id="start">' + (sessionLen === 'endless' ? '문제 풀기' : sessionLen + '문제 풀기') + '</button>' +
+    '<div class="note" style="margin-top:-14px">지금 바로 낼 수 있는 게 <b>' + due + '문제</b> 남았어요</div>' +
+
+    '<div class="sectionlist"><div class="lab">한 번에</div><div class="filterrow" id="lens"></div></div>' +
+    '<div class="sectionlist"><div class="lab">시험 범위</div><div id="units" style="display:flex;flex-direction:column;gap:8px"></div></div>' +
+
+    '<div class="sectionlist">' +
+    (wrongN ? '<button class="btn danger" id="startWrong">오답 ' + wrongN + '문제 다시 풀기</button>' : '') +
+    '<button class="btn ghost" id="toWrong">오답 노트' + (wrongN ? ' (' + wrongN + ')' : '') + '</button>' +
+    '<button class="btn ghost" id="toAll">전체 문제 찾아보기</button>' +
+    '<button class="btn ghost" id="snd">소리 ' + (SOUND ? '켜짐 🔔' : '꺼짐 🔕') + '</button>' +
+    '</div>' +
+
+    '<div class="note">맞히면 <b>딩동</b>, 틀리면 <b>땡</b> 소리가 납니다. ' +
+    '틀린 문제는 오답 노트에 쌓였다가 더 자주 돌아오고, 한 번 맞히면 목록에서 빠집니다.</div>' +
+    (CAN_SAVE ? '' : '<div class="warnnote"><b>진도가 저장되지 않는 상태</b>이 브라우저에서는 저장이 막혀 있어요. 문제는 풀리지만 창을 닫으면 처음으로 돌아갑니다.</div>') +
+    '<div class="footer">홈 화면에 추가하면 앱처럼 열립니다<br>Safari 공유 → 홈 화면에 추가</div>' +
+    '</div>'));
+
+  const lens = document.getElementById('lens');
+  LENGTHS.forEach(([v, label]) => {
+    const b = $('<button class="chip" aria-pressed="' + (sessionLen === v) + '">' + label + '</button>');
+    b.onclick = () => { sessionLen = v; try { localStorage.setItem(KEY + '-len', v); } catch (e) { } screenHome(); };
+    lens.append(b);
+  });
+  const us = document.getElementById('units');
+  UNITS.forEach(([u, roman, name]) => {
+    const n = DATA.filter(d => d.u === u).length;
+    const b = $('<button class="chip" aria-pressed="' + filterUnits.has(u) + '">' + ubadge(u) +
+      '<span>' + esc(name) + '</span><span class="n">' + n + '</span></button>');
+    b.onclick = () => {
+      if (filterUnits.has(u)) { if (filterUnits.size > 1) filterUnits.delete(u); }
+      else filterUnits.add(u);
+      saveFilter(); screenHome();
+    };
+    us.append(b);
+  });
+  document.getElementById('start').onclick = () => startSession('normal');
+  const sw = document.getElementById('startWrong');
+  if (sw) sw.onclick = () => startSession('wrong');
+  document.getElementById('toWrong').onclick = screenWrongNote;
+  document.getElementById('toAll').onclick = screenAll;
+  document.getElementById('snd').onclick = () => {
+    SOUND = !SOUND;
+    try { localStorage.setItem('tonghap2-sound', SOUND ? 'on' : 'off'); } catch (e) { }
+    if (SOUND) dingdong();
+    screenHome();
+  };
+}
+
+/* ============ 세션 ============ */
+let S = null;
+function startSession(mode) {
+  const cap = sessionLen === 'endless' ? 9999 : parseInt(sessionLen, 10);
+  S = { mode, cap, endless: sessionLen === 'endless', queue: [], idx: 0, total: 0, right: 0,
+        streak: 0, bestStreak: 0, seen: new Set(), missed: [], cur: null };
+  S.queue = pickBatch(Math.min(BATCH, cap));
+  if (!S.queue.length) return screenHome();
+  nextItem();
+}
+function retrySession(list) {
+  S = { mode: 'wrong', cap: list.length, endless: false, queue: shuffle(list), idx: 0, total: 0, right: 0,
+        streak: 0, bestStreak: 0, seen: new Set(list.map(d => d.i)), missed: [], cur: null };
+  nextItem();
+}
+function pickBatch(n) {
+  const now = Date.now();
+  let base = S.mode === 'wrong' ? wrongPool() : DATA.filter(d => filterUnits.has(d.u));
+  base = base.filter(d => !S.seen.has(d.i));
+  if (!base.length) return [];
+  const due = base.filter(d => store.rec[d.i].d <= now);
+  const src = due.length ? due : base;
+  const out = shuffle(src).sort((a, b) => store.rec[a.i].p - store.rec[b.i].p).slice(0, n);
+  out.forEach(d => S.seen.add(d.i));
+  return out;
+}
+function nextItem() {
+  if (S.idx >= S.queue.length) {
+    if (S.total < S.cap) {
+      const more = pickBatch(Math.min(BATCH, S.cap - S.total));
+      if (!more.length) return screenResult();
+      S.queue = more; S.idx = 0;
+    } else return screenResult();
+  }
+  S.cur = { d: S.queue[S.idx], wrongHere: false, locked: false, given: '' };
+  stageQuiz();
+}
+function topbar() {
+  const pct = S.endless ? 0 : Math.min(100, S.total / S.cap * 100);
+  return '<div class="topbar"><div class="row">' +
+    '<button class="iconbtn" id="quit" aria-label="나가기">✕</button><div class="steps">' +
+    (S.endless
+      ? '<span class="stepdot done" style="flex:' + (Math.min(S.total, 40) || 0.5) + '"></span><span class="stepdot" style="flex:' + Math.max(40 - S.total, 4) + '"></span>'
+      : '<span class="stepdot on" style="flex:' + (pct || 0.5) + '"></span><span class="stepdot" style="flex:' + (100 - pct || 0.5) + '"></span>') +
+    '</div>' + (S.streak >= 3 ? '<span class="combo mono">' + S.streak + '연속</span>' : '') +
+    '<span class="counter mono">' + (S.endless ? (S.total + 1) + '번째' : (S.total + 1) + '/' + S.cap) + '</span>' +
+    '</div></div>';
+}
+
+function stageQuiz() {
+  const d = S.cur.d;
+  const isOX = d.t === 'ox', isSA = d.t === 'sa';
+  const label = S.mode === 'wrong' ? '<em style="color:var(--bad)">오답 다시 풀기</em>'
+    : isOX ? '<em>맞으면 O, 틀리면 X</em>'
+      : isSA ? '<em>빈칸에 직접 쓰기</em>'
+        : d.f ? '<em>자료 보고 고르기</em>' : '<em>알맞은 것 고르기</em>';
+
+  app.innerHTML = topbar();
+  app.append($('<div class="play">' +
+    '<div class="stagelabel">' + label + '</div>' +
+    '<div class="prompt">' +
+    '<div class="qtag">' + ubadge(d.u) + '<span>' + esc(d.g) + '</span></div>' +
+    (d.f && FIGS[d.f] ? FIGS[d.f]() : '') +
+    (d.def ? '<div class="qdef">' + esc(d.def) + '</div>' : '') +
+    '<div class="qtext">' + esc(d.q) + '</div>' +
+    '</div>' +
+    '<div id="ans"></div>' +
+    '<button class="skip" id="dunno">모르겠어요 · 답 보기</button>' +
+    '</div>'));
+  document.getElementById('quit').onclick = quit;
+  const ans = document.getElementById('ans');
+
+  if (isSA) {
+    ans.append($('<div class="sabox">' +
+      '<div class="sarow"><input id="sain" type="text" autocomplete="off" autocorrect="off" ' +
+      'autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="답을 쓰세요"/>' +
+      '<button id="sabtn">확인</button></div>' +
+      '<div class="sahint">힌트 · ' + lenHint(d.a) + (d.h ? ' · ' + esc(d.h) : '') + '</div></div>'));
+    const inp = document.getElementById('sain');
+    const submit = () => {
+      if (S.cur.locked) return;
+      const v = inp.value;
+      if (!norm(v)) { inp.focus(); return; }
+      S.cur.locked = true; S.cur.given = v;
+      S.cur.wrongHere = !saOk(v, d);
+      inp.blur();
+      finishItem();
+    };
+    document.getElementById('sabtn').onclick = submit;
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+    setTimeout(() => inp.focus(), 60);
+  } else {
+    const opts = isOX ? ['O', 'X'] : shuffle([d.a].concat(d.d));
+    const box = $('<div class="choices ' + (isOX ? 'ox' : '') + '"></div>');
+    ans.append(box);
+    opts.forEach((o, i) => {
+      const b = $('<button class="choice" data-v="' + esc(o) + '">' +
+        (isOX ? '' : '<span class="kx">' + (i + 1) + '</span>') + '<span>' + esc(o) + '</span></button>');
+      b.onclick = () => {
+        if (S.cur.locked) return;
+        S.cur.locked = true;
+        [...box.children].forEach(x => x.disabled = true);
+        const ok = o === d.a;
+        if (ok) dingdong(); else { ttaeng(); S.cur.wrongHere = true; b.classList.add('wrong'); }
+        [...box.children].forEach(x => { if (x.dataset.v === d.a) x.classList.add('right'); });
+        setTimeout(finishItem, ok ? 480 : 1000);
+      };
+      box.append(b);
+    });
+  }
+
+  document.getElementById('dunno').onclick = () => {
+    if (S.cur.locked) return;
+    S.cur.locked = true; S.cur.wrongHere = true; S.cur.given = '';
+    ttaeng();
+    const box = ans.querySelector('.choices');
+    if (box) {
+      [...box.children].forEach(x => { x.disabled = true; if (x.dataset.v === d.a) x.classList.add('right'); });
+      setTimeout(finishItem, 800);
+    } else finishItem();
+  };
+}
+
+function finishItem() {
+  const { d, wrongHere } = S.cur;
+  const r = store.rec[d.i];
+  S.total++;
+  if (wrongHere) {
+    if (d.t === 'sa') ttaeng();
+    r.n = 0; r.w++; r.d = Date.now(); r.p = 0;
+    S.streak = 0; S.missed.push(d);
+  } else {
+    if (d.t === 'sa') dingdong();
+    S.streak++; S.bestStreak = Math.max(S.bestStreak, S.streak);
+    r.n++; r.d = Date.now() + STEPS[Math.min(r.n, STEPS.length - 1)] * DAY;
+    if (r.p === 0 && r.n >= 2) r.p = 1;
+    S.right++;
+  }
+  store.done++; save();
+  screenReveal(d, !wrongHere);
+}
+
+function screenReveal(d, ok) {
+  const given = S.cur.given;
+  app.innerHTML = topbar();
+  app.append($('<div class="play"><div class="stagelabel">' +
+    (ok ? '<em>정답</em>' : '<em style="color:var(--bad)">복습</em> 이 문제는 다시 나옵니다') + '</div>' +
+    '<div class="reveal"><div class="revealcard"><div class="head">' +
+    '<div class="verdict ' + (ok ? 'ok' : 'no') + '">' + (ok ? '✓ 딩동! 맞았어요' : '✗ 땡! 오답 노트에 담았어요') + '</div>' +
+    (d.def ? '<div class="q">' + esc(d.def) + '</div>' : '') +
+    '<div class="q">' + esc(d.q) + '</div>' +
+    (d.t === 'sa' && given && !ok ? '<div class="sagiven wrong">' + esc(given) + '</div>' : '') +
+    '<div class="a ' + (ok ? '' : 'miss') + '">' + esc(d.a) + '</div>' +
+    ((d.alt && d.alt.length) ? '<div class="q">다른 표기도 정답: ' + esc(d.alt.join(' · ')) + '</div>' : '') +
+    '</div><div class="body">' +
+    '<div class="kv"><span class="k">왜 그런가</span><span class="v">' + esc(d.x) + '</span></div>' +
+    '<div class="kv"><span class="k">단원</span><span class="v">' + UNAME[d.u] + ' · ' + esc(d.g) + '</span></div>' +
+    '</div></div><button class="btn" id="next" style="margin-top:auto">다음</button></div></div>'));
+  document.getElementById('quit').onclick = quit;
+  document.getElementById('next').onclick = () => { S.idx++; nextItem(); };
+}
+
+function quit() { if (S && S.total > 0) screenResult(); else screenHome(); }
+
+function screenResult() {
+  const rate = S.total ? Math.round(S.right / S.total * 100) : 0;
+  app.innerHTML = '';
+  app.append($('<div class="result">' +
+    '<div class="score"><div class="big mono">' + rate + '%</div>' +
+    '<div class="cap">' + S.total + '문제 중 ' + S.right + '문제 정답</div></div>' +
+    '<div class="stats">' +
+    '<div class="stat"><b>' + S.right + '</b><span>맞은 문제</span></div>' +
+    '<div class="stat"><b>' + S.missed.length + '</b><span>틀린 문제</span></div>' +
+    '<div class="stat"><b>' + S.bestStreak + '</b><span>최고 연속</span></div></div>' +
+    (S.missed.length
+      ? '<div class="sectionlist"><div class="lab">이번에 틀린 문제</div><div id="missed" style="display:flex;flex-direction:column;gap:8px"></div></div>'
+      : '<div class="note" style="text-align:center">틀린 문제가 없어요. 오답 노트가 깨끗합니다.</div>') +
+    '<div class="sectionlist" style="margin-top:auto">' +
+    (S.missed.length ? '<button class="btn danger" id="again">방금 틀린 ' + S.missed.length + '문제 바로 다시 풀기</button>' : '') +
+    '<button class="btn ghost" id="home">처음으로</button></div></div>'));
+  if (S.missed.length) {
+    const box = document.getElementById('missed');
+    S.missed.forEach(d => box.append(itemCard(d, true)));
+    const list = S.missed.slice();
+    document.getElementById('again').onclick = () => retrySession(list);
+  }
+  document.getElementById('home').onclick = screenHome;
+}
+
+/* ============ 오답 노트 / 전체 목록 ============ */
+function itemCard(d, miss) {
+  return $('<div class="item ' + (miss ? 'miss' : '') + '">' +
+    '<div class="meta">' + ubadge(d.u) + '<span>' + esc(d.g) + '</span></div>' +
+    (d.def ? '<div class="qq">' + esc(d.def) + '</div>' : '') +
+    '<div class="qq">' + esc(d.q) + '</div>' +
+    '<div class="aa">' + esc(d.a) + '</div>' +
+    '<div class="xx">' + esc(d.x) + '</div></div>');
+}
+// 오답 노트에서 따로 고르는 단원 (홈의 시험 범위와 별개로 움직인다)
+let noteUnits = new Set(UNITS.map(u => u[0]));
+
+function screenWrongNote() {
+  const all = allWrong();
+  const list = all.filter(d => noteUnits.has(d.u));
+  app.innerHTML = '';
+  app.append($('<div class="listwrap"><div class="listhead">' +
+    '<button class="iconbtn" id="back" aria-label="뒤로">←</button><h2>오답 노트</h2></div>' +
+    '<div class="note">틀린 문제만 모았습니다. 다시 맞히면 목록에서 빠지고, 또 틀리면 다시 들어옵니다.</div>' +
+    '<div class="sectionlist"><div class="lab">단원 고르기</div>' +
+    '<div id="nunits" style="display:flex;flex-direction:column;gap:8px"></div></div>' +
+    '<div id="body" style="display:flex;flex-direction:column;gap:10px"></div></div>'));
+  document.getElementById('back').onclick = screenHome;
+
+  // 단원 칩: 단원별 오답 개수를 함께 보여 준다
+  const nu = document.getElementById('nunits');
+  UNITS.forEach(([u, roman, name]) => {
+    const n = all.filter(d => d.u === u).length;
+    const b = $('<button class="chip" aria-pressed="' + noteUnits.has(u) + '">' + ubadge(u) +
+      '<span>' + esc(name) + '</span><span class="n">오답 ' + n + '</span></button>');
+    b.onclick = () => {
+      if (noteUnits.has(u)) { if (noteUnits.size > 1) noteUnits.delete(u); }
+      else noteUnits.add(u);
+      screenWrongNote();
+    };
+    nu.append(b);
+  });
+
+  const body = document.getElementById('body');
+  if (!all.length) {
+    body.append($('<div class="empty">아직 틀린 문제가 없어요.<br>문제를 풀다가 틀리면 여기에 쌓입니다.</div>'));
+    return;
+  }
+  if (!list.length) {
+    body.append($('<div class="empty">고른 단원에는 틀린 문제가 없어요.<br>위에서 다른 단원을 골라 보세요.</div>'));
+    return;
+  }
+  const btn = $('<button class="btn danger">고른 단원 오답 ' + list.length + '문제 다시 풀기</button>');
+  btn.onclick = () => retrySession(list);
+  body.append(btn);
+
+  UNITS.forEach(([u]) => {
+    const sub = list.filter(d => d.u === u);
+    if (!sub.length) return;
+    const cap = $('<div class="groupcap">' + UNAME[u] + ' · ' + sub.length + '</div>');
+    body.append(cap);
+    const only = $('<button class="btn ghost" style="font-size:14px;padding:11px">' +
+      UROMAN[u] + '단원 오답 ' + sub.length + '문제만 풀기</button>');
+    only.onclick = () => retrySession(sub);
+    body.append(only);
+    sub.forEach(d => body.append(itemCard(d, true)));
+  });
+}
+function screenAll() {
+  app.innerHTML = '';
+  app.append($('<div class="listwrap"><div class="listhead">' +
+    '<button class="iconbtn" id="back" aria-label="뒤로">←</button><h2>전체 문제</h2></div>' +
+    '<div class="note">시험 전에 훑어보기용입니다. 단원 순서대로 정답과 해설이 함께 있습니다.</div>' +
+    '<div id="body" style="display:flex;flex-direction:column;gap:10px"></div></div>'));
+  document.getElementById('back').onclick = screenHome;
+  const body = document.getElementById('body');
+  UNITS.forEach(([u]) => {
+    const sub = DATA.filter(d => d.u === u);
+    body.append($('<div class="groupcap">' + UNAME[u] + ' · ' + sub.length + '</div>'));
+    sub.forEach(d => body.append(itemCard(d, isWrongNote(d.i))));
+  });
+}
+
+screenHome();
+</script>
+
+</body>
+</html>
