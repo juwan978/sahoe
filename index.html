@@ -293,17 +293,35 @@ function tone(freq, start, dur, vol, type) {
   o.connect(g); g.connect(c.destination);
   o.start(t0); o.stop(t0 + dur + 0.05);
 }
+// iOS 는 사용자가 화면을 처음 건드릴 때 오디오를 열어 두지 않으면 소리가 나지 않는다.
+let AUDIO_READY = false;
+function unlockAudio() {
+  if (AUDIO_READY) return;
+  const c = ac(); if (!c) return;
+  try {
+    if (c.state === 'suspended') c.resume();
+    const b = c.createBuffer(1, 1, 22050);
+    const src = c.createBufferSource();
+    src.buffer = b; src.connect(c.destination); src.start(0);
+    AUDIO_READY = true;
+  } catch (e) { }
+}
+document.addEventListener('touchstart', unlockAudio, { passive: true });
+document.addEventListener('touchend', unlockAudio, { passive: true });
+document.addEventListener('pointerdown', unlockAudio, { passive: true });
+document.addEventListener('click', unlockAudio, { passive: true });
+
 let SOUND = true;
 try { SOUND = localStorage.getItem('tonghap2-sound') !== 'off'; } catch (e) { }
 function dingdong() {   // 딩-동 (높은음 → 낮은음)
   if (!SOUND) return;
-  tone(1174.7, 0, 0.30, 0.22);    // D6
-  tone(880.0, 0.17, 0.42, 0.20);  // A5
+  tone(1174.7, 0, 0.32, 0.34);    // D6
+  tone(880.0, 0.17, 0.44, 0.32);  // A5
 }
 function ttaeng() {     // 땡 (낮고 둔탁한 두 음)
   if (!SOUND) return;
-  tone(196.0, 0, 0.42, 0.20, 'triangle');   // G3
-  tone(155.6, 0.05, 0.50, 0.16, 'triangle');// D#3
+  tone(196.0, 0, 0.44, 0.32, 'triangle');   // G3
+  tone(155.6, 0.05, 0.52, 0.26, 'triangle');// D#3
 }
 
 /* ============ 자료 그림 ============ */
@@ -1426,7 +1444,7 @@ function statusOf(id) {
 }
 // 오답 노트: 틀린 적이 있고 아직 다시 맞히지 못한 문제
 function isWrongNote(id) { const r = store.rec[id]; return r.w > 0 && r.n === 0; }
-function wrongPool() { return DATA.filter(d => filterUnits.has(d.u) && isWrongNote(d.i)); }
+function wrongPool() { return practicePool().filter(d => isWrongNote(d.i)); }
 function allWrong() { return DATA.filter(d => isWrongNote(d.i)); }
 function counts(pool) {
   const c = { know: 0, learn: 0, hard: 0, new: 0 };
@@ -1473,10 +1491,32 @@ try {
   const f = JSON.parse(localStorage.getItem(KEY + '-units') || 'null');
   if (Array.isArray(f) && f.length) filterUnits = new Set(f);
 } catch (e) { }
-function saveFilter() { try { localStorage.setItem(KEY + '-units', JSON.stringify([...filterUnits])); } catch (e) { } }
+// 주제(소단원) 선택과 문제 종류
+const ALL_GROUPS = [...new Set(DATA.map(d => d.g))];
+let filterGroups = new Set(ALL_GROUPS);
+let onlyConcept = false;   // true 면 모의고사용 실전 문항을 빼고 개념 문제만
+try {
+  const g = JSON.parse(localStorage.getItem(KEY + '-groups') || 'null');
+  if (Array.isArray(g) && g.length) filterGroups = new Set(g.filter(x => ALL_GROUPS.includes(x)));
+  onlyConcept = localStorage.getItem(KEY + '-concept') === '1';
+} catch (e) { }
+function saveFilter() {
+  try {
+    localStorage.setItem(KEY + '-units', JSON.stringify([...filterUnits]));
+    localStorage.setItem(KEY + '-groups', JSON.stringify([...filterGroups]));
+    localStorage.setItem(KEY + '-concept', onlyConcept ? '1' : '0');
+  } catch (e) { }
+}
+// 연습 모드에서 실제로 출제되는 문제 묶음
+function practicePool() {
+  return DATA.filter(d => filterUnits.has(d.u) && filterGroups.has(d.g) && (!onlyConcept || !d.ex));
+}
+function groupsOfSelectedUnits() {
+  return ALL_GROUPS.filter(g => DATA.some(d => d.g === g && filterUnits.has(d.u)));
+}
 
 function screenHome() {
-  const pool = DATA.filter(d => filterUnits.has(d.u));
+  const pool = practicePool();
   const wrongN = wrongPool().length;
   const c = counts(pool);
   const tot = pool.length || 1;
@@ -1511,6 +1551,10 @@ function screenHome() {
 
     '<div class="sectionlist"><div class="lab">한 번에</div><div class="filterrow" id="lens"></div></div>' +
     '<div class="sectionlist"><div class="lab">시험 범위</div><div id="units" style="display:flex;flex-direction:column;gap:8px"></div></div>' +
+    '<div class="sectionlist"><div class="lab">주제 고르기</div>' +
+    '<div id="groups" style="display:flex;flex-direction:column;gap:8px"></div>' +
+    '<div class="filterrow"><button class="chip" id="gAll" style="justify-content:center">주제 전부 켜기</button></div></div>' +
+    '<div class="sectionlist"><div class="lab">문제 종류</div><div class="filterrow" id="kinds"></div></div>' +
 
     '<div class="sectionlist">' +
     (wrongN ? '<button class="btn danger" id="startWrong">오답 ' + wrongN + '문제 다시 풀기</button>' : '') +
@@ -1537,12 +1581,47 @@ function screenHome() {
     const b = $('<button class="chip" aria-pressed="' + filterUnits.has(u) + '">' + ubadge(u) +
       '<span>' + esc(name) + '</span><span class="n">' + n + '</span></button>');
     b.onclick = () => {
-      if (filterUnits.has(u)) { if (filterUnits.size > 1) filterUnits.delete(u); }
-      else filterUnits.add(u);
+      if (filterUnits.has(u)) {
+        if (filterUnits.size > 1) {
+          filterUnits.delete(u);
+          DATA.filter(d => d.u === u).forEach(d => filterGroups.delete(d.g));
+        }
+      } else {
+        filterUnits.add(u);
+        DATA.filter(d => d.u === u).forEach(d => filterGroups.add(d.g));
+      }
       saveFilter(); screenHome();
     };
     us.append(b);
   });
+  const gs = document.getElementById('groups');
+  groupsOfSelectedUnits().forEach(g => {
+    const u = DATA.find(d => d.g === g).u;
+    const n = DATA.filter(d => d.g === g && (!onlyConcept || !d.ex)).length;
+    if (!n) return;
+    const b = $('<button class="chip" aria-pressed="' + filterGroups.has(g) + '">' + ubadge(u) +
+      '<span>' + esc(g) + '</span><span class="n">' + n + '</span></button>');
+    b.onclick = () => {
+      if (filterGroups.has(g)) {
+        // 마지막 하나까지 끄면 낼 문제가 없어진다
+        if (groupsOfSelectedUnits().filter(x => filterGroups.has(x)).length > 1) filterGroups.delete(g);
+      } else filterGroups.add(g);
+      saveFilter(); screenHome();
+    };
+    gs.append(b);
+  });
+  document.getElementById('gAll').onclick = () => {
+    groupsOfSelectedUnits().forEach(g => filterGroups.add(g));
+    saveFilter(); screenHome();
+  };
+
+  const kinds = document.getElementById('kinds');
+  [[false, '전부'], [true, '개념 문제만']].forEach(([v, label]) => {
+    const b = $('<button class="chip" aria-pressed="' + (onlyConcept === v) + '">' + label + '</button>');
+    b.onclick = () => { onlyConcept = v; saveFilter(); screenHome(); };
+    kinds.append(b);
+  });
+
   document.getElementById('exam').onclick = () => startExam();
   document.getElementById('start').onclick = () => startSession('normal');
   const sw = document.getElementById('startWrong');
@@ -1574,7 +1653,7 @@ function retrySession(list) {
 }
 function pickBatch(n) {
   const now = Date.now();
-  let base = S.mode === 'wrong' ? wrongPool() : DATA.filter(d => filterUnits.has(d.u));
+  let base = S.mode === 'wrong' ? wrongPool() : practicePool();
   base = base.filter(d => !S.seen.has(d.i));
   if (!base.length) return [];
   const due = base.filter(d => store.rec[d.i].d <= now);
