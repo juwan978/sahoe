@@ -1582,14 +1582,15 @@ function screenHome() {
       '<span>' + esc(name) + '</span><span class="n">' + n + '</span></button>');
     b.onclick = () => {
       if (filterUnits.has(u)) {
-        if (filterUnits.size > 1) {
-          filterUnits.delete(u);
-          DATA.filter(d => d.u === u).forEach(d => filterGroups.delete(d.g));
-        }
+        // 여러 단원에 걸친 주제가 함께 꺼지지 않도록, 단원만 끄고 주제는 건드리지 않는다
+        if (filterUnits.size > 1) filterUnits.delete(u);
       } else {
         filterUnits.add(u);
         DATA.filter(d => d.u === u).forEach(d => filterGroups.add(d.g));
       }
+      // 켜진 주제가 하나도 남지 않으면 낼 문제가 없으므로 전부 켠다
+      if (!groupsOfSelectedUnits().some(g => filterGroups.has(g)))
+        groupsOfSelectedUnits().forEach(g => filterGroups.add(g));
       saveFilter(); screenHome();
     };
     us.append(b);
@@ -1597,7 +1598,7 @@ function screenHome() {
   const gs = document.getElementById('groups');
   groupsOfSelectedUnits().forEach(g => {
     const u = DATA.find(d => d.g === g).u;
-    const n = DATA.filter(d => d.g === g && (!onlyConcept || !d.ex)).length;
+    const n = DATA.filter(d => d.g === g && filterUnits.has(d.u) && (!onlyConcept || !d.ex)).length;
     if (!n) return;
     const b = $('<button class="chip" aria-pressed="' + filterGroups.has(g) + '">' + ubadge(u) +
       '<span>' + esc(g) + '</span><span class="n">' + n + '</span></button>');
