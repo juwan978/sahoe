@@ -606,6 +606,7 @@ const FIGS = {
 };
 </script>
 <script>
+const SUBJECT_NAME = "통합사회2";
 /* ===== Ⅰ. 인권 보장과 헌법 (교과서 6~33쪽) ===== */
 const U1 = [
 /* 1-1 인권의 의미 변화와 확장 (8~15쪽) */
@@ -1423,10 +1424,13 @@ function load() {
   const now = Date.now();
   for (const d of DATA) {
     if (!s.rec[d.i]) s.rec[d.i] = {
-      n: 0, w: 0,
+      n: 0, w: 0, a: 0,
       d: d.s === 'known' ? now + 2 * DAY : 0,
       p: d.s === 'hard' ? 0 : (d.s === 'new' ? 1 : 2)
     };
+    // 예전에 저장된 자료에는 푼 횟수(a)가 없으므로 최소값으로 채운다
+    const r = s.rec[d.i];
+    if (r.a === undefined) r.a = (r.n || 0) + (r.w || 0);
   }
   return s;
 }
@@ -1559,6 +1563,7 @@ function screenHome() {
     '<div class="sectionlist">' +
     (wrongN ? '<button class="btn danger" id="startWrong">오답 ' + wrongN + '문제 다시 풀기</button>' : '') +
     '<button class="btn ghost" id="toWrong">오답 노트' + (wrongN ? ' (' + wrongN + ')' : '') + '</button>' +
+    '<button class="btn ghost" id="toReport">약점 리포트</button>' +
     '<button class="btn ghost" id="toAll">전체 문제 찾아보기</button>' +
     '<button class="btn ghost" id="snd">소리 ' + (SOUND ? '켜짐 🔔' : '꺼짐 🔕') + '</button>' +
     '</div>' +
@@ -1628,6 +1633,7 @@ function screenHome() {
   const sw = document.getElementById('startWrong');
   if (sw) sw.onclick = () => startSession('wrong');
   document.getElementById('toWrong').onclick = screenWrongNote;
+  document.getElementById('toReport').onclick = screenReport;
   document.getElementById('toAll').onclick = screenAll;
   document.getElementById('snd').onclick = () => {
     SOUND = !SOUND;
@@ -1762,6 +1768,7 @@ function stageQuiz() {
 function finishItem() {
   const { d, wrongHere } = S.cur;
   const r = store.rec[d.i];
+  r.a = (r.a || 0) + 1;
   S.total++;
   if (wrongHere) {
     if (d.t === 'sa') ttaeng();
@@ -2048,6 +2055,7 @@ function gradeExam(timeUp) {
     if (ok) score += pointOf(i);
     // 모의고사 결과도 진도·오답 노트에 반영한다
     const r = store.rec[d.i];
+    r.a = (r.a || 0) + 1;
     if (ok) { r.n++; r.d = Date.now() + STEPS[Math.min(r.n, STEPS.length - 1)] * DAY; if (r.p === 0 && r.n >= 2) r.p = 1; }
     else { r.n = 0; r.w++; r.d = Date.now(); r.p = 0; }
     return { d, i, given, ok };
@@ -2105,6 +2113,151 @@ function examResult(rows, score, timeUp) {
   }
   document.getElementById('xnew').onclick = () => startExam();
   document.getElementById('xhome').onclick = () => { X = null; screenHome(); };
+}
+/* ============ 약점 리포트 ============
+   어디를 얼마나 틀리는지 모아서 보여 주고, 그대로 부모에게 보낼 수 있게 한다.
+   rec.a = 그 문항을 푼 횟수, rec.w = 틀린 횟수 (누적)
+*/
+function kindOf(d) {
+  if (d.w) return '서술형';
+  if (d.ex) return '실전 자료형';
+  if (d.t === 'sa') return '주관식';
+  if (d.t === 'ox') return 'O/X';
+  return '객관식';
+}
+
+// 한 묶음의 성적을 낸다
+function tally(list) {
+  let tries = 0, wrong = 0;
+  for (const d of list) {
+    const r = store.rec[d.i];
+    tries += (r.a || 0);
+    wrong += (r.w || 0);
+  }
+  return { tries, wrong, rate: tries ? Math.round((tries - wrong) / tries * 100) : null };
+}
+
+function groupRows(keyFn, minTries) {
+  const map = new Map();
+  for (const d of DATA) {
+    const k = keyFn(d);
+    if (!map.has(k)) map.set(k, []);
+    map.get(k).push(d);
+  }
+  const rows = [];
+  for (const [k, list] of map) {
+    const t = tally(list);
+    if (t.tries >= (minTries || 1)) rows.push({ k, list, ...t });
+  }
+  rows.sort((a, b) => (a.rate - b.rate) || (b.wrong - a.wrong));
+  return rows;
+}
+
+function bar(rate) {
+  const c = rate >= 80 ? 'var(--ok)' : rate >= 60 ? 'var(--warn)' : 'var(--bad)';
+  return '<span style="display:inline-block;width:52px;height:6px;border-radius:99px;background:var(--rule-2);vertical-align:middle">' +
+    '<span style="display:block;width:' + Math.max(rate, 2) + '%;height:100%;border-radius:99px;background:' + c + '"></span></span>';
+}
+
+function reportText() {
+  const all = tally(DATA);
+  const L = [];
+  L.push('[' + (typeof SUBJECT_NAME === 'string' ? SUBJECT_NAME : '학습') + ' 약점 리포트]');
+  if (!all.tries) { L.push('아직 푼 문제가 없습니다.'); return L.join('\n'); }
+  L.push('푼 횟수 ' + all.tries + '회 · 정답률 ' + all.rate + '%');
+  L.push('');
+  L.push('■ 단원별');
+  for (const [u, roman, name] of UNITS) {
+    const t = tally(DATA.filter(d => d.u === u));
+    if (!t.tries) continue;
+    L.push('  ' + roman + '. ' + name + ' — ' + t.rate + '% (' + t.wrong + '/' + t.tries + ' 틀림)');
+  }
+  const kinds = groupRows(kindOf);
+  if (kinds.length) {
+    L.push('');
+    L.push('■ 유형별');
+    for (const r of kinds) L.push('  ' + r.k + ' — ' + r.rate + '% (' + r.wrong + '/' + r.tries + ' 틀림)');
+  }
+  const weak = groupRows(d => d.g, 3).slice(0, 5);
+  if (weak.length) {
+    L.push('');
+    L.push('■ 약한 주제 (많이 푼 것 중 정답률 낮은 순)');
+    for (const r of weak) L.push('  ' + r.k + ' — ' + r.rate + '%');
+  }
+  const note = allWrong();
+  L.push('');
+  L.push('■ 지금 못 외운 문제 ' + note.length + '개');
+  note.slice(0, 40).forEach((d, i) => {
+    L.push('  ' + (i + 1) + ') [' + UROMAN[d.u] + '] ' + d.q.replace(/\s+/g, ' ').slice(0, 60));
+    L.push('     정답: ' + d.a);
+  });
+  if (note.length > 40) L.push('  … 외 ' + (note.length - 40) + '개');
+  return L.join('\n');
+}
+
+function screenReport() {
+  const all = tally(DATA);
+  const note = allWrong();
+  app.innerHTML = '';
+  app.append($('<div class="listwrap">' +
+    '<div class="listhead"><button class="iconbtn" id="back" aria-label="뒤로">←</button><h2>약점 리포트</h2></div>' +
+    (all.tries
+      ? '<div class="progresscard"><div class="score" style="padding:4px 0">' +
+        '<div class="big mono" style="font-size:44px">' + all.rate + '%</div>' +
+        '<div class="cap">지금까지 ' + all.tries + '회 풀어서 ' + all.wrong + '번 틀렸어요</div></div></div>'
+      : '<div class="empty">아직 푼 문제가 없어요.<br>문제를 풀고 나면 여기에 약점이 정리됩니다.</div>') +
+    '<div id="rbody" style="display:flex;flex-direction:column;gap:14px"></div>' +
+    '</div>'));
+  document.getElementById('back').onclick = screenHome;
+  const body = document.getElementById('rbody');
+  if (!all.tries) return;
+
+  function section(title, rows, labelFn) {
+    if (!rows.length) return;
+    body.append($('<div class="lab">' + esc(title) + '</div>'));
+    const box = $('<div style="display:flex;flex-direction:column;gap:6px"></div>');
+    rows.forEach(r => {
+      box.append($('<div class="chip" style="cursor:default">' + labelFn(r) +
+        '<span class="n">' + bar(r.rate) + ' ' + r.rate + '% · ' + r.wrong + '/' + r.tries + '</span></div>'));
+    });
+    body.append(box);
+  }
+
+  const unitRows = UNITS.map(([u, roman, name]) => {
+    const t = tally(DATA.filter(d => d.u === u));
+    return { u, roman, name, ...t };
+  }).filter(r => r.tries).sort((a, b) => a.rate - b.rate);
+  section('단원별 — 약한 곳이 위로', unitRows, r => ubadge(r.u) + '<span>' + esc(r.name) + '</span>');
+
+  section('유형별', groupRows(kindOf), r => '<span>' + esc(r.k) + '</span>');
+  section('약한 주제 (3회 이상 푼 것)', groupRows(d => d.g, 3).slice(0, 8),
+    r => ubadge(r.list[0].u) + '<span>' + esc(r.k) + '</span>');
+
+  body.append($('<div class="lab">지금 못 외운 문제 ' + note.length + '개</div>'));
+  if (!note.length) body.append($('<div class="note">없습니다. 오답 노트가 깨끗해요.</div>'));
+  else note.forEach(d => body.append(itemCard(d, true)));
+
+  const share = $('<button class="btn" id="rshare" style="margin-top:8px">아빠에게 보내기</button>');
+  share.onclick = async () => {
+    const txt = reportText();
+    try {
+      if (navigator.share) { await navigator.share({ title: '약점 리포트', text: txt }); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    try {
+      await navigator.clipboard.writeText(txt);
+      share.textContent = '복사했어요 · 카톡에 붙여넣기';
+      setTimeout(() => { share.textContent = '아빠에게 보내기'; }, 2500);
+      return;
+    } catch (e) { }
+    // 마지막 수단: 화면에 띄워서 직접 복사하게 한다
+    const ta = $('<textarea style="width:100%;height:240px;font-size:12px;font-family:monospace;' +
+      'border:1px solid var(--rule);border-radius:10px;padding:10px;background:var(--card);color:var(--ink)"></textarea>');
+    ta.value = txt;
+    body.append($('<div class="lab">아래 내용을 길게 눌러 복사하세요</div>'));
+    body.append(ta);
+    ta.select();
+  };
+  body.append(share);
 }
 </script>
 
